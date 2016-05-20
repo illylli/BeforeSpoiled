@@ -16,10 +16,6 @@ import java.util.ArrayList;
 import cs165.edu.dartmouth.cs.beforespoiled.view.SlidingTabLayout;
 
 public class MainActivity extends Activity {
-
-    private Messenger mMessenger = new Messenger(new IncomingMessageHandler());
-    private Messenger mServiceMessenger = null;
-
     private SlidingTabLayout mSlidingTabLayout;
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPagerAdapter;
@@ -91,18 +87,6 @@ public class MainActivity extends Activity {
                     break;
             }
             return null;
-        }
-    }
-
-    private class IncomingMessageHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-            Log.d("Fanzy", "MainActivity:handleMessage");
-            switch (msg.what) {
-                case MainService.MSG_REGISTER_CLIENT:
-                default:
-                    super.handleMessage(msg);
-            }
         }
     }
 }

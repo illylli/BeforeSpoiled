@@ -70,8 +70,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         setHasOptionsMenu(true);
 
         shoppingListItems = new ArrayList<>();
-//        shoppingListItems.add(new ShoppingListItem("a", a2, true));
-//        shoppingListItems.add(new ShoppingListItem("B", 2, false));
     }
 
     @Override

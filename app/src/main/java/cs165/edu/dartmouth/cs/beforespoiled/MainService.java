@@ -18,6 +18,7 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 
+import java.util.List;
 import java.util.Calendar;
 
 public class MainService extends Service {
@@ -27,6 +28,12 @@ public class MainService extends Service {
     public static final int MSG_REGISTER_CLIENT = 1;
     public static final int MSG_UNREGISTER_CLIENT = 2;
     public static final int MSG_UPDATE_ENTRY = 3;
+
+    public static final int READSHOPPINGLIST = 4;
+    public final static int SAVESHOPPINGLIST = 5;
+
+    private List<ShoppingListItem> shoppingListItems;
+
     private static boolean isRunning = false;
     private final Messenger mMessenger = new Messenger(
             new IncomingMessageHandler());
@@ -88,23 +95,13 @@ public class MainService extends Service {
         @Override
         public void handleMessage(Message msg) {
             Log.d("Fanzy", "Service:handleMessage: " + msg.what);
-            try {
-                switch (msg.what) {
-                    case MSG_REGISTER_CLIENT:
-                        Message rmsg = Message.obtain(null, MSG_REGISTER_CLIENT);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("hello", "hello");
-                        rmsg.setData(bundle);
-                        msg.replyTo.send(rmsg);
-                        break;
-                    case MSG_UNREGISTER_CLIENT:
-
-                        break;
-                    default:
-                        super.handleMessage(msg);
-                }
-            }catch (RemoteException e) {
-                e.printStackTrace();
+            switch (msg.what) {
+                case MSG_REGISTER_CLIENT:
+                    break;
+                case MSG_UNREGISTER_CLIENT:;
+                    break;
+                default:
+                    super.handleMessage(msg);
             }
         }
     }

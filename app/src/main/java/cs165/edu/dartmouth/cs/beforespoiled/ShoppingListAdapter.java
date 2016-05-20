@@ -2,6 +2,7 @@ package cs165.edu.dartmouth.cs.beforespoiled;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,23 +11,27 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.swipe.adapters.*;
+import com.daimajia.swipe.adapters.ArraySwipeAdapter;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Yuzhong on 2016/5/19.
  */
 public class ShoppingListAdapter extends ArrayAdapter<ShoppingListItem> {
     private Context context;
-    private ArrayList<ShoppingListItem> shoppingListItems;
+    private List<ShoppingListItem> shoppingListItems;
 
-    public ShoppingListAdapter(Context context, ArrayList<ShoppingListItem> shoppingListItems) {
+    public ShoppingListAdapter(Context context, List<ShoppingListItem> shoppingListItems) {
         super(context, R.layout.shopping_list_item, shoppingListItems);
         this.context = context;
-//        this.shoppingListItems = shoppingListItems;
-        this.shoppingListItems = new ArrayList<ShoppingListItem>();
-        this.shoppingListItems.addAll(shoppingListItems);
+        this.shoppingListItems = shoppingListItems;
+//        this.shoppingListItems = new ArrayList<ShoppingListItem>();
+//        this.shoppingListItems.addAll(shoppingListItems);
     }
 
     private class ViewHolder {
@@ -55,25 +60,28 @@ public class ShoppingListAdapter extends ArrayAdapter<ShoppingListItem> {
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.shopping_list_item, null);
-
-            holder = new ViewHolder();
-            holder.itemName = (TextView) convertView.findViewById(R.id.item_name);
-            holder.ifBought = (CheckBox) convertView.findViewById(R.id.check_box);
-            convertView.setTag(holder);
-
-            holder.itemName.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    CheckBox checkBox = (CheckBox) v;
-                    ShoppingListItem listItem = (ShoppingListItem) checkBox.getTag();
-                    Toast.makeText(getContext(), "Clicked on Checkbox" + checkBox.isChecked(), Toast.LENGTH_LONG).show();
-                    listItem.setSelected(checkBox.isChecked());
-                }
-            });
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        holder = new ViewHolder();
+        holder.itemName = (TextView) convertView.findViewById(R.id.item_name);
+        holder.ifBought = (CheckBox) convertView.findViewById(R.id.check_box);
+        convertView.setTag(holder);
+
+        holder.itemName.setTextColor(Color.GRAY);
+
+        holder.itemName.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                CheckBox checkBox = (CheckBox) v;
+                ShoppingListItem listItem = (ShoppingListItem) checkBox.getTag();
+                Toast.makeText(getContext(), "Clicked on Checkbox" + checkBox.isChecked(), Toast.LENGTH_LONG).show();
+                listItem.setSelected(checkBox.isChecked());
+            }
+        });
+
         ShoppingListItem listItem = shoppingListItems.get(position);
+        Log.d("Database", "@@@"+listItem.getItemName());
         holder.itemName.setText(listItem.getItemName());
         holder.ifBought.setChecked(listItem.isSelected());
 

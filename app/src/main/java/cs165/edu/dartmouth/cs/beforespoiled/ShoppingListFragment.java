@@ -2,21 +2,28 @@ package cs165.edu.dartmouth.cs.beforespoiled;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Loader;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.DialogPreference;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 /**
@@ -27,7 +34,7 @@ import java.util.ArrayList;
  * Use the {@link ShoppingListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShoppingListFragment extends Fragment {
+public class ShoppingListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<ShoppingListItem>>{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -36,7 +43,7 @@ public class ShoppingListFragment extends Fragment {
     private View shoppingListView;
     private ListView shoppingList;
     private ShoppingListAdapter shoppingListAdapter;
-    private ArrayList<ShoppingListItem> shoppingListItems;
+    private List<ShoppingListItem> shoppingListItems;
 
     // TODO: Rename and change types of parameters
 
@@ -65,17 +72,42 @@ public class ShoppingListFragment extends Fragment {
         setHasOptionsMenu(true);
 
         shoppingListItems = new ArrayList<>();
-        updateList();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        updateList();
+
         shoppingListView = inflater.inflate(R.layout.fragment_shopping_list, container, false);
         shoppingList = (ListView) shoppingListView.findViewById(R.id.listView);
         shoppingListAdapter = new ShoppingListAdapter(getActivity().getApplicationContext(), shoppingListItems);
         shoppingList.setAdapter(shoppingListAdapter);
+        shoppingList.setLongClickable(true);
+        shoppingList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                Log.d("daniel", "long press");
+                final SweetAlertDialog warningDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
+                warningDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                warningDialog.setTitleText("Delete this item?");
+                warningDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        SweetAlertDialog successDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE);
+                        successDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                        successDialog.setTitle("Deleted!");
+                        successDialog.setTitleText("This item is deleted!");
+                        successDialog.show();
+                        deleteItem(position);
+                        warningDialog.cancel();
+                    }
+                });
+                warningDialog.show();
+                return true;
+            }
+        });
         return shoppingListView;
     }
 
@@ -88,27 +120,35 @@ public class ShoppingListFragment extends Fragment {
     // create a dialog to get the input of the item
     // and add the item to the list
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_item:
-                AlertDialog.Builder addItemBuilder = new AlertDialog.Builder(getActivity());
-                addItemBuilder.setTitle("Please add a new item");
-                final EditText itemText = new EditText(getActivity().getApplicationContext());
-                addItemBuilder.setView(itemText);
-                addItemBuilder.setPositiveButton("Add Item", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Add an item");
+//                builder.setMessage("describe the Todo task...");
+                final EditText itemText = new EditText(getActivity());
+                builder.setView(itemText);
+                builder.setPositiveButton("Add Item", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String itemInput = itemText.getText().toString();
+                        String itemName = itemText.getText().toString();
                         ContentValues values = new ContentValues();
                         values.clear();
-
+                        ShoppingListItem listItem = new ShoppingListItem();
+                        listItem.setItemName(itemName);
+                        listItem.setItemNumber(1);
+                        listItem.setSelected(false);
+                        addNewItem(listItem);
                         updateList();
                     }
                 });
-
-                addItemBuilder.setNegativeButton("Cancel", null);
-
-                addItemBuilder.create().show();
+                builder.setNegativeButton("Cancel", null);
+                builder.create().show();
+//                SweetAlertDialog pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.NORMAL_TYPE);
+//                pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+//                pDialog.setTitleText("Please add a new item");
+//                pDialog.setCancelable(false);
+//                pDialog.show();
                 return true;
             default:
                 return false;
@@ -133,11 +173,63 @@ public class ShoppingListFragment extends Fragment {
 //        }
 //    }
 
+    public void updateList(){
+        getLoaderManager().initLoader(0, null, this).forceLoad();
+    }
+
+    public void addNewItem(ShoppingListItem shoppingListItem){
+        SaveShoppingItemToDatabase task = new SaveShoppingItemToDatabase(getActivity().getApplicationContext(), shoppingListItem);
+        task.execute();
+        shoppingListItems.add(shoppingListItem);
+        shoppingListAdapter.clear();
+        Log.d("TEST", shoppingListItems.size() + " length");
+        shoppingListAdapter.addAll(shoppingListItems);
+        shoppingListAdapter.notifyDataSetChanged();
+    }
+
+    public void deleteItem(int position){
+        updateList();
+        ShoppingListItem item = shoppingListItems.get(position);
+        shoppingListItems.remove(position);
+
+        DeleteShoppingItemFromDatabase task = new DeleteShoppingItemFromDatabase(getActivity().getApplicationContext(), item.getId());
+        task.execute();
+
+        shoppingListAdapter.clear();
+        Log.d("TEST", shoppingListItems.size() + " length");
+        shoppingListAdapter.addAll(shoppingListItems);
+        shoppingListAdapter.notifyDataSetChanged();
+    }
+
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
+
+    @Override
+    public Loader<List<ShoppingListItem>> onCreateLoader(int i, Bundle bundle) {
+        return new ReadShoppingListFromDatabase(getActivity().getApplicationContext());
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<ShoppingListItem>> loader, List<ShoppingListItem> items) {
+        shoppingListAdapter.clear();
+        Log.d("Database", "items " + items.size());
+        shoppingListItems = items;
+        Log.d("Database", "shoppingListItems " + shoppingListItems.size());
+        shoppingListAdapter.addAll(shoppingListItems);
+        Log.d("Database", "shoppingListItems changes");
+        shoppingListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<ShoppingListItem>> loader) {
+        Log.d("CS65", "RESET");
+        shoppingListAdapter = new ShoppingListAdapter(getActivity().getApplicationContext(), new ArrayList<ShoppingListItem>());
+        shoppingList.setAdapter(shoppingListAdapter);
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this
@@ -154,8 +246,5 @@ public class ShoppingListFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    // update the list
-    private void updateList() {
 
-    }
 }

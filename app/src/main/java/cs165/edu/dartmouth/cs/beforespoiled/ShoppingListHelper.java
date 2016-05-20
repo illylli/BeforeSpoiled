@@ -13,6 +13,7 @@ public class ShoppingListHelper extends SQLiteOpenHelper {
 
 	public static final String TABLE_COMMENTS = "ShoppingList";
 	public static final String COLUMN_ID = "_id";
+	public static final String LIST_NUMBER = "list_number";
 	public static final String COLUMN_ITEMNAME = "item_name";
 	public static final String COLUMN_ITEMNUMBER = "item_number";
 
@@ -24,6 +25,7 @@ public class ShoppingListHelper extends SQLiteOpenHelper {
 	private static final String DATABASE_CREATE = "CREATE TABLE "
 			+ TABLE_COMMENTS + "("
 			+ COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+			+ LIST_NUMBER + "INTEGER, "
 			+ COLUMN_ITEMNAME + " TEXT NOT NULL, "
 			+ COLUMN_ITEMNUMBER + " TEXT NOT NULL);";
 

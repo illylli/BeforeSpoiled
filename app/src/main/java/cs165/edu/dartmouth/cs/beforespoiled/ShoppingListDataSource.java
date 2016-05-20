@@ -67,7 +67,7 @@ public class ShoppingListDataSource {
 		database.delete(ShoppingListHelper.TABLE_COMMENTS, null, null);
 	}
 	
-	public List<ShoppingListItem> getAllHistories() {
+	public List<ShoppingListItem> getAllItems() {
 		List<ShoppingListItem> shoppingListItems = new ArrayList<>();
 
 		Cursor cursor = database.query(ShoppingListHelper.TABLE_COMMENTS,

@@ -1,15 +1,12 @@
 package cs165.edu.dartmouth.cs.beforespoiled.view;
 
 import android.content.Context;
-import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import cs165.edu.dartmouth.cs.beforespoiled.R;
 
@@ -27,7 +24,7 @@ public class ReminderGridAdapter extends BaseAdapter {
 
     // the length of the matrix
     public int getCount() {
-        return 9;
+        return 16;
     }
 
     // getItem method, not used
@@ -49,7 +46,7 @@ public class ReminderGridAdapter extends BaseAdapter {
         } else {
             gridEntry = convertView;
         }
-        ((ImageButton) gridEntry.findViewById(R.id.ibtn_reminder_grid_delete)).setOnClickListener(new ImageButton.OnClickListener() {
+        gridEntry.findViewById(R.id.ibtn_reminder_grid_delete).setOnClickListener(new ImageButton.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("Fanzy", "delete" + position);

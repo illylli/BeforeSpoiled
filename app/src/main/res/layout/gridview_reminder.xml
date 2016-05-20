@@ -1,46 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+<cs165.edu.dartmouth.cs.beforespoiled.view.SquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="4dp"
+    android:paddingTop="8dp">
 
     <ImageView
         android:id="@+id/iv_reminder_grid_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/psm_alarm_clock"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:scaleType="fitXY"
+        android:src="@drawable/psm_alarm_clock" />
 
     <ImageButton
         android:id="@+id/ibtn_reminder_grid_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:src="@android:drawable/ic_delete"/>
+        android:background="#00000000"
+        android:gravity="left"
+        android:src="@android:drawable/ic_delete" />
 
     <ImageButton
         android:id="@+id/ibtn_reminder_grid_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:src="@android:drawable/ic_dialog_alert"/>
+        android:background="#00000000"
+        android:gravity="right"
+        android:src="@android:drawable/ic_dialog_alert" />
 
     <TextView
         android:id="@+id/tv_reminder_grid_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:textColor="@android:color/black"
-        android:text="Name"/>
-
-    <TextView
-        android:id="@+id/tv_reminder_grid_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/tv_reminder_grid_name"
-        android:layout_alignEnd="@+id/tv_reminder_grid_name"
-        android:textColor="@android:color/black"
-        android:text="Label"/>
+        android:background="#88000000"
+        android:gravity="center_horizontal"
+        android:text="Name"
+        android:textColor="#58D3F7" />
 
-</RelativeLayout>
+</cs165.edu.dartmouth.cs.beforespoiled.view.SquareLayout>

@@ -8,12 +8,14 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.DialogPreference;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -30,7 +32,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * Use the {@link ShoppingListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShoppingListFragment extends Fragment {
+public class ShoppingListFragment extends Fragment implements AdapterView.OnItemLongClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -79,6 +81,31 @@ public class ShoppingListFragment extends Fragment {
         shoppingList = (ListView) shoppingListView.findViewById(R.id.listView);
         shoppingListAdapter = new ShoppingListAdapter(getActivity().getApplicationContext(), shoppingListItems);
         shoppingList.setAdapter(shoppingListAdapter);
+        shoppingList.setLongClickable(true);
+        shoppingList.setOnItemLongClickListener(this);
+        shoppingList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                Log.d("daniel", "long press");
+                final SweetAlertDialog warningDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
+                warningDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                warningDialog.setTitleText("Delete this item?");
+                warningDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        SweetAlertDialog successDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE);
+                        successDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                        successDialog.setTitle("Deleted!");
+                        successDialog.setTitleText("This item is deleted!");
+                        successDialog.show();
+                        deleteItem(position);
+                        warningDialog.cancel();
+                    }
+                });
+                warningDialog.show();
+                return true;
+            }
+        });
         return shoppingListView;
     }
 
@@ -91,33 +118,31 @@ public class ShoppingListFragment extends Fragment {
     // create a dialog to get the input of the item
     // and add the item to the list
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_item:
-                SweetAlertDialog pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
-                pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-                pDialog.setTitleText("Please add a new item");
-                pDialog.setCancelable(false);
-                pDialog.show();
-//                AlertDialog.Builder addItemBuilder = new AlertDialog.Builder(getActivity());
-//                addItemBuilder.setTitle("Please add a new item");
-//                final EditText itemText = new EditText(getActivity().getApplicationContext());
-//                addItemBuilder.setView(itemText);
-//                addItemBuilder.setPositiveButton("Add Item", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        String itemInput = itemText.getText().toString();
-//
-//                        ContentValues values = new ContentValues();
-//                        values.clear();
-//
-//                        updateList();
-//                    }
-//                });
-//
-//                addItemBuilder.setNegativeButton("Cancel", null);
-//
-//                addItemBuilder.create().show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Add an item");
+//                builder.setMessage("describe the Todo task...");
+                final EditText itemText = new EditText(getActivity());
+                builder.setView(itemText);
+                builder.setPositiveButton("Add Item", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String itemName = itemText.getText().toString();
+                        ShoppingListItem listItem = new ShoppingListItem();
+                        listItem.setItemName(itemName);
+                        listItem.setItemNumber(1);
+                        listItem.setSelected(false);
+                        addNewItem(listItem);
+                        updateList();
+                    }
+                });
+//                SweetAlertDialog pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.NORMAL_TYPE);
+//                pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+//                pDialog.setTitleText("Please add a new item");
+//                pDialog.setCancelable(false);
+//                pDialog.show();
                 return true;
             default:
                 return false;
@@ -148,6 +173,21 @@ public class ShoppingListFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        SweetAlertDialog dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
+        dialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        dialog.setTitleText("Do you want to delete this item>");
+        dialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+            }
+        });
+        dialog.show();
+        return true;
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -165,6 +205,14 @@ public class ShoppingListFragment extends Fragment {
 
     // update the list
     private void updateList() {
+
+    }
+
+    private void addNewItem(ShoppingListItem listItem) {
+
+    }
+
+    private void deleteItem(int position) {
 
     }
 }

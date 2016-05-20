@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_reminder_grid_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/psm_alarm_clock"/>
+
+    <ImageButton
+        android:id="@+id/ibtn_reminder_grid_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@android:drawable/ic_delete"/>
+
+    <ImageButton
+        android:id="@+id/ibtn_reminder_grid_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@android:drawable/ic_dialog_alert"/>
+
+    <TextView
+        android:id="@+id/tv_reminder_grid_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:textColor="@android:color/black"
+        android:text="Name"/>
+
+    <TextView
+        android:id="@+id/tv_reminder_grid_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/tv_reminder_grid_name"
+        android:layout_alignEnd="@+id/tv_reminder_grid_name"
+        android:textColor="@android:color/black"
+        android:text="Label"/>
+
+</RelativeLayout>

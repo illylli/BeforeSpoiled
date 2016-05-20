@@ -22,7 +22,10 @@ import java.util.ArrayList;
 
 import cs165.edu.dartmouth.cs.beforespoiled.view.SlidingTabLayout;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity  implements ServiceConnection {
+
+    private Messenger mMessenger = new Messenger(new IncomingMessageHandler());
+    private Messenger mServiceMessenger = null;
 
     private SlidingTabLayout mSlidingTabLayout;
     private ViewPager mViewPager;
@@ -30,20 +33,11 @@ public class MainActivity extends Activity {
     private ArrayList<Fragment> mFragments;
     private ArrayList<ShoppingListItem> shoppingListItems;
 
-    private Messenger mMessenger = new Messenger( new IncomingMessageHandler());
-    private Messenger mServiceMessenger = null;
-    private Message fragmentMessage;
-
-    public final static int READSHOPPINGLIST = 1;
-    public final static int SAVESHOPPINGLIST = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Intent i = new Intent(this, MainService.class);
-        startService(i);
 
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.tab);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -113,8 +107,6 @@ public class MainActivity extends Activity {
             Log.d("Fanzy", "MainActivity:handleMessage");
             switch (msg.what) {
                 case MainService.MSG_REGISTER_CLIENT:
-                    Bundle bundle = msg.getData();
-                    ((ReminderFragment) mFragments.get(0)).changeText(bundle.getString("hello"));
                 default:
                     super.handleMessage(msg);
             }

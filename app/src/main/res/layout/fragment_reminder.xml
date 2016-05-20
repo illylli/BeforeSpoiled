@@ -1,20 +1,36 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="cs165.edu.dartmouth.cs.beforespoiled.ReminderFragment">
 
-    <TextView
-        android:id="@+id/tv_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment" />
+    <GridView
+        android:id="@+id/gv_reminder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:verticalSpacing="5dp"
+        android:horizontalSpacing="5dp"
+        android:numColumns="3"
+        android:layout_above="@+id/ll_reminder"></GridView>
 
-    <Button
-        android:id="@+id/btn_change"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_reminder"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="click"/>
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btn_reminder_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ADD"/>
+    </LinearLayout>
+
+</RelativeLayout>

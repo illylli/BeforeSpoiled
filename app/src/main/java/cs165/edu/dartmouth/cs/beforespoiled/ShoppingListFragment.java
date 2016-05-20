@@ -130,6 +130,8 @@ public class ShoppingListFragment extends Fragment implements AdapterView.OnItem
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String itemName = itemText.getText().toString();
+                        ContentValues values = new ContentValues();
+                        values.clear();
                         ShoppingListItem listItem = new ShoppingListItem();
                         listItem.setItemName(itemName);
                         listItem.setItemNumber(1);
@@ -138,6 +140,8 @@ public class ShoppingListFragment extends Fragment implements AdapterView.OnItem
                         updateList();
                     }
                 });
+                builder.setNegativeButton("Cancel", null);
+                builder.create().show();
 //                SweetAlertDialog pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.NORMAL_TYPE);
 //                pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
 //                pDialog.setTitleText("Please add a new item");

@@ -41,7 +41,6 @@ public class MainService extends Service {
     public void onCreate() {
         Log.d("Fanzy", "TrackingService onCreate");
         super.onCreate();
-
         isRunning = true;
         showNotification();
     }
@@ -56,11 +55,6 @@ public class MainService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         Log.d("Fanzy", "Service:onBind() - return mMessenger.getBinder()");
-
-        // getBinder()
-        // Return the IBinder that this Messenger is using to communicate with
-        // its associated Handler; that is, IncomingMessageHandler().
-
         return mMessenger.getBinder();
     }
 
@@ -94,13 +88,23 @@ public class MainService extends Service {
         @Override
         public void handleMessage(Message msg) {
             Log.d("Fanzy", "Service:handleMessage: " + msg.what);
-            switch (msg.what) {
-                case MSG_REGISTER_CLIENT:
-                    break;
-                case MSG_UNREGISTER_CLIENT:;
-                    break;
-                default:
-                    super.handleMessage(msg);
+            try {
+                switch (msg.what) {
+                    case MSG_REGISTER_CLIENT:
+                        Message rmsg = Message.obtain(null, MSG_REGISTER_CLIENT);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("hello", "hello");
+                        rmsg.setData(bundle);
+                        msg.replyTo.send(rmsg);
+                        break;
+                    case MSG_UNREGISTER_CLIENT:
+
+                        break;
+                    default:
+                        super.handleMessage(msg);
+                }
+            }catch (RemoteException e) {
+                e.printStackTrace();
             }
         }
     }

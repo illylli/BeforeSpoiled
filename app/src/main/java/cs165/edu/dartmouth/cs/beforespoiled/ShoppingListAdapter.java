@@ -11,6 +11,9 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.swipe.adapters.*;
+import com.daimajia.swipe.adapters.ArraySwipeAdapter;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -80,8 +83,7 @@ public class ShoppingListAdapter extends ArrayAdapter<ShoppingListItem> {
         ShoppingListItem listItem = shoppingListItems.get(position);
         Log.d("Database", "@@@"+listItem.getItemName());
         holder.itemName.setText(listItem.getItemName());
-//        holder.ifBought.setChecked(listItem.isSelected());
-        holder.ifBought.setChecked(true);
+        holder.ifBought.setChecked(listItem.isSelected());
 
         return convertView;
 //        View twoLineListItem;

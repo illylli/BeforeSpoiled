@@ -5,20 +5,25 @@ import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Loader;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.DialogPreference;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 /**
@@ -80,7 +85,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         shoppingListAdapter = new ShoppingListAdapter(getActivity().getApplicationContext(), shoppingListItems);
         shoppingList.setAdapter(shoppingListAdapter);
         shoppingList.setLongClickable(true);
-        shoppingList.setOnItemLongClickListener(this);
         shoppingList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -226,20 +230,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         shoppingList.setAdapter(shoppingListAdapter);
     }
 
-    @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        SweetAlertDialog dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
-        dialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        dialog.setTitleText("Do you want to delete this item>");
-        dialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-            @Override
-            public void onClick(SweetAlertDialog sweetAlertDialog) {
-
-            }
-        });
-        dialog.show();
-        return true;
-    }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -257,5 +247,4 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     }
 
 
-    }
 }

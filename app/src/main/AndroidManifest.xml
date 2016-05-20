@@ -21,9 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ManualAddItemActivity"></activity>
 
-        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
+        <service
+            android:name=".MainService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

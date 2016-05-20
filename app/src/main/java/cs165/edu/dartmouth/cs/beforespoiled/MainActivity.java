@@ -53,6 +53,7 @@ public class MainActivity extends Activity  implements ServiceConnection {
 
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setViewPager(mViewPager);
+      //  startActivity(new Intent(this,ManualAddItemActivity.class));
 
         doBindService();
     }

@@ -1,11 +1,19 @@
 package cs165.edu.dartmouth.cs.beforespoiled;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.DialogPreference;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -54,13 +62,10 @@ public class ShoppingListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            //get service and read the shopping list data from the database to shoppingListItems!
+        setHasOptionsMenu(true);
 
-            shoppingListItems = new ArrayList<>();
-            shoppingListItems.add(new ShoppingListItem("a", 2));
-            shoppingListItems.add(new ShoppingListItem("b", 1));
-        }
+        shoppingListItems = new ArrayList<>();
+        updateList();
     }
 
     @Override
@@ -72,6 +77,42 @@ public class ShoppingListFragment extends Fragment {
         shoppingListAdapter = new ShoppingListAdapter(getActivity().getApplicationContext(), shoppingListItems);
         shoppingList.setAdapter(shoppingListAdapter);
         return shoppingListView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.add_item, menu);
+        super.onCreateOptionsMenu(menu,inflater);
+    }
+
+    // create a dialog to get the input of the item
+    // and add the item to the list
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add_item:
+                AlertDialog.Builder addItemBuilder = new AlertDialog.Builder(getActivity());
+                addItemBuilder.setTitle("Please add a new item");
+                final EditText itemText = new EditText(getActivity().getApplicationContext());
+                addItemBuilder.setView(itemText);
+                addItemBuilder.setPositiveButton("Add Item", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String itemInput = itemText.getText().toString();
+                        ContentValues values = new ContentValues();
+                        values.clear();
+
+                        updateList();
+                    }
+                });
+
+                addItemBuilder.setNegativeButton("Cancel", null);
+
+                addItemBuilder.create().show();
+                return true;
+            default:
+                return false;
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -111,5 +152,10 @@ public class ShoppingListFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    // update the list
+    private void updateList() {
+
     }
 }

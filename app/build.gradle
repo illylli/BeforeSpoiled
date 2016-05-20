@@ -24,5 +24,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.android.support:support-v13:21.0.3'
+    compile 'com.google.code.gson:gson:2.4'
     compile 'com.soundcloud.android:android-crop:1.0.1@aar'
 }

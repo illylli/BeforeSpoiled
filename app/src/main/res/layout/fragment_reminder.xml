@@ -8,11 +8,11 @@
         android:id="@+id/gv_reminder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/ll_reminder"
         android:layout_centerHorizontal="true"
-        android:verticalSpacing="5dp"
         android:horizontalSpacing="5dp"
         android:numColumns="3"
-        android:layout_above="@+id/ll_reminder"></GridView>
+        android:verticalSpacing="5dp" />
 
     <LinearLayout
         android:id="@+id/ll_reminder"
@@ -21,16 +21,18 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-        <Button
-            android:id="@+id/btn_reminder_add"
+            android:id="@+id/btn_reminder_add_manual"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="ADD"/>
+            android:text="@string/reminder_button_manual" />
+
+        <Button
+            android:id="@+id/btn_reminder_add_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/reminder_button_history" />
     </LinearLayout>
 
 </RelativeLayout>

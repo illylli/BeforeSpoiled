@@ -16,7 +16,6 @@ import android.os.RemoteException;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -96,11 +95,11 @@ public class MainActivity extends Activity  implements ServiceConnection {
         }
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
+    public class ViewPagerAdapter extends FragmentPagerAdapter {
         public static final int DISPLAY = 0;
         public static final int SHOPPING = 1;
         public static final int SETTINGS = 2;
-        public static final String UI_TAB_DISPLAY = "DISPLAY";
+        public static final String UI_TAB_DISPLAY = "REMINDER";
         public static final String UI_TAB_SHOPPING = "SHOPPING";
         public static final String UI_TAB_SETTINGS = "SETTINGS";
         private ArrayList<Fragment> fragments;

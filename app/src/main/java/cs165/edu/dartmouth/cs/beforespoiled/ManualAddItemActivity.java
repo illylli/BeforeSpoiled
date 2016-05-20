@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -24,14 +25,20 @@ import android.widget.Toast;
 
 import com.soundcloud.android.crop.Crop;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 
+import cs165.edu.dartmouth.cs.beforespoiled.database.ReminderEntry;
+import cs165.edu.dartmouth.cs.beforespoiled.database.ReminderEntryAsyncTask;
+
 public class ManualAddItemActivity extends Activity {
 
+    public static final int TAKE_PHOTO_REQUEST_CODE = 0;
+    private static final String URI_INSTANCE_STATE_KEY = "saved_uri";
     private TextView mDisplayDateTime;
     private Calendar mDateAndTime = Calendar.getInstance();
     private EditText itemName;
@@ -39,10 +46,6 @@ public class ManualAddItemActivity extends Activity {
     private Spinner categorySpinner;
     private Uri mImageCaptureUri;
     private String filePath;
-    private static final String URI_INSTANCE_STATE_KEY = "saved_uri";
-
-    public static final int TAKE_PHOTO_REQUEST_CODE= 0;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -249,11 +252,17 @@ public class ManualAddItemActivity extends Activity {
     //Not done for on Save clicked!!!!
 
     public void onSaveClicked(View view){
-
-        saveSnap();
-
         Toast.makeText(getApplicationContext(), getString(R.string.save_message), Toast.LENGTH_SHORT).show();
 
+        ReminderEntry entry = new ReminderEntry();
+        entry.setName(itemName.getText().toString());
+        entry.setLabel(getResources().getStringArray(R.array.CategorySpinner)[categorySpinner.getSelectedItemPosition()]);
+        entry.setExpireDate(mDateAndTime);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        ((BitmapDrawable) cameraButton.getDrawable()).getBitmap().compress(Bitmap.CompressFormat.JPEG, 0, stream);
+        entry.setImage(stream.toByteArray());
+
+        (new ReminderEntryAsyncTask(this)).execute(ReminderEntryAsyncTask.INSERT, entry);
         finish();
     }
 

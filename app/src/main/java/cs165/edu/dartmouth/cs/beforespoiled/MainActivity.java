@@ -67,13 +67,6 @@ public class MainActivity extends Activity  implements ServiceConnection {
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         Log.d("Fanzy", "MainActivity: onServiceConnected");
         mServiceMessenger = new Messenger(iBinder);
-        try {
-            Message msg = Message.obtain(null, MainService.MSG_REGISTER_CLIENT);
-            msg.replyTo = mMessenger;
-            mServiceMessenger.send(msg);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -90,6 +83,15 @@ public class MainActivity extends Activity  implements ServiceConnection {
         Log.d("Fanzy", "MainActivity: doUnBindService()");
         if (mServiceMessenger != null) {
             unbindService(this);
+        }
+    }
+
+    public void sendMessage(Message msg){
+        msg.replyTo = mMessenger;
+        try {
+            mServiceMessenger.send(msg);
+        } catch (RemoteException e) {
+            e.printStackTrace();
         }
     }
 
@@ -139,7 +141,7 @@ public class MainActivity extends Activity  implements ServiceConnection {
             switch (msg.what) {
                 case MainService.MSG_REGISTER_CLIENT:
                     Bundle bundle = msg.getData();
-                    ((TextView)(mFragments.get(0).getView().findViewById(R.id.tv_test))).setText(bundle.getString("hello"));
+                    ((ReminderFragment) mFragments.get(0)).changeText(bundle.getString("hello"));
                 default:
                     super.handleMessage(msg);
             }

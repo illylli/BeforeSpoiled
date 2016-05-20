@@ -139,7 +139,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                         listItem.setItemNumber(1);
                         listItem.setSelected(false);
                         addNewItem(listItem);
-                        updateList();
                     }
                 });
                 builder.setNegativeButton("Cancel", null);
@@ -188,7 +187,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     }
 
     public void deleteItem(int position){
-        updateList();
         ShoppingListItem item = shoppingListItems.get(position);
         shoppingListItems.remove(position);
 

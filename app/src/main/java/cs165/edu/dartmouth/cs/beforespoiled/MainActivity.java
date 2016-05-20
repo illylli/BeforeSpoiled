@@ -51,11 +51,11 @@ public class MainActivity extends Activity {
     }
 
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
+    public class ViewPagerAdapter extends FragmentPagerAdapter {
         public static final int DISPLAY = 0;
         public static final int SHOPPING = 1;
         public static final int SETTINGS = 2;
-        public static final String UI_TAB_DISPLAY = "DISPLAY";
+        public static final String UI_TAB_DISPLAY = "REMINDER";
         public static final String UI_TAB_SHOPPING = "SHOPPING";
         public static final String UI_TAB_SETTINGS = "SETTINGS";
         private ArrayList<Fragment> fragments;

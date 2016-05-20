@@ -20,7 +20,6 @@ import java.util.List;
 
 import cs165.edu.dartmouth.cs.beforespoiled.database.ReminderEntry;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ReminderEntryDataSource;
-import cs165.edu.dartmouth.cs.beforespoiled.database.ReminderEntryDbHelper;
 import cs165.edu.dartmouth.cs.beforespoiled.view.ReminderGridAdapter;
 
 public class ReminderFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<ReminderEntry>> {

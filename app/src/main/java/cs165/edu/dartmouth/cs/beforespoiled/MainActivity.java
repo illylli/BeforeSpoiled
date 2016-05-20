@@ -4,15 +4,12 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Messenger;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 
 import java.util.ArrayList;
 
+import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
 import cs165.edu.dartmouth.cs.beforespoiled.view.SlidingTabLayout;
 
 public class MainActivity extends Activity {

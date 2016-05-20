@@ -1,4 +1,4 @@
-package cs165.edu.dartmouth.cs.beforespoiled;
+package cs165.edu.dartmouth.cs.beforespoiled.database;
 
 /**
  * Created by Yuzhong on 2016/5/19.

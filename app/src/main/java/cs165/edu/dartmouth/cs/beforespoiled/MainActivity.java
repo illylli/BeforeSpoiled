@@ -22,21 +22,28 @@ import java.util.ArrayList;
 
 import cs165.edu.dartmouth.cs.beforespoiled.view.SlidingTabLayout;
 
-public class MainActivity extends Activity  implements ServiceConnection {
-
-    private Messenger mMessenger = new Messenger(new IncomingMessageHandler());
-    private Messenger mServiceMessenger = null;
+public class MainActivity extends Activity {
 
     private SlidingTabLayout mSlidingTabLayout;
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPagerAdapter;
     private ArrayList<Fragment> mFragments;
+    private ArrayList<ShoppingListItem> shoppingListItems;
 
+    private Messenger mMessenger = new Messenger( new IncomingMessageHandler());
+    private Messenger mServiceMessenger = null;
+    private Message fragmentMessage;
+
+    public final static int READSHOPPINGLIST = 1;
+    public final static int SAVESHOPPINGLIST = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent i = new Intent(this, MainService.class);
+        startService(i);
 
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.tab);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -53,47 +60,13 @@ public class MainActivity extends Activity  implements ServiceConnection {
 
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setViewPager(mViewPager);
-
-        doBindService();
     }
 
     @Override
     protected void onDestroy() {
-        doUnbindService();
         super.onDestroy();
     }
 
-    @Override
-    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-        Log.d("Fanzy", "MainActivity: onServiceConnected");
-        mServiceMessenger = new Messenger(iBinder);
-    }
-
-    @Override
-    public void onServiceDisconnected(ComponentName componentName) {
-        mServiceMessenger = null;
-    }
-
-    private void doBindService() {
-        Log.d("Fanzy", "MainActivity: doBindService()");
-        bindService(new Intent(this, MainService.class), this, Context.BIND_AUTO_CREATE);
-    }
-
-    private void doUnbindService() {
-        Log.d("Fanzy", "MainActivity: doUnBindService()");
-        if (mServiceMessenger != null) {
-            unbindService(this);
-        }
-    }
-
-    public void sendMessage(Message msg){
-        msg.replyTo = mMessenger;
-        try {
-            mServiceMessenger.send(msg);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-    }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         public static final int DISPLAY = 0;

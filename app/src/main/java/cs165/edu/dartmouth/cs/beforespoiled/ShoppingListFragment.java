@@ -2,11 +2,15 @@ package cs165.edu.dartmouth.cs.beforespoiled;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Loader;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.DialogPreference;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -27,7 +32,7 @@ import java.util.ArrayList;
  * Use the {@link ShoppingListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShoppingListFragment extends Fragment {
+public class ShoppingListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<ShoppingListItem>>{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -36,7 +41,7 @@ public class ShoppingListFragment extends Fragment {
     private View shoppingListView;
     private ListView shoppingList;
     private ShoppingListAdapter shoppingListAdapter;
-    private ArrayList<ShoppingListItem> shoppingListItems;
+    private List<ShoppingListItem> shoppingListItems;
 
     // TODO: Rename and change types of parameters
 
@@ -65,13 +70,16 @@ public class ShoppingListFragment extends Fragment {
         setHasOptionsMenu(true);
 
         shoppingListItems = new ArrayList<>();
-        updateList();
+//        shoppingListItems.add(new ShoppingListItem("a", a2, true));
+//        shoppingListItems.add(new ShoppingListItem("B", 2, false));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        updateList();
+
         shoppingListView = inflater.inflate(R.layout.fragment_shopping_list, container, false);
         shoppingList = (ListView) shoppingListView.findViewById(R.id.listView);
         shoppingListAdapter = new ShoppingListAdapter(getActivity().getApplicationContext(), shoppingListItems);
@@ -102,7 +110,9 @@ public class ShoppingListFragment extends Fragment {
                         ContentValues values = new ContentValues();
                         values.clear();
 
-                        updateList();
+                        ShoppingListItem item = new ShoppingListItem();
+                        item.setItemName(itemInput);
+                        addNewItem(item);
                     }
                 });
 
@@ -133,10 +143,48 @@ public class ShoppingListFragment extends Fragment {
 //        }
 //    }
 
+    public void updateList(){
+        getLoaderManager().initLoader(0, null, this).forceLoad();
+    }
+
+    public void addNewItem(ShoppingListItem shoppingListItem){
+        SaveShoppingItemToDatabase task = new SaveShoppingItemToDatabase(getActivity().getApplicationContext(), shoppingListItem);
+        task.execute();
+        shoppingListItems.add(shoppingListItem);
+        shoppingListAdapter.clear();
+        Log.d("TEST", shoppingListItems.size() + " length");
+        shoppingListAdapter.addAll(shoppingListItems);
+        shoppingListAdapter.notifyDataSetChanged();
+    }
+
+
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public Loader<List<ShoppingListItem>> onCreateLoader(int i, Bundle bundle) {
+        return new ReadShoppingListFromDatabase(getActivity().getApplicationContext());
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<ShoppingListItem>> loader, List<ShoppingListItem> items) {
+        shoppingListAdapter.clear();
+        Log.d("Database", "items " + items.size());
+        shoppingListItems = items;
+        Log.d("Database", "shoppingListItems " + shoppingListItems.size());
+        shoppingListAdapter.addAll(shoppingListItems);
+        Log.d("Database", "shoppingListItems changes");
+        shoppingListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<ShoppingListItem>> loader) {
+        Log.d("CS65", "RESET");
+        shoppingListAdapter = new ShoppingListAdapter(getActivity().getApplicationContext(), new ArrayList<ShoppingListItem>());
+        shoppingList.setAdapter(shoppingListAdapter);
     }
 
     /**
@@ -154,8 +202,15 @@ public class ShoppingListFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    // update the list
-    private void updateList() {
 
+    private class IncomingMessageHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            Log.d("Fanzy", "ReminderFragment:IncomingHandler:handleMessage");
+            switch (msg.what) {
+                default:
+                    super.handleMessage(msg);
+            }
+        }
     }
 }

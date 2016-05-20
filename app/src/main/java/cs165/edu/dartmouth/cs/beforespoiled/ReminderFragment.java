@@ -45,7 +45,6 @@ public class ReminderFragment extends Fragment {
 
     public void changeClicked() {
         Message msg = Message.obtain(null, MainService.MSG_REGISTER_CLIENT);
-        ((MainActivity)getActivity()).sendMessage(msg);
     }
 
     public void changeText(String text){

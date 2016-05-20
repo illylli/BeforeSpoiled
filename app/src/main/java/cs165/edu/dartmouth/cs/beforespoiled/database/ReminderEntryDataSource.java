@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import cs165.edu.dartmouth.cs.beforespoiled.MyDBHelper;
 import cs165.edu.dartmouth.cs.beforespoiled.helper.DateHelper;
 
 /**

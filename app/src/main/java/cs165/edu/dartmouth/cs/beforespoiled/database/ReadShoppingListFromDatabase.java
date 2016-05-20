@@ -1,11 +1,13 @@
-package cs165.edu.dartmouth.cs.beforespoiled;
+package cs165.edu.dartmouth.cs.beforespoiled.database;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import java.util.List;
+
+import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListDataSource;
+import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
 
 /**
  * Created by Yuzhong on 2016/5/19.

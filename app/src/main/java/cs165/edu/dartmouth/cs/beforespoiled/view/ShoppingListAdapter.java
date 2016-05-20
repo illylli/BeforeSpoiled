@@ -1,4 +1,4 @@
-package cs165.edu.dartmouth.cs.beforespoiled;
+package cs165.edu.dartmouth.cs.beforespoiled.view;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,13 +11,10 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daimajia.swipe.adapters.*;
-import com.daimajia.swipe.adapters.ArraySwipeAdapter;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
+
+import cs165.edu.dartmouth.cs.beforespoiled.R;
+import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
 
 /**
  * Created by Yuzhong on 2016/5/19.

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.DialogPreference;
@@ -17,6 +18,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 /**
@@ -91,24 +94,30 @@ public class ShoppingListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_item:
-                AlertDialog.Builder addItemBuilder = new AlertDialog.Builder(getActivity());
-                addItemBuilder.setTitle("Please add a new item");
-                final EditText itemText = new EditText(getActivity().getApplicationContext());
-                addItemBuilder.setView(itemText);
-                addItemBuilder.setPositiveButton("Add Item", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        String itemInput = itemText.getText().toString();
-                        ContentValues values = new ContentValues();
-                        values.clear();
-
-                        updateList();
-                    }
-                });
-
-                addItemBuilder.setNegativeButton("Cancel", null);
-
-                addItemBuilder.create().show();
+                SweetAlertDialog pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
+                pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                pDialog.setTitleText("Please add a new item");
+                pDialog.setCancelable(false);
+                pDialog.show();
+//                AlertDialog.Builder addItemBuilder = new AlertDialog.Builder(getActivity());
+//                addItemBuilder.setTitle("Please add a new item");
+//                final EditText itemText = new EditText(getActivity().getApplicationContext());
+//                addItemBuilder.setView(itemText);
+//                addItemBuilder.setPositiveButton("Add Item", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        String itemInput = itemText.getText().toString();
+//
+//                        ContentValues values = new ContentValues();
+//                        values.clear();
+//
+//                        updateList();
+//                    }
+//                });
+//
+//                addItemBuilder.setNegativeButton("Cancel", null);
+//
+//                addItemBuilder.create().show();
                 return true;
             default:
                 return false;

@@ -10,6 +10,9 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.swipe.adapters.*;
+import com.daimajia.swipe.adapters.ArraySwipeAdapter;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -17,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by Yuzhong on 2016/5/19.
  */
-public class ShoppingListAdapter extends ArrayAdapter<ShoppingListItem> {
+public class ShoppingListAdapter extends ArraySwipeAdapter {
     private Context context;
     private ArrayList<ShoppingListItem> shoppingListItems;
 
@@ -26,7 +29,13 @@ public class ShoppingListAdapter extends ArrayAdapter<ShoppingListItem> {
         this.context = context;
 //        this.shoppingListItems = shoppingListItems;
         this.shoppingListItems = new ArrayList<ShoppingListItem>();
+
         this.shoppingListItems.addAll(shoppingListItems);
+    }
+
+    @Override
+    public int getSwipeLayoutResourceId(int i) {
+        return 0;
     }
 
     private class ViewHolder {

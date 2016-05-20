@@ -157,6 +157,19 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         shoppingListAdapter.notifyDataSetChanged();
     }
 
+    public void deleteItem(int position){
+        updateList();
+        ShoppingListItem item = shoppingListItems.get(position);
+        shoppingListItems.remove(position);
+
+        DeleteShoppingItemFromDatabase task = new DeleteShoppingItemFromDatabase(getActivity().getApplicationContext(), item.getId());
+        task.execute();
+
+        shoppingListAdapter.clear();
+        Log.d("TEST", shoppingListItems.size() + " length");
+        shoppingListAdapter.addAll(shoppingListItems);
+        shoppingListAdapter.notifyDataSetChanged();
+    }
 
     @Override
     public void onDetach() {

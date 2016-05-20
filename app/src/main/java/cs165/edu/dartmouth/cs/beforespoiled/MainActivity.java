@@ -140,8 +140,6 @@ public class MainActivity extends Activity  implements ServiceConnection {
             Log.d("Fanzy", "MainActivity:handleMessage");
             switch (msg.what) {
                 case MainService.MSG_REGISTER_CLIENT:
-                    Bundle bundle = msg.getData();
-                    ((ReminderFragment) mFragments.get(0)).changeText(bundle.getString("hello"));
                 default:
                     super.handleMessage(msg);
             }

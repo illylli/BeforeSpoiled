@@ -15,13 +15,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
-public class ReminderFragment extends Fragment {
+import cs165.edu.dartmouth.cs.beforespoiled.view.ReminderGridAdapter;
 
+public class ReminderFragment extends Fragment {
 
     public ReminderFragment() {
 
@@ -34,23 +38,26 @@ public class ReminderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reminder, container, false);
-        ((Button) view.findViewById(R.id.btn_change)).setOnClickListener(new Button.OnClickListener(){
-            public void onClick(View v){
-                changeClicked();
+        GridView gridView = (GridView) view.findViewById(R.id.gv_reminder);
+        gridView.setAdapter(new ReminderGridAdapter(getActivity()));
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                // send necessary parameters to SubmitActivity
+                Log.d("Fanzy", "click on " + position);
+            }
+        });
+
+        ((Button) view.findViewById(R.id.btn_reminder_add)).setOnClickListener(new Button.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Log.d("Fanzy", "add");
             }
         });
 
         return view;
     }
-
-    public void changeClicked() {
-        Message msg = Message.obtain(null, MainService.MSG_REGISTER_CLIENT);
-        ((MainActivity)getActivity()).sendMessage(msg);
-    }
-
-    public void changeText(String text){
-        ((TextView)getView().findViewById(R.id.tv_test)).setText(text);
-    }
-
 
 }

@@ -10,9 +10,12 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/ll_reminder"
         android:layout_centerHorizontal="true"
-        android:horizontalSpacing="5dp"
-        android:numColumns="3"
-        android:verticalSpacing="5dp" />
+        android:columnWidth="100dp"
+        android:horizontalSpacing="10dp"
+        android:numColumns="auto_fit"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:verticalSpacing="5dp"></GridView>
 
     <LinearLayout
         android:id="@+id/ll_reminder"

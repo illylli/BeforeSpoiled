@@ -39,6 +39,7 @@ public class MainActivity extends Activity {
 
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setViewPager(mViewPager);
+      //  startActivity(new Intent(this,ManualAddItemActivity.class));
     }
 
     @Override

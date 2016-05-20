@@ -20,22 +20,21 @@ import java.util.ArrayList;
 /**
  * Created by Yuzhong on 2016/5/19.
  */
-public class ShoppingListAdapter extends ArraySwipeAdapter {
+public class ShoppingListAdapter extends ArrayAdapter {
     private Context context;
     private ArrayList<ShoppingListItem> shoppingListItems;
 
     public ShoppingListAdapter(Context context, ArrayList<ShoppingListItem> shoppingListItems) {
         super(context, R.layout.shopping_list_item, shoppingListItems);
         this.context = context;
-//        this.shoppingListItems = shoppingListItems;
-        this.shoppingListItems = new ArrayList<ShoppingListItem>();
-
+        this.shoppingListItems = shoppingListItems;
+//        this.shoppingListItems = new ArrayList<ShoppingListItem>();
+        ShoppingListItem shoppingListItem = new ShoppingListItem();
+        shoppingListItem.setItemName("banana");
+        shoppingListItem.setItemNumber(0);
+        shoppingListItem.setSelected(false);
+        shoppingListItems.add(shoppingListItem);
         this.shoppingListItems.addAll(shoppingListItems);
-    }
-
-    @Override
-    public int getSwipeLayoutResourceId(int i) {
-        return 0;
     }
 
     private class ViewHolder {
@@ -67,6 +66,7 @@ public class ShoppingListAdapter extends ArraySwipeAdapter {
 
             holder = new ViewHolder();
             holder.itemName = (TextView) convertView.findViewById(R.id.item_name);
+            holder.itemName.setTextColor(Color.GRAY);
             holder.ifBought = (CheckBox) convertView.findViewById(R.id.check_box);
             convertView.setTag(holder);
 

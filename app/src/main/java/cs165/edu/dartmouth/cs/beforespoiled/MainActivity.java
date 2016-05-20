@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
 
         if (mFragments == null) {
             mFragments = new ArrayList<>();
-            mFragments.add(DisplayFragment.newInstance());
+            mFragments.add(ReminderFragment.newInstance());
             mFragments.add(ShoppingListFragment.newInstance());
             mFragments.add(SettingsFragment.newInstance());
         }

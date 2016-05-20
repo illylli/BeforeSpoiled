@@ -11,17 +11,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingListDataSource {
-
 	// Database fields
+	public static final String TABLE_SHOPPINGLIST = "ShoppingList";
+	public static final String COLUMN_ID = "_id";
+	public static final String LIST_NUMBER = "list_number";
+	public static final String COLUMN_ITEMNAME = "item_name";
+	public static final String COLUMN_ITEMNUMBER = "item_number";
+
 	private SQLiteDatabase database;
-	private ShoppingListHelper dbHelper;
-	private String[] allColumns = { ShoppingListHelper.COLUMN_ID, ShoppingListHelper.COLUMN_ITEMNAME,
-			ShoppingListHelper.COLUMN_ITEMNUMBER};
+	private MyDBHelper dbHelper;
+	private String[] allColumns = { COLUMN_ID, COLUMN_ITEMNAME,
+			COLUMN_ITEMNUMBER};
 
 	private static final String TAG = "DBDEMO";
 
 	public ShoppingListDataSource(Context context) {
-		dbHelper = new ShoppingListHelper(context);
+		dbHelper = MyDBHelper.getInstance(context);
 	}
 
 	public void open() throws SQLException {
@@ -37,13 +42,13 @@ public class ShoppingListDataSource {
 		ContentValues values = new ContentValues();
 
         //get one historyEntry values
-        values.put(ShoppingListHelper.COLUMN_ITEMNAME, shoppingListItem.getItemName());
-        values.put(ShoppingListHelper.COLUMN_ITEMNUMBER, shoppingListItem.getItemNumber());
+        values.put(COLUMN_ITEMNAME, shoppingListItem.getItemName());
+        values.put(COLUMN_ITEMNUMBER, shoppingListItem.getItemNumber());
 
-		long insertId = database.insert(ShoppingListHelper.TABLE_COMMENTS, null,
+		long insertId = database.insert(TABLE_SHOPPINGLIST, null,
 				values);
-		Cursor cursor = database.query(ShoppingListHelper.TABLE_COMMENTS,
-				allColumns, ShoppingListHelper.COLUMN_ID + " = " + insertId, null,
+		Cursor cursor = database.query(TABLE_SHOPPINGLIST,
+				allColumns, COLUMN_ID + " = " + insertId, null,
 				null, null, null);
 		cursor.moveToFirst();
 		ShoppingListItem newShoppingListItem = cursorToShoppingListItem(cursor);
@@ -57,20 +62,20 @@ public class ShoppingListDataSource {
 	}
 
 	public void deleteHistory(long id){
-		database.delete(ShoppingListHelper.TABLE_COMMENTS, ShoppingListHelper.COLUMN_ID
+		database.delete(TABLE_SHOPPINGLIST, COLUMN_ID
 				+ " = " + id, null);
 	}
 	
 	public void deleteAllHistories() {
 		System.out.println("HistroyEntries deleted all");
 		Log.d(TAG, "delete all = ");
-		database.delete(ShoppingListHelper.TABLE_COMMENTS, null, null);
+		database.delete(TABLE_SHOPPINGLIST, null, null);
 	}
 	
 	public List<ShoppingListItem> getAllItems() {
 		List<ShoppingListItem> shoppingListItems = new ArrayList<>();
 
-		Cursor cursor = database.query(ShoppingListHelper.TABLE_COMMENTS,
+		Cursor cursor = database.query(TABLE_SHOPPINGLIST,
 				allColumns, null, null, null, null, null);
 
 		cursor.moveToFirst();

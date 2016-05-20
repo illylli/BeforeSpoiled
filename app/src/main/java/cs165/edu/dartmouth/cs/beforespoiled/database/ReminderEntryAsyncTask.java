@@ -25,18 +25,16 @@ public class ReminderEntryAsyncTask extends AsyncTask<Object, Void, String> {
     protected String doInBackground(Object... args) {
         Integer request = (Integer) args[0];
         String msg = "";
-        ReminderEntryDbHelper dbHelper = new ReminderEntryDbHelper(context);
+        ReminderEntryDataSource dbHelper = new ReminderEntryDataSource(context);
+        dbHelper.open();
         if (request == INSERT) {
-            ReminderEntry entry = (ReminderEntry) args[1];
             long id = dbHelper.insertEntry((ReminderEntry) args[1]);
-
             msg = "insert entry " + id + " successfully";
         } else if (request == DELETE) {
             Long id = (Long) args[1];
             dbHelper.removeEntry(id);
             msg = "delete " + id + " successfully";
         } else if (request == QUERY) {
-            List<ReminderEntry> entries = dbHelper.fetchEntries();
         }
         dbHelper.close();
         return msg;

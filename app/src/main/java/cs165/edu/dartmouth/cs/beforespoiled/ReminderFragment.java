@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cs165.edu.dartmouth.cs.beforespoiled.database.ReminderEntry;
+import cs165.edu.dartmouth.cs.beforespoiled.database.ReminderEntryDataSource;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ReminderEntryDbHelper;
 import cs165.edu.dartmouth.cs.beforespoiled.view.ReminderGridAdapter;
 
@@ -110,7 +111,8 @@ public class ReminderFragment extends Fragment implements LoaderManager.LoaderCa
 
         @Override
         public List<ReminderEntry> loadInBackground() {
-            ReminderEntryDbHelper dbHelper = new ReminderEntryDbHelper(context);
+            ReminderEntryDataSource dbHelper = new ReminderEntryDataSource(context);
+            dbHelper.open();
             List<ReminderEntry> result = dbHelper.fetchEntries();
             dbHelper.close();
             return result;

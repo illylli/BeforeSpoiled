@@ -60,7 +60,6 @@ public class ReminderGridAdapter extends BaseAdapter {
             ((ImageView) gridEntry.findViewById(R.id.iv_reminder_grid_image)).setImageBitmap(BitmapFactory.decodeByteArray(entry.getImage(), 0, entry.getImage().length));
         }
         gridEntry.findViewById(R.id.ibtn_reminder_grid_delete).setOnClickListener(new ImageButton.OnClickListener() {
-        gridEntry.findViewById(R.id.ibtn_reminder_grid_delete).setOnClickListener(new ImageButton.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new ReminderEntryAsyncTask(mContext).execute(ReminderEntryAsyncTask.DELETE, getItemId(position));
@@ -69,7 +68,6 @@ public class ReminderGridAdapter extends BaseAdapter {
             }
         });
         ((TextView) gridEntry.findViewById(R.id.tv_reminder_grid_name)).setText(entry.getName());
-        ((TextView) gridEntry.findViewById(R.id.tv_reminder_grid_label)).setText(entry.getLabel());
         return gridEntry;
     }
 }

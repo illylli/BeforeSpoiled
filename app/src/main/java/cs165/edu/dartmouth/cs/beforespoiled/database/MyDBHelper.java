@@ -5,15 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-/**
- * Created by Yuzhong on 2016/5/19.
- */
-
 public class MyDBHelper extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "BeforeSpoiled.db";
 	private static final int DATABASE_VERSION = 1;
-
-	private static MyDBHelper dbHelper;
 
 	// Database creation sql statement
 	private static final String SHOPPINGLIST_CREATE = "CREATE TABLE "
@@ -31,15 +25,8 @@ public class MyDBHelper extends SQLiteOpenHelper {
 			ReminderEntryDataSource.COLUMN_PHOTO + " BLOB );";
 
 
-	private MyDBHelper(Context context) {
+	public MyDBHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
-	}
-
-	public static MyDBHelper getInstance(Context context){
-		if(dbHelper == null){
-			dbHelper = new MyDBHelper(context);
-		}
-		return dbHelper;
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class ShoppingListDataSource {
 	private static final String TAG = "DBDEMO";
 
 	public ShoppingListDataSource(Context context) {
-		dbHelper = MyDBHelper.getInstance(context);
+		dbHelper = new MyDBHelper(context);
 	}
 
 	public void open() throws SQLException {

@@ -259,7 +259,7 @@ public class ManualAddItemActivity extends Activity {
         entry.setLabel(getResources().getStringArray(R.array.CategorySpinner)[categorySpinner.getSelectedItemPosition()]);
         entry.setExpireDate(mDateAndTime);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        ((BitmapDrawable) cameraButton.getDrawable()).getBitmap().compress(Bitmap.CompressFormat.JPEG, 0, stream);
+        ((BitmapDrawable) cameraButton.getDrawable()).getBitmap().compress(Bitmap.CompressFormat.JPEG, 50, stream);
         entry.setImage(stream.toByteArray());
 
         (new ReminderEntryAsyncTask(this)).execute(ReminderEntryAsyncTask.INSERT, entry);

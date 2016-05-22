@@ -24,7 +24,19 @@
     <!-- Reminder -->
     <string name="reminder_button_manual">Add from manual</string>
     <string name="reminder_button_history">Add from history</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Shoppinglist -->
     <string name="finish_shopping">Finish Shopping</string>
+
+    <!-- Settings -->
+    <string name="settings_days_before_spoiled">Days Before Spoiled</string>
+    <string name="preference_days_before_spoiled">days_before_spoiled</string>
+    <string name="settings_labels">Labels Setting</string>
+    <string name="title_activity_labels_setting">LabelsSettingActivity</string>
+
+    <!-- Single Label -->
+    <string name="settings_labels_single_name">Name</string>
+    <string name="settings_labels_single_period">Storage Period</string>
+    <string name="settings_labels_single_days">Days Before Spoiled</string>
+
 </resources>

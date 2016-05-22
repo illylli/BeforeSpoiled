@@ -27,8 +27,8 @@
         android:gravity="left"
         android:src="@android:drawable/ic_delete" />
 
-    <ImageButton
-        android:id="@+id/ibtn_reminder_grid_left"
+    <ImageView
+        android:id="@+id/iv_reminder_grid_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

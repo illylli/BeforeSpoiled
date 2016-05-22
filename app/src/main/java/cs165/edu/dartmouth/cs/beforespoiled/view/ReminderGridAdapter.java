@@ -1,7 +1,9 @@
 package cs165.edu.dartmouth.cs.beforespoiled.view;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Calendar;
 import java.util.List;
 
 import cs165.edu.dartmouth.cs.beforespoiled.R;
@@ -56,6 +59,7 @@ public class ReminderGridAdapter extends BaseAdapter {
         } else {
             gridEntry = convertView;
         }
+
         if (entry.getImage() != null) {
             ((ImageView) gridEntry.findViewById(R.id.iv_reminder_grid_image)).setImageBitmap(BitmapFactory.decodeByteArray(entry.getImage(), 0, entry.getImage().length));
         }
@@ -68,6 +72,12 @@ public class ReminderGridAdapter extends BaseAdapter {
             }
         });
         ((TextView) gridEntry.findViewById(R.id.tv_reminder_grid_name)).setText(entry.getName());
+
+//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+//        int days = Integer.parseInt(preferences.getString(mContext.getString(R.string.settings_days_before_spoiled), "1"));
+
+        long days = (entry.getExpireDate().getTimeInMillis() - Calendar.getInstance().getTimeInMillis())/1000/3600/24;
+
         return gridEntry;
     }
 }

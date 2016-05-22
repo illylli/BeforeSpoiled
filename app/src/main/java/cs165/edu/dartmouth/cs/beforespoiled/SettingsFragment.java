@@ -1,11 +1,12 @@
 package cs165.edu.dartmouth.cs.beforespoiled;
 
-import android.app.Fragment;
+import android.os.Bundle;
+import android.preference.PreferenceFragment;
 
 /**
  * Created by oubai on 5/19/16.
  */
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends PreferenceFragment {
 
     public SettingsFragment() {
 
@@ -13,5 +14,11 @@ public class SettingsFragment extends Fragment {
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        addPreferencesFromResource(R.xml.fragment_settings);
     }
 }

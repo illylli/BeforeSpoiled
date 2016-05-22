@@ -24,6 +24,12 @@ public class MyDBHelper extends SQLiteOpenHelper {
 			ReminderEntryDataSource.COLUMN_EXPIREDATE + " DATETIME NOT NULL, " +
 			ReminderEntryDataSource.COLUMN_PHOTO + " BLOB );";
 
+	private static final String LABEL_CREATE = "CREATE TABLE IF NOT EXISTS " + LabelDataSource.TABLE_LABEL + " (" +
+			LabelDataSource.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+			LabelDataSource.COLUMN_NAME + " TEXT NOT NULL, " +
+			LabelDataSource.COLUMN_STORAGE_PERIOD + " INTEGER NOT NULL, " +
+			LabelDataSource.COLUMN_DAYS_BEFORE_SPOILED + " INTEGER);";
+
 
 	public MyDBHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -33,6 +39,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase database) {
 		database.execSQL(SHOPPINGLIST_CREATE);
 		database.execSQL(REMINDER_CREATE);
+		database.execSQL(LABEL_CREATE);
 	}
 
 	@Override
@@ -42,6 +49,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
 						+ newVersion + ", which will destroy all old data");
 		db.execSQL("DROP TABLE IF EXISTS " + ShoppingListDataSource.TABLE_SHOPPINGLIST);
 		db.execSQL("DROP TABLE IF EXISTS " + ReminderEntryDataSource.TABLE_REMINDER);
+		db.execSQL("DROP TABLE IF EXISTS " + LabelDataSource.TABLE_LABEL);
 		onCreate(db);
 	}
 

@@ -10,9 +10,6 @@ import java.util.List;
 
 import cs165.edu.dartmouth.cs.beforespoiled.helper.DateHelper;
 
-/**
- * Created by Fanzy on 5/20/16.
- */
 public class ReminderEntryDataSource {
     public static final String TABLE_REMINDER = "ReminderEntry";
     public static final String COLUMN_ID = "_id";
@@ -25,7 +22,7 @@ public class ReminderEntryDataSource {
     private SQLiteDatabase database;
 
     public ReminderEntryDataSource ( Context context){
-        dbHelper = MyDBHelper.getInstance(context);
+        dbHelper = new MyDBHelper(context);
     }
 
     public void open(){
@@ -33,8 +30,7 @@ public class ReminderEntryDataSource {
     }
 
     public void close(){
-        database.close();
-        database = null;
+        dbHelper.close();
     }
 
     // Insert an item given each column value

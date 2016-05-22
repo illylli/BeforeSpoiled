@@ -47,6 +47,10 @@ public class ManualAddItemActivity extends Activity {
     private Uri mImageCaptureUri;
     private String filePath;
 
+    private int[] imageResource = {R.drawable.vege, R.drawable.fruit, R.drawable.bread, R.drawable.milk, R.drawable.spices
+            ,R.drawable.frozen, R.drawable.grain, R.drawable.snack, R.drawable.beverage, R.drawable.fish};
+    private boolean photoExist = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +61,7 @@ public class ManualAddItemActivity extends Activity {
         //User change expire date by clicking image button.
         mDisplayDateTime = (TextView) findViewById(R.id.DateDisplayView);
         updateDateAndTimeDisplay();
-        //
         cameraButton = (ImageButton) findViewById(R.id.ShowCameraButton);
-
-        loadSnap();
 
         cameraButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -80,38 +81,10 @@ public class ManualAddItemActivity extends Activity {
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch(position){
-                    case 0:
-                         cameraButton.setImageResource(R.drawable.vege);
-                        break;
-                    case 1:
-                        cameraButton.setImageResource(R.drawable.fruit);
-                        break;
-                    case 2:
-                        cameraButton.setImageResource(R.drawable.bread);
-                        break;
-                    case 3:
-                        cameraButton.setImageResource(R.drawable.milk);
-                        break;
-                    case 4:
-                        cameraButton.setImageResource(R.drawable.spices);
-                        break;
-                    case 5:
-                        cameraButton.setImageResource(R.drawable.frozen);
-                        break;
-                    case 6:
-                        cameraButton.setImageResource(R.drawable.grain);
-                        break;
-                    case 7:
-                        cameraButton.setImageResource(R.drawable.snack);
-                        break;
-                    case 8:
-                        cameraButton.setImageResource(R.drawable.beverage);
-                        break;
-                    case 9:
-                        cameraButton.setImageResource(R.drawable.fish);
+                if(!photoExist) {
+                    cameraButton.setImageResource(imageResource[position]);
+                    cameraButton.setScaleType(ImageView.ScaleType.FIT_XY);
                 }
-                cameraButton.setScaleType(ImageView.ScaleType.FIT_XY);
             }
 
             @Override
@@ -119,12 +92,6 @@ public class ManualAddItemActivity extends Activity {
                cameraButton.setImageResource(R.drawable.fish);
             }
         });
-
-        loadSnap();
-
-
-
-
     }
     //When click the best before image button (pencil)
     public void onDateClicked(View v) {
@@ -175,15 +142,11 @@ public class ManualAddItemActivity extends Activity {
             case Crop.REQUEST_CROP: //We changed the RequestCode to the one being used by the library.
                 // Update image view after image crop
                 handleCrop(resultCode, data);
-
                 // Delete temporary image taken by camera after crop.
-//                if (isTakenFromCamera) {
-                    File f = new File(mImageCaptureUri.getPath());
-                    if (f.exists())
-                        f.delete();
-//                }
+                File f = new File(mImageCaptureUri.getPath());
+                if (f.exists())
+                    f.delete();
                 break;
-
 
         }
     }
@@ -191,18 +154,15 @@ public class ManualAddItemActivity extends Activity {
     private void beginCrop(Uri source) {
         filePath = getCacheDir() + "cropped" + System.currentTimeMillis();
         File file = new File(filePath);
-
-
         Uri destination = Uri.fromFile(file);
-
-//        Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
-
         Crop.of(source, destination).asSquare().start(this);
     }
 
     private void handleCrop(int resultCode, Intent result) {
         if (resultCode == RESULT_OK) {
             cameraButton.setImageURI(Crop.getOutput(result));
+            cameraButton.setScaleType(ImageView.ScaleType.FIT_XY);
+            photoExist = true;
             File file = new File(filePath);
             if(file.exists()) {
                 Log.d("lly", "Delete: " + file.delete() + "again" + file.exists());
@@ -217,40 +177,6 @@ public class ManualAddItemActivity extends Activity {
         }
     }
 
-    private void loadSnap() {
-        // Load profile photo from internal storage
-        try {
-            FileInputStream fis = openFileInput(getString(R.string.photo_name));
-            Bitmap bmap = BitmapFactory.decodeStream(fis);
-            cameraButton.setImageBitmap(bmap);
-            cameraButton.setScaleType(ImageView.ScaleType.FIT_XY);
-            fis.close();
-        } catch (IOException e) {
-            // Default profile photo if no photo saved before.
-            cameraButton.setImageResource(R.drawable.fish);
-            cameraButton.setScaleType(ImageView.ScaleType.FIT_XY);
-
-        }
-    }
-
-    private void saveSnap() {
-        // Commit all the changes into preference file
-        // Save profile image into internal storage.
-        cameraButton.buildDrawingCache();
-        Bitmap bmap = cameraButton.getDrawingCache();
-        try {
-            FileOutputStream fos = openFileOutput(
-                    getString(R.string.photo_name), MODE_PRIVATE);
-            bmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            fos.flush();
-            fos.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
-
-    //Not done for on Save clicked!!!!
-
     public void onSaveClicked(View view){
         Toast.makeText(getApplicationContext(), getString(R.string.save_message), Toast.LENGTH_SHORT).show();
 
@@ -258,8 +184,10 @@ public class ManualAddItemActivity extends Activity {
         entry.setName(itemName.getText().toString());
         entry.setLabel(getResources().getStringArray(R.array.CategorySpinner)[categorySpinner.getSelectedItemPosition()]);
         entry.setExpireDate(mDateAndTime);
+
+        cameraButton.buildDrawingCache();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        ((BitmapDrawable) cameraButton.getDrawable()).getBitmap().compress(Bitmap.CompressFormat.JPEG, 50, stream);
+        cameraButton.getDrawingCache().compress(Bitmap.CompressFormat.PNG, 100, stream);
         entry.setImage(stream.toByteArray());
 
         (new ReminderEntryAsyncTask(this)).execute(ReminderEntryAsyncTask.INSERT, entry);

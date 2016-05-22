@@ -21,11 +21,8 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f915035-9673-4305-bd47-e7597247a5f0" name="Default" comment="resolve the database's conflict">
+    <list default="true" id="1f915035-9673-4305-bd47-e7597247a5f0" name="Default" comment="fix the bugs of">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ManualAddItemActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ManualAddItemActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/MyDBHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/MyDBHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ReminderEntryDataSource.java" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ReminderEntryDataSource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListDataSource.java" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListDataSource.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BeforeSpoiled.iws" />
@@ -87,6 +84,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ManualAddItemActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ManualAddItemActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.21212122">
+              <caret line="160" column="27" selection-start-line="160" selection-start-column="27" selection-end-line="160" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4829#4830#0" expanded="true" />
+                <element signature="e#4853#4854#0" expanded="true" />
+                <element signature="method#onSaveInstanceState#0;class#ManualAddItemActivity#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ReminderEntryAsyncTask.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ReminderEntryAsyncTask.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -97,10 +109,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReminderEntryDataSource.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ReminderEntryDataSource.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ReminderEntryDataSource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29820627">
+            <state vertical-scroll-proportion="0.0">
               <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -127,27 +139,12 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListDataSource.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="43" selection-start-line="28" selection-start-column="43" selection-end-line="28" selection-end-column="43" />
+              <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
               <folding>
                 <element signature="e#914#915#0" expanded="true" />
                 <element signature="e#955#956#0" expanded="true" />
                 <element signature="e#1070#1071#0" expanded="true" />
                 <element signature="e#1093#1094#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ManualAddItemActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ManualAddItemActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="215" column="38" selection-start-line="215" selection-start-column="38" selection-end-line="215" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#onDateClicked#0;class#ManualAddItemActivity#0" expanded="false" />
-                <element signature="method#onActivityResult#0;class#ManualAddItemActivity#0" expanded="false" />
-                <element signature="method#beginCrop#0;class#ManualAddItemActivity#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -1938,10 +1935,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/MyDBHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ShoppingListFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/view/ReminderGridAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ManualAddItemActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListDataSource.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/MyDBHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ReminderEntryDataSource.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ManualAddItemActivity.java" />
       </list>
     </option>
   </component>
@@ -2204,21 +2201,21 @@
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="84B7N16125005182" />
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.WIDTH" value="117" />
     <property name="FullScreen" value="true" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="78" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="100" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="80" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="102" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="83" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="106" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="878" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="900" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="78" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="100" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="80" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="102" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="83" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="106" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="878" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="900" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
@@ -2453,7 +2450,13 @@
       <option name="project" value="LOCAL" />
       <updated>1463778208964</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="resolve the database's conflict">
+      <created>1463885201074</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1463885201074</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -2467,7 +2470,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2476,16 +2479,16 @@
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956523" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34702548" sideWeight="0.4830287" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34560907" sideWeight="0.4830287" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956523" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30257186" sideWeight="0.5169713" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4003044" sideWeight="0.49695387" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39943343" sideWeight="0.49695387" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5069565" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956523" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3286119" sideWeight="0.47606614" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286119" sideWeight="0.47606614" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956523" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.49304348" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24956521" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2631,9 +2634,9 @@
           <caret line="107" column="27" selection-start-line="107" selection-start-column="27" selection-end-line="107" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#onDateClicked#0;class#ManualAddItemActivity#0" expanded="false" />
-            <element signature="method#onActivityResult#0;class#ManualAddItemActivity#0" expanded="false" />
-            <element signature="method#beginCrop#0;class#ManualAddItemActivity#0" expanded="false" />
+            <element signature="e#4829#4830#0" expanded="true" />
+            <element signature="e#4853#4854#0" expanded="true" />
+            <element signature="method#onSaveInstanceState#0;class#ManualAddItemActivity#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2671,9 +2674,9 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#onDateClicked#0;class#ManualAddItemActivity#0" expanded="false" />
-            <element signature="method#onActivityResult#0;class#ManualAddItemActivity#0" expanded="false" />
-            <element signature="method#beginCrop#0;class#ManualAddItemActivity#0" expanded="false" />
+            <element signature="e#4829#4830#0" expanded="true" />
+            <element signature="e#4853#4854#0" expanded="true" />
+            <element signature="method#onSaveInstanceState#0;class#ManualAddItemActivity#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2703,9 +2706,9 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#onDateClicked#0;class#ManualAddItemActivity#0" expanded="false" />
-            <element signature="method#onActivityResult#0;class#ManualAddItemActivity#0" expanded="false" />
-            <element signature="method#beginCrop#0;class#ManualAddItemActivity#0" expanded="false" />
+            <element signature="e#4829#4830#0" expanded="true" />
+            <element signature="e#4853#4854#0" expanded="true" />
+            <element signature="method#onSaveInstanceState#0;class#ManualAddItemActivity#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2921,14 +2924,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ReminderFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="113" column="28" selection-start-line="113" selection-start-column="28" selection-end-line="113" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/view/ShoppingListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2974,28 +2969,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListDataSource.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ReminderEntryDataSource.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="43" selection-start-line="28" selection-start-column="43" selection-end-line="28" selection-end-column="43" />
-          <folding>
-            <element signature="e#914#915#0" expanded="true" />
-            <element signature="e#955#956#0" expanded="true" />
-            <element signature="e#1070#1071#0" expanded="true" />
-            <element signature="e#1093#1094#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ManualAddItemActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="215" column="38" selection-start-line="215" selection-start-column="38" selection-end-line="215" selection-end-column="38" />
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#onDateClicked#0;class#ManualAddItemActivity#0" expanded="false" />
-            <element signature="method#onActivityResult#0;class#ManualAddItemActivity#0" expanded="false" />
-            <element signature="method#beginCrop#0;class#ManualAddItemActivity#0" expanded="false" />
+            <element signature="e#830#831#0" expanded="true" />
+            <element signature="e#880#881#0" expanded="true" />
+            <element signature="e#988#989#0" expanded="true" />
+            <element signature="e#1020#1021#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3008,16 +2991,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ReminderEntryDataSource.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListDataSource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29820627">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+          <folding>
+            <element signature="e#914#915#0" expanded="true" />
+            <element signature="e#955#956#0" expanded="true" />
+            <element signature="e#1070#1071#0" expanded="true" />
+            <element signature="e#1093#1094#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ReminderFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="113" column="28" selection-start-line="113" selection-start-column="28" selection-end-line="113" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ManualAddItemActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21212122">
+          <caret line="160" column="27" selection-start-line="160" selection-start-column="27" selection-end-line="160" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#830#831#0" expanded="true" />
-            <element signature="e#880#881#0" expanded="true" />
-            <element signature="e#988#989#0" expanded="true" />
-            <element signature="e#1020#1021#0" expanded="true" />
+            <element signature="e#4829#4830#0" expanded="true" />
+            <element signature="e#4853#4854#0" expanded="true" />
+            <element signature="method#onSaveInstanceState#0;class#ManualAddItemActivity#0" expanded="false" />
           </folding>
         </state>
       </provider>

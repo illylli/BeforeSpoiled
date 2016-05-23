@@ -1,16 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#e2e4fe">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:listSelector="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:dividerHeight="10dp">
+
+    </ListView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/finish_shopping"
+        android:layout_gravity="bottom"
+        android:onClick="onFinishClicked"/>
+</LinearLayout>
+<!--
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="cs165.edu.dartmouth.cs.beforespoiled.ShoppingListFragment">
-
-    <!-- TODO: Update blank fragment layout -->
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:longClickable="true"
         android:id="@+id/listView"
-        android:layout_weight="1" android:layout_margin="10dp" />
+        android:layout_weight="1" android:layout_margin="10dp"
+        android:background="@drawable/shape" />
 
     <Button
         android:layout_width="match_parent"
@@ -19,3 +44,4 @@
         android:layout_gravity="bottom"/>
 
 </FrameLayout>
+-->

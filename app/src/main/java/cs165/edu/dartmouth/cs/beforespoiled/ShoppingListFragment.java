@@ -17,8 +17,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.AnimatorSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +32,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import cs165.edu.dartmouth.cs.beforespoiled.database.DeleteShoppingItemFromDatabase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ReadShoppingListFromDatabase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.SaveShoppingItemToDatabase;
-import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
-import cs165.edu.dartmouth.cs.beforespoiled.view.ShoppingListAdapter;
-
+import cs165.edu.dartmouth.cs.beforespoiled.database.Card;
+import cs165.edu.dartmouth.cs.beforespoiled.view.CardArrayAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,16 +43,17 @@ import cs165.edu.dartmouth.cs.beforespoiled.view.ShoppingListAdapter;
  * Use the {@link ShoppingListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShoppingListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<ShoppingListItem>>{
+public class ShoppingListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<Card>> {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private View shoppingListView;
+
+    private CardArrayAdapter cardArrayAdapter;
     private ListView shoppingList;
-    private ShoppingListAdapter shoppingListAdapter;
-    private List<ShoppingListItem> shoppingListItems;
+    private List<Card> cardList;
 
     // TODO: Rename and change types of parameters
 
@@ -76,7 +81,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        shoppingListItems = new ArrayList<>();
+        cardList = new ArrayList<>();
     }
 
     @Override
@@ -87,8 +92,17 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
 
         shoppingListView = inflater.inflate(R.layout.fragment_shopping_list, container, false);
         shoppingList = (ListView) shoppingListView.findViewById(R.id.listView);
-        shoppingListAdapter = new ShoppingListAdapter(getActivity().getApplicationContext(), shoppingListItems);
-        shoppingList.setAdapter(shoppingListAdapter);
+
+        shoppingList.addHeaderView(new View(getActivity()));
+        shoppingList.addFooterView(new View(getActivity()));
+
+        cardArrayAdapter = new CardArrayAdapter(getActivity().getApplicationContext(), cardList);
+//        shoppingListAdapter = new ShoppingListAdapter(getActivity().getApplicationContext(), shoppingListItems);
+//        AlphaInAnimationAdapter animationAdapter = new AlphaInAnimationAdapter(shoppingListAdapter);
+//        animationAdapter.setAbsListView(shoppingList);
+//        shoppingList.setAdapter(animationAdapter);
+        shoppingList.setAdapter(cardArrayAdapter);
+//        shoppingList.setDraggableManager(new TouchViewDraggableManager(R.id.itemrow_gripview));
         shoppingList.setLongClickable(true);
         shoppingList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -130,7 +144,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
             case R.id.add_item:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Add an item");
-//                builder.setMessage("describe the Todo task...");
                 final EditText itemText = new EditText(getActivity());
                 builder.setView(itemText);
                 builder.setPositiveButton("Add Item", new DialogInterface.OnClickListener() {
@@ -139,7 +152,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                         String itemName = itemText.getText().toString();
                         ContentValues values = new ContentValues();
                         values.clear();
-                        ShoppingListItem listItem = new ShoppingListItem();
+                        Card listItem = new Card();
                         listItem.setItemName(itemName);
                         listItem.setItemNumber(1);
                         listItem.setSelected(false);
@@ -148,15 +161,13 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                 });
                 builder.setNegativeButton("Cancel", null);
                 builder.create().show();
-//                SweetAlertDialog pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.NORMAL_TYPE);
-//                pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-//                pDialog.setTitleText("Please add a new item");
-//                pDialog.setCancelable(false);
-//                pDialog.show();
                 return true;
             default:
                 return false;
         }
+    }
+
+    public void onFinishClicked() {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -166,42 +177,29 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         }
     }
 
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-
     public void updateList(){
         getLoaderManager().initLoader(0, null, this).forceLoad();
     }
 
-    public void addNewItem(ShoppingListItem shoppingListItem){
-        SaveShoppingItemToDatabase task = new SaveShoppingItemToDatabase(getActivity().getApplicationContext(), shoppingListItem);
+    public void addNewItem(Card card) {
+        SaveShoppingItemToDatabase task = new SaveShoppingItemToDatabase(getActivity().getApplicationContext(), card);
         task.execute();
-        shoppingListItems.add(shoppingListItem);
-        shoppingListAdapter.clear();
-        Log.d("TEST", shoppingListItems.size() + " length");
-        shoppingListAdapter.addAll(shoppingListItems);
-        shoppingListAdapter.notifyDataSetChanged();
+        cardList.add(card);
+        cardArrayAdapter.clear();
+        cardArrayAdapter.addAll(cardList);
+        cardArrayAdapter.notifyDataSetChanged();
     }
 
-    public void deleteItem(int position){
-        ShoppingListItem item = shoppingListItems.get(position);
-        shoppingListItems.remove(position);
+    public void deleteItem(int position) {
+        Card card = cardList.get(position);
+        cardList.remove(position);
 
-        DeleteShoppingItemFromDatabase task = new DeleteShoppingItemFromDatabase(getActivity().getApplicationContext(), item.getId());
+        DeleteShoppingItemFromDatabase task = new DeleteShoppingItemFromDatabase(getActivity().getApplicationContext(), card.getId());
         task.execute();
 
-        shoppingListAdapter.clear();
-        Log.d("TEST", shoppingListItems.size() + " length");
-        shoppingListAdapter.addAll(shoppingListItems);
-        shoppingListAdapter.notifyDataSetChanged();
+        cardArrayAdapter.clear();
+        cardArrayAdapter.addAll(cardList);
+        cardArrayAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -211,26 +209,22 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     }
 
     @Override
-    public Loader<List<ShoppingListItem>> onCreateLoader(int i, Bundle bundle) {
+    public Loader<List<Card>> onCreateLoader(int i, Bundle bundle) {
         return new ReadShoppingListFromDatabase(getActivity().getApplicationContext());
     }
 
     @Override
-    public void onLoadFinished(Loader<List<ShoppingListItem>> loader, List<ShoppingListItem> items) {
-        shoppingListAdapter.clear();
-        Log.d("Database", "items " + items.size());
-        shoppingListItems = items;
-        Log.d("Database", "shoppingListItems " + shoppingListItems.size());
-        shoppingListAdapter.addAll(shoppingListItems);
-        Log.d("Database", "shoppingListItems changes");
-        shoppingListAdapter.notifyDataSetChanged();
+    public void onLoadFinished(Loader<List<Card>> loader, List<Card> items) {
+        cardArrayAdapter.clear();
+        cardList = items;
+        cardArrayAdapter.addAll(cardList);
+        cardArrayAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onLoaderReset(Loader<List<ShoppingListItem>> loader) {
-        Log.d("CS65", "RESET");
-        shoppingListAdapter = new ShoppingListAdapter(getActivity().getApplicationContext(), new ArrayList<ShoppingListItem>());
-        shoppingList.setAdapter(shoppingListAdapter);
+    public void onLoaderReset(Loader<List<Card>> loader) {
+        cardArrayAdapter = new CardArrayAdapter(getActivity().getApplicationContext(), new ArrayList<Card>());
+        shoppingList.setAdapter(cardArrayAdapter);
     }
 
 

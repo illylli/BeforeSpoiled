@@ -38,12 +38,35 @@ public class ShoppingListDataSource {
 	}
 
     //add one history to database
-	public ShoppingListItem createHistory(ShoppingListItem shoppingListItem) {
+//	public ShoppingListItem createHistory(ShoppingListItem shoppingListItem) {
+//		ContentValues values = new ContentValues();
+//
+//        //get one historyEntry values
+//        values.put(COLUMN_ITEMNAME, shoppingListItem.getItemName());
+//        values.put(COLUMN_ITEMNUMBER, shoppingListItem.getItemNumber());
+//
+//		long insertId = database.insert(TABLE_SHOPPINGLIST, null,
+//				values);
+//		Cursor cursor = database.query(TABLE_SHOPPINGLIST,
+//				allColumns, COLUMN_ID + " = " + insertId, null,
+//				null, null, null);
+//		cursor.moveToFirst();
+//		ShoppingListItem newShoppingListItem = cursorToShoppingListItem(cursor);
+//
+//		// Log the comment stored
+//		Log.d(TAG, "shoppingListItem = " + cursorToShoppingListItem(cursor).toString()
+//				+ " insert ID = " + insertId);
+//
+//		cursor.close();
+//		return newShoppingListItem;
+//	}
+
+	public Card createHistory(Card card) {
 		ContentValues values = new ContentValues();
 
-        //get one historyEntry values
-        values.put(COLUMN_ITEMNAME, shoppingListItem.getItemName());
-        values.put(COLUMN_ITEMNUMBER, shoppingListItem.getItemNumber());
+		//get one historyEntry values
+		values.put(COLUMN_ITEMNAME, card.getItemName());
+		values.put(COLUMN_ITEMNUMBER, card.getItemNumber());
 
 		long insertId = database.insert(TABLE_SHOPPINGLIST, null,
 				values);
@@ -51,14 +74,14 @@ public class ShoppingListDataSource {
 				allColumns, COLUMN_ID + " = " + insertId, null,
 				null, null, null);
 		cursor.moveToFirst();
-		ShoppingListItem newShoppingListItem = cursorToShoppingListItem(cursor);
+		Card newCard = cursorToShoppingListItem(cursor);
 
 		// Log the comment stored
 		Log.d(TAG, "shoppingListItem = " + cursorToShoppingListItem(cursor).toString()
 				+ " insert ID = " + insertId);
 
 		cursor.close();
-		return newShoppingListItem;
+		return newCard;
 	}
 
 	public void deleteHistory(long id){
@@ -72,31 +95,59 @@ public class ShoppingListDataSource {
 		database.delete(TABLE_SHOPPINGLIST, null, null);
 	}
 	
-	public List<ShoppingListItem> getAllItems() {
-		List<ShoppingListItem> shoppingListItems = new ArrayList<>();
+//	public List<ShoppingListItem> getAllItems() {
+//		List<ShoppingListItem> shoppingListItems = new ArrayList<>();
+//
+//		Cursor cursor = database.query(TABLE_SHOPPINGLIST,
+//				allColumns, null, null, null, null, null);
+//
+//		cursor.moveToFirst();
+//		while (!cursor.isAfterLast()) {
+//			ShoppingListItem shoppingListItem = cursorToShoppingListItem(cursor);
+//			Log.d(TAG, "get comment = " + cursorToShoppingListItem(cursor).toString());
+//			shoppingListItems.add(shoppingListItem);
+//			cursor.moveToNext();
+//		}
+//		// Make sure to close the cursor
+//		cursor.close();
+//		return shoppingListItems;
+//	}
+
+	public List<Card> getAllItems() {
+		List<Card> cardList = new ArrayList<>();
 
 		Cursor cursor = database.query(TABLE_SHOPPINGLIST,
 				allColumns, null, null, null, null, null);
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			ShoppingListItem shoppingListItem = cursorToShoppingListItem(cursor);
+			Card card = cursorToShoppingListItem(cursor);
 			Log.d(TAG, "get comment = " + cursorToShoppingListItem(cursor).toString());
-			shoppingListItems.add(shoppingListItem);
+			cardList.add(card);
 			cursor.moveToNext();
 		}
 		// Make sure to close the cursor
 		cursor.close();
-		return shoppingListItems;
+		return cardList;
 	}
 
-	private ShoppingListItem cursorToShoppingListItem(Cursor cursor) {
-		ShoppingListItem shoppingListItem = new ShoppingListItem();
+//	private ShoppingListItem cursorToShoppingListItem(Cursor cursor) {
+//		ShoppingListItem shoppingListItem = new ShoppingListItem();
+//
+//		shoppingListItem.setId(cursor.getLong(0));
+//		shoppingListItem.setItemName(cursor.getString(1));
+//		shoppingListItem.setItemNumber(cursor.getInt(2));
+//
+//		return shoppingListItem;
+//	}
 
-		shoppingListItem.setId(cursor.getLong(0));
-		shoppingListItem.setItemName(cursor.getString(1));
-		shoppingListItem.setItemNumber(cursor.getInt(2));
+	private Card cursorToShoppingListItem(Cursor cursor) {
+		Card card = new Card();
 
-		return shoppingListItem;
+		card.setId(cursor.getLong(0));
+		card.setItemName(cursor.getString(1));
+		card.setItemNumber(cursor.getInt(2));
+
+		return card;
 	}
 }

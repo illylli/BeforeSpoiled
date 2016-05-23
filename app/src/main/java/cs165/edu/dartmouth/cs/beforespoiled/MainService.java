@@ -13,7 +13,7 @@ import android.util.Log;
 
 import java.util.List;
 
-import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
+import cs165.edu.dartmouth.cs.beforespoiled.database.Card;
 
 public class MainService extends Service {
     public MainService() {
@@ -26,7 +26,8 @@ public class MainService extends Service {
     public static final int READSHOPPINGLIST = 4;
     public final static int SAVESHOPPINGLIST = 5;
 
-    private List<ShoppingListItem> shoppingListItems;
+//    private List<ShoppingListItem> shoppingListItems;
+    private List<Card> shoppingListItems;
 
     private static boolean isRunning = false;
     private final Messenger mMessenger = new Messenger(

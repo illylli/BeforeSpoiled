@@ -6,13 +6,10 @@ import android.util.Log;
 
 import java.util.List;
 
-import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListDataSource;
-import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
-
 /**
  * Created by Yuzhong on 2016/5/19.
  */
-public class ReadShoppingListFromDatabase extends AsyncTaskLoader<List<ShoppingListItem>> {
+public class ReadShoppingListFromDatabase extends AsyncTaskLoader<List<Card>> {
 
     private ShoppingListDataSource mDataSource;
     private Context context;
@@ -26,10 +23,11 @@ public class ReadShoppingListFromDatabase extends AsyncTaskLoader<List<ShoppingL
     }
 
     @Override
-    public List<ShoppingListItem> loadInBackground() {
+    public List<Card> loadInBackground() {
         mDataSource.open();
         // read data from database
-        List<ShoppingListItem> list = mDataSource.getAllItems();
+//        List<ShoppingListItem> list = mDataSource.getAllItems();
+        List<Card> list = mDataSource.getAllItems();
 
         Log.d("Database", "Read All:" + list.size());
 

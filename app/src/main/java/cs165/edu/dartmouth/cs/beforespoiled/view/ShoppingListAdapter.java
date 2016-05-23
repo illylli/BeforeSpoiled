@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import java.util.List;
 
 import cs165.edu.dartmouth.cs.beforespoiled.R;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
+import cs165.edu.dartmouth.cs.beforespoiled.database.UpdateShoppingItem;
 
 /**
  * Created by Yuzhong on 2016/5/19.
@@ -64,6 +66,27 @@ public class ShoppingListAdapter extends ArrayAdapter<ShoppingListItem> {
         holder = new ViewHolder();
         holder.itemName = (TextView) convertView.findViewById(R.id.item_name);
         holder.ifBought = (CheckBox) convertView.findViewById(R.id.check_box);
+        final ShoppingListItem listItem = shoppingListItems.get(position);
+
+        holder.ifBought.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,
+                                         boolean isChecked) {
+                // TODO Auto-generated method stub
+                UpdateShoppingItem task;
+                if(isChecked){
+                    listItem.setSelected(true);
+                    task = new UpdateShoppingItem(getContext(), listItem);
+                    task.execute();
+                }else{
+                    listItem.setSelected(false);
+                    task = new UpdateShoppingItem(getContext(), listItem);
+                    task.execute();
+                }
+            }
+        });
+
+
         convertView.setTag(holder);
 
         holder.itemName.setTextColor(Color.GRAY);
@@ -77,40 +100,13 @@ public class ShoppingListAdapter extends ArrayAdapter<ShoppingListItem> {
             }
         });
 
-        ShoppingListItem listItem = shoppingListItems.get(position);
+
         Log.d("Database", "@@@"+listItem.getItemName());
         holder.itemName.setText(listItem.getItemName());
         holder.ifBought.setChecked(listItem.isSelected());
 
         return convertView;
-//        View twoLineListItem;
-//        if (convertView == null) {
-//            LayoutInflater inflater = (LayoutInflater) context
-//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            twoLineListItem = inflater.inflate(
-//                    R.layout.shopping_list_item, null);
-//        } else {
-//            twoLineListItem = convertView;
-//        }
-//
-//        TextView text1 = (TextView) twoLineListItem.findViewById(R.id.item_name);
-//        TextView text2 = (TextView) twoLineListItem.findViewById(R.id.item_number);
-//
-//        text1.setTextColor(Color.GRAY);
-//        text2.setTextColor(Color.GRAY);
-//        text1.setText(getFirstRow(shoppingListItems.get(position)));
-//        text2.setText(getSecondRow(shoppingListItems.get(position)));
-//
-//        return twoLineListItem;
     }
 
-    //Show the first row in history entry list.
-//    public String getFirstRow(ShoppingListItem shoppingListItem){
-//        return "Row1";
-//    }
-    //Show the second row in history entry list.
-//    public String getSecondRow(ShoppingListItem shoppingListItem){
-//        return "Row2";
-//    }
 
 }

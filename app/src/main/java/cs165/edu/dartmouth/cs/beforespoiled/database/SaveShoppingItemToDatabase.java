@@ -5,14 +5,11 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListDataSource;
-import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
-
 /**
- * Created by Yuzhong on 2016/4/19.
+ * Created by Yuzhong on 2016/5/19.
  */
 public class SaveShoppingItemToDatabase extends AsyncTask<Void, Integer, Void> {
-    private ShoppingListDataSource mDataSource;
+    private ShoppingListItemDataSource mDataSource;
     private ShoppingListItem shoppingListItem;
     private ShoppingListItem newShoppingListItem;
     private Context context;
@@ -25,7 +22,7 @@ public class SaveShoppingItemToDatabase extends AsyncTask<Void, Integer, Void> {
     @Override
     protected void onPreExecute() {
         // Getting reference to the TextView tv_counter of the layout activity_main
-        mDataSource = new ShoppingListDataSource(context);
+        mDataSource = new ShoppingListItemDataSource(context);
     }
 
     // A callback method executed on non UI thread, invoked after
@@ -37,6 +34,7 @@ public class SaveShoppingItemToDatabase extends AsyncTask<Void, Integer, Void> {
     protected Void doInBackground(Void... params) {
         mDataSource.open();
         Log.d("Database", "Save data:" + shoppingListItem);
+        shoppingListItem.setSelected(false);
         newShoppingListItem = mDataSource.createHistory(shoppingListItem);
 
         mDataSource.close();

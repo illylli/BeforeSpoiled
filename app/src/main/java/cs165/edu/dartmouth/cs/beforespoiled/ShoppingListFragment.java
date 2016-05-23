@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Loader;
 import android.graphics.Color;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,17 +18,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import java.nio.LongBuffer;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import cs165.edu.dartmouth.cs.beforespoiled.database.CreateShoppingList;
 import cs165.edu.dartmouth.cs.beforespoiled.database.DeleteShoppingItemFromDatabase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ReadShoppingListFromDatabase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.SaveShoppingItemToDatabase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
+import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingLists;
+import cs165.edu.dartmouth.cs.beforespoiled.database.UpdateShoppingItem;
+import cs165.edu.dartmouth.cs.beforespoiled.helper.DateHelper;
 import cs165.edu.dartmouth.cs.beforespoiled.view.ShoppingListAdapter;
 
 
@@ -46,6 +56,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     private static final String ARG_PARAM2 = "param2";
 
     private View shoppingListView;
+    private Button finishShoppingButton;
     private ListView shoppingList;
     private ShoppingListAdapter shoppingListAdapter;
     private List<ShoppingListItem> shoppingListItems;
@@ -53,6 +64,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     // TODO: Rename and change types of parameters
 
     private OnFragmentInteractionListener mListener;
+    private View view;
 
     public ShoppingListFragment() {
         // Required empty public constructor
@@ -113,13 +125,61 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                 return true;
             }
         });
+
+        finishShoppingButton = (Button) shoppingListView.findViewById(R.id.finishShopping);
+        finishShoppingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ListAdapter temp = shoppingList.getAdapter();
+                ShoppingLists shoppingLists = new ShoppingLists(new Date());
+//                ShoppingLists shoppingLists = new ShoppingLists(new Date(), item.getItemName(), item.getItemNumber());
+                CreateShoppingList task = new CreateShoppingList(getActivity().getApplicationContext(), shoppingLists);
+                task.execute();
+
+                try {
+                    shoppingLists = task.get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                long listID = shoppingLists.getId();
+                Log.d("ITEM", "listID" + listID);
+                ArrayList<ShoppingListItem> index = new ArrayList<>();
+//                ArrayList<Long> poses = new ArrayList<>();
+                int number = temp.getCount();
+                for (int i = 0; i < number; i++) {
+                    ShoppingListItem item = (ShoppingListItem) temp.getItem(i);
+                    boolean checked = item.isSelected();
+                    // for test
+//                    index.add(item);
+                    if (checked) {
+                        item.setListId(listID);
+                        index.add(item);
+//                        poses.add(item.getId());
+                        UpdateShoppingItem update = new UpdateShoppingItem(getActivity().getApplicationContext(), item);
+                        update.execute();
+                        Log.d("ITEM", item.getItemName() + "checked");
+                    }
+
+                }
+//                DeleteShoppingItemFromDatabase task2 = new DeleteShoppingItemFromDatabase(getActivity().getApplicationContext(), poses);
+//                task2.execute();
+                Log.d("ITEM", shoppingListItems.size() + "shoppinglist size");
+                shoppingListItems.removeAll(index);
+                shoppingListAdapter.clear();
+                shoppingListAdapter.addAll(shoppingListItems);
+                shoppingListAdapter.notifyDataSetChanged();
+            }
+        });
+
         return shoppingListView;
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.add_item, menu);
-        super.onCreateOptionsMenu(menu,inflater);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     // create a dialog to get the input of the item

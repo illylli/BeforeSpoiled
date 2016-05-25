@@ -9,6 +9,7 @@ import android.content.Loader;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.transition.CircularPropagation;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,6 +22,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import com.dd.CircularProgressButton;
+import com.vstechlab.easyfonts.EasyFonts;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,7 +52,7 @@ import cs165.edu.dartmouth.cs.beforespoiled.view.CardArrayAdapter;
  */
 public class ShoppingListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<ShoppingListItem>> {
     private View shoppingListView;
-    private Button finishShoppingButton;
+    private CircularProgressButton finishShoppingButton;
 
     private CardArrayAdapter cardArrayAdapter;
     private ListView shoppingList;
@@ -94,7 +99,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         shoppingList.addFooterView(new View(getActivity()));
 
         cardArrayAdapter = new CardArrayAdapter(getActivity().getApplicationContext(), cardList);
-//        shoppingListAdapter = new ShoppingListAdapter(getActivity().getApplicationContext(), shoppingListItems);
 //        AlphaInAnimationAdapter animationAdapter = new AlphaInAnimationAdapter(shoppingListAdapter);
 //        animationAdapter.setAbsListView(shoppingList);
 //        shoppingList.setAdapter(animationAdapter);
@@ -116,7 +120,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                         successDialog.setTitle("Deleted!");
                         successDialog.setTitleText("This item is deleted!");
                         successDialog.show();
-                        deleteItem(position);
+                        deleteItem(position - 1);
                         warningDialog.cancel();
                     }
                 });
@@ -125,53 +129,51 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
             }
         });
 
-        finishShoppingButton = (Button) shoppingListView.findViewById(R.id.btn_finish_shopping);
+        finishShoppingButton = (CircularProgressButton) shoppingListView.findViewById(R.id.btn_finish_shopping);
+        finishShoppingButton.setTypeface(EasyFonts.caviarDreamsBold(getActivity().getApplicationContext()));
+        finishShoppingButton.setIndeterminateProgressMode(true);
         finishShoppingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CardArrayAdapter temp = cardArrayAdapter;
-                ShoppingLists shoppingLists = new ShoppingLists(new Date());
-//                ShoppingLists shoppingLists = new ShoppingLists(new Date(), item.getItemName(), item.getItemNumber());
-                CreateShoppingList task = new CreateShoppingList(getActivity().getApplicationContext(), shoppingLists);
-                task.execute();
-
-                try {
-                    shoppingLists = task.get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-                long listID = shoppingLists.getId();
-                Log.d("ITEM", "listID" + listID);
-                ArrayList<ShoppingListItem> index = new ArrayList<>();
-//                ArrayList<Long> poses = new ArrayList<>();
-                int number = temp.getCount();
+                ArrayList<ShoppingListItem> checkedItems = new ArrayList<>();
+                int number = cardArrayAdapter.getCount();
                 for (int i = 0; i < number; i++) {
-                    ShoppingListItem item = (ShoppingListItem) temp.getItem(i);
+                    ShoppingListItem item = cardArrayAdapter.getItem(i);
                     boolean checked = item.isSelected();
-                    // for test
-//                    index.add(item);
-                    if (checked) {
-                        item.setListId(listID);
-                        index.add(item);
-//                        poses.add(item.getId());
-                        UpdateShoppingItem update = new UpdateShoppingItem(getActivity().getApplicationContext(), item);
-                        update.execute();
-                        Log.d("ITEM", item.getItemName() + "checked");
-                    }
-
+                    if (checked) checkedItems.add(item);
                 }
-//                DeleteShoppingItemFromDatabase task2 = new DeleteShoppingItemFromDatabase(getActivity().getApplicationContext(), poses);
-//                task2.execute();
+
+                int checkedItemsNumber = checkedItems.size();
+                if(checkedItemsNumber > 0){
+//                    finishShoppingButton.setProgress(50);
+                    ShoppingLists shoppingLists = new ShoppingLists(new Date());
+                    CreateShoppingList task = new CreateShoppingList(getActivity().getApplicationContext(), shoppingLists);
+                    task.execute();
+                    try {
+                        shoppingLists = task.get();
+                        long listID = shoppingLists.getId();
+                        for(ShoppingListItem item : checkedItems){
+                            item.setListId(listID);
+                            UpdateShoppingItem update = new UpdateShoppingItem(getActivity().getApplicationContext(), item);
+                            update.execute();
+                            finishShoppingButton.setProgress(100);
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    finishShoppingButton.setProgress(-1);
+                }
                 Log.d("ITEM", cardList.size() + "shoppinglist size");
-                cardList.removeAll(index);
+                cardList.removeAll(checkedItems);
                 cardArrayAdapter.clear();
                 cardArrayAdapter.addAll(cardList);
                 cardArrayAdapter.notifyDataSetChanged();
+                finishShoppingButton.setProgress(0);
             }
         });
-
         return shoppingListView;
     }
 

@@ -129,7 +129,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         finishShoppingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ListAdapter temp = shoppingList.getAdapter();
+                CardArrayAdapter temp = cardArrayAdapter;
                 ShoppingLists shoppingLists = new ShoppingLists(new Date());
 //                ShoppingLists shoppingLists = new ShoppingLists(new Date(), item.getItemName(), item.getItemNumber());
                 CreateShoppingList task = new CreateShoppingList(getActivity().getApplicationContext(), shoppingLists);

@@ -27,7 +27,7 @@ public class ReadShoppingListFromDatabase extends AsyncTaskLoader<List<ShoppingL
         mDataSource.open();
         // read data from database
 //        List<ShoppingListItem> list = mDataSource.getAllItems();
-        List<ShoppingListItem> list = mDataSource.getAllItems();
+        List<ShoppingListItem> list = mDataSource.getItems();
 
         Log.d("Database", "Read All:" + list.size());
 

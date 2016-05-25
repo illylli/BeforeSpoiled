@@ -21,32 +21,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f915035-9673-4305-bd47-e7597247a5f0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/1_library_1_1_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/CreateShoppingList.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListItemDataSource.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingLists.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListsDataSource.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/UpdateShoppingItem.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/idle_state_selector.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/library_2_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/nineoldandroids_2_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/libs/nineoldandroids-2.4.0.jar" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ShoppingListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ShoppingListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/DeleteShoppingItemFromDatabase.java" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/DeleteShoppingItemFromDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/MyDBHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/MyDBHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ReadShoppingListFromDatabase.java" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ReadShoppingListFromDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/SaveShoppingItemToDatabase.java" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/SaveShoppingItemToDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListItem.java" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/helper/DateHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/helper/DateHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/view/CardArrayAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/view/CardArrayAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/view/ShoppingListAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/view/ShoppingListAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_list_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_list_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_shopping_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_shopping_list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
     </list>
     <ignored path="BeforeSpoiled.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -87,14 +64,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ShoppingListFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ShoppingListFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ShoppingListFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6919192">
-              <caret line="150" column="75" selection-start-line="150" selection-start-column="68" selection-end-line="150" selection-end-column="75" />
+            <state vertical-scroll-proportion="-5.3703704">
+              <caret line="133" column="90" selection-start-line="133" selection-start-column="83" selection-end-line="133" selection-end-column="90" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ShoppingListItemDataSource.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListItemDataSource.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.037037">
+              <caret line="110" column="33" selection-start-line="110" selection-start-column="30" selection-end-line="110" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReadShoppingListFromDatabase.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ReadShoppingListFromDatabase.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7090517">
+              <caret line="29" column="60" selection-start-line="29" selection-start-column="60" selection-end-line="29" selection-end-column="60" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -112,30 +109,13 @@
       <file leaf-file-name="fragment_shopping_list.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_shopping_list.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.6603773">
-              <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+            <state vertical-scroll-proportion="-3.2264152">
+              <caret line="22" column="47" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
               <folding />
             </state>
           </provider>
           <provider editor-type-id="android-designer">
             <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CardArrayAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/view/CardArrayAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="40" selection-start-line="36" selection-start-column="40" selection-end-line="36" selection-end-column="40" />
-              <folding>
-                <element signature="e#1439#1440#0" expanded="true" />
-                <element signature="e#1482#1483#0" expanded="true" />
-                <element signature="e#1546#1547#0" expanded="true" />
-                <element signature="e#1593#1594#0" expanded="true" />
-                <element signature="e#2686#3286#0" expanded="true" />
-                <element signature="e#3285#3286#0" expanded="true" />
-              </folding>
-            </state>
           </provider>
         </entry>
       </file>
@@ -1950,7 +1930,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/view/ShoppingListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/CreateShoppingList.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/DeleteShoppingItemFromDatabase.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ReadShoppingListFromDatabase.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/SaveShoppingItemToDatabase.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListItem.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListItemDataSource.java" />
@@ -1960,10 +1939,11 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_shopping_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/helper/DateHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/MyDBHelper.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ShoppingListFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/view/CardArrayAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_list_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ShoppingListFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ReadShoppingListFromDatabase.java" />
       </list>
     </option>
   </component>
@@ -2751,7 +2731,13 @@
       <option name="project" value="LOCAL" />
       <updated>1464036241719</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="ListView Database">
+      <created>1464135823334</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1464135823334</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -2773,7 +2759,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30257186" sideWeight="0.5169713" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30311614" sideWeight="0.4830287" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30311614" sideWeight="0.4830287" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39943343" sideWeight="0.49695387" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2787,7 +2773,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24956521" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956523" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39943343" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39943343" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2849,7 +2835,8 @@
     <MESSAGE value="resolve the database's conflict" />
     <MESSAGE value="fix the image replacement bugs in manualAddItemActivity" />
     <MESSAGE value="ListView UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="ListView UI" />
+    <MESSAGE value="ListView Database" />
+    <option name="LAST_COMMIT_MESSAGE" value="ListView Database" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2866,13 +2853,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/LabelDataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.84033614">
-          <caret line="54" column="46" selection-start-line="54" selection-start-column="46" selection-end-line="54" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ReminderEntry.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16806723">
@@ -3226,30 +3206,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ReadShoppingListFromDatabase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListItemDataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1060#1061#0" expanded="false" />
-            <element signature="e#1110#1111#0" expanded="false" />
-            <element signature="e#1240#1241#0" expanded="false" />
-            <element signature="e#1272#1273#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/MyDBHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3271,21 +3227,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/view/CardArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="40" selection-start-line="36" selection-start-column="40" selection-end-line="36" selection-end-column="40" />
-          <folding>
-            <element signature="e#1439#1440#0" expanded="true" />
-            <element signature="e#1482#1483#0" expanded="true" />
-            <element signature="e#1546#1547#0" expanded="true" />
-            <element signature="e#1593#1594#0" expanded="true" />
-            <element signature="e#2686#3286#0" expanded="true" />
-            <element signature="e#3285#3286#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_list_item.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.924528">
@@ -3297,10 +3238,44 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Android/sdk/ndk-bundle/sources/android-21/android/widget/ListView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33189654">
+          <caret line="435" column="23" selection-start-line="435" selection-start-column="23" selection-end-line="435" selection-end-column="23" />
+          <folding>
+            <element signature="e#15857#15858#0" expanded="false" />
+            <element signature="e#15888#15889#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/view/CardArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43318966">
+          <caret line="54" column="35" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="35" />
+          <folding>
+            <element signature="e#1439#1440#0" expanded="true" />
+            <element signature="e#1482#1483#0" expanded="true" />
+            <element signature="e#1546#1547#0" expanded="true" />
+            <element signature="e#1593#1594#0" expanded="true" />
+            <element signature="e#2686#3286#0" expanded="true" />
+            <element signature="e#3285#3286#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_shopping_list.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.6603773">
-          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+        <state vertical-scroll-proportion="-3.2264152">
+          <caret line="22" column="47" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
           <folding />
         </state>
       </provider>
@@ -3310,27 +3285,35 @@
     </entry>
     <entry file="file://$USER_HOME$/Library/Android/sdk/ndk-bundle/sources/android-21/android/widget/Adapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33189654">
-          <caret line="62" column="31" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.28448275">
+          <caret line="62" column="18" selection-start-line="62" selection-start-column="11" selection-end-line="62" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ShoppingListFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6919192">
-          <caret line="150" column="75" selection-start-line="150" selection-start-column="68" selection-end-line="150" selection-end-column="75" />
+        <state vertical-scroll-proportion="-5.3703704">
+          <caret line="133" column="90" selection-start-line="133" selection-start-column="83" selection-end-line="133" selection-end-column="90" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListItemDataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.037037">
+          <caret line="110" column="33" selection-start-line="110" selection-start-column="30" selection-end-line="110" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ReadShoppingListFromDatabase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7090517">
+          <caret line="29" column="60" selection-start-line="29" selection-start-column="60" selection-end-line="29" selection-end-column="60" />
+          <folding />
         </state>
       </provider>
     </entry>

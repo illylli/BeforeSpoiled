@@ -5,13 +5,17 @@ package cs165.edu.dartmouth.cs.beforespoiled.database;
  */
 public class ShoppingListItem {
     private long id;
+    private long listId;
     private String itemName;
     private int itemNumber;
     boolean selected = false;
 
-    public ShoppingListItem(){}
+    public ShoppingListItem(){
+        this.listId = -1;
+    }
 
     public ShoppingListItem(String name, int itemNumber, boolean selected){
+        this.listId = -1;
         this.itemName = name;
         this.itemNumber = itemNumber;
         this.selected = selected;
@@ -23,6 +27,14 @@ public class ShoppingListItem {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getListId() {
+        return listId;
+    }
+
+    public void setListId(long listId) {
+        this.listId = listId;
     }
 
     public String getItemName() {

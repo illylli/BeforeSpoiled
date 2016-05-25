@@ -17,13 +17,15 @@ import java.util.List;
 
 import cs165.edu.dartmouth.cs.beforespoiled.R;
 import cs165.edu.dartmouth.cs.beforespoiled.database.Card;
+import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
+import cs165.edu.dartmouth.cs.beforespoiled.database.UpdateShoppingItem;
 
 /**
  * Created by oubai on 5/22/16.
  */
-public class CardArrayAdapter extends ArrayAdapter<Card> {
+public class CardArrayAdapter extends ArrayAdapter<ShoppingListItem> {
     private Context context;
-    private List<Card> cardList;
+    private List<ShoppingListItem> cardList;
 
     static class CardViewHolder {
         TextView itemName;
@@ -31,7 +33,7 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
         CheckBox ifBought;
     }
 
-    public CardArrayAdapter(Context context, List<Card> cardList) {
+    public CardArrayAdapter(Context context, List<ShoppingListItem> cardList) {
         super(context, R.layout.fragment_list_item, cardList);
         Log.d("View", "Hello + +");
         this.context = context;
@@ -39,7 +41,7 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
     }
 
     @Override
-    public void add(Card card) {
+    public void add(ShoppingListItem card) {
         cardList.add(card);
         super.add(card);
     }
@@ -50,7 +52,7 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
     }
 
     @Override
-    public Card getItem(int index) {
+    public ShoppingListItem getItem(int index) {
         return this.cardList.get(index);
     }
 
@@ -64,16 +66,31 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
         } else {
             viewHolder = (CardViewHolder) row.getTag();
         }
-        Log.d("View", "Hello + +");
+
         viewHolder = new CardViewHolder();
         viewHolder.itemName = (TextView) row.findViewById(R.id.item_name);
 //        viewHolder.itemNumber = (TextView) row.findViewById(R.id.item_number);
         viewHolder.ifBought = (CheckBox) row.findViewById(R.id.check_box);
         row.setTag(viewHolder);
-        Card card = cardList.get(position);
+        final ShoppingListItem card = cardList.get(position);
         viewHolder.itemName.setText(card.getItemName());
 //        viewHolder.itemNumber.setText(String.valueOf(card.getItemNumber()));
         viewHolder.ifBought.setChecked(card.isSelected());
+        viewHolder.ifBought.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                UpdateShoppingItem task;
+                if(isChecked) {
+                    card.setSelected(true);
+                    task = new UpdateShoppingItem(getContext(), card);
+                    task.execute();
+                } else {
+                    card.setSelected(false);
+                    task = new UpdateShoppingItem(getContext(), card);
+                    task.execute();
+                }
+            }
+        });
         return row;
     }
 

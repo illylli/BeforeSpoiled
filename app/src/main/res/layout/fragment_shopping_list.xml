@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -16,32 +16,22 @@
         android:dividerHeight="10dp">
 
     </ListView>
+
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/finish_shopping"
-        android:layout_gravity="bottom"
-        android:onClick="onFinishClicked"/>
-</LinearLayout>
+        android:id="@+id/btn_finish_shopping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 <!--
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="cs165.edu.dartmouth.cs.beforespoiled.ShoppingListFragment">
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:longClickable="true"
-        android:id="@+id/listView"
-        android:layout_weight="1" android:layout_margin="10dp"
-        android:background="@drawable/shape" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/finish_shopping"
-        android:layout_gravity="bottom"/>
-
-</FrameLayout>
--->
+    <com.dd.CircularProgressButton
+        android:id="@+id/btnWithText"
+        android:layout_width="196dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:cpb_textComplete="@string/btn_complete"
+        app:cpb_textError="@string/btn_error"
+        app:cpb_textIdle="@string/btn_idle"
+        app:cpb_cornerRadius="48dp" />.CircularProgressButton
+        -->
+</LinearLayout>

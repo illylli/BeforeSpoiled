@@ -13,6 +13,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.vstechlab.easyfonts.EasyFonts;
+
 import java.util.List;
 
 import cs165.edu.dartmouth.cs.beforespoiled.R;
@@ -69,6 +71,7 @@ public class CardArrayAdapter extends ArrayAdapter<ShoppingListItem> {
 
         viewHolder = new CardViewHolder();
         viewHolder.itemName = (TextView) row.findViewById(R.id.item_name);
+        viewHolder.itemName.setTypeface(EasyFonts.caviarDreams(getContext()));
 //        viewHolder.itemNumber = (TextView) row.findViewById(R.id.item_number);
         viewHolder.ifBought = (CheckBox) row.findViewById(R.id.check_box);
         row.setTag(viewHolder);

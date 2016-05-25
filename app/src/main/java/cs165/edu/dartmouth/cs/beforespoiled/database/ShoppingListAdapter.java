@@ -1,4 +1,4 @@
-package cs165.edu.dartmouth.cs.beforespoiled.view;
+package cs165.edu.dartmouth.cs.beforespoiled.database;
 
 import android.content.Context;
 import android.graphics.Color;

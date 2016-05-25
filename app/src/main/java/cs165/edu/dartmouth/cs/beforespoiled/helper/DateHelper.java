@@ -3,6 +3,7 @@ package cs165.edu.dartmouth.cs.beforespoiled.helper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class DateHelper {
     private static final SimpleDateFormat DATA_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -42,6 +43,10 @@ public class DateHelper {
      */
     public static String calendarToString(Calendar calendar) {
         return STRING_FORMAT.format(calendar.getTime());
+    }
+
+    public static String formatDate(Date date){
+        return DATA_FORMAT.format(date);
     }
 
     /**

@@ -6,23 +6,23 @@ import android.util.Log;
 import android.widget.Toast;
 
 /**
- * Created by Yuzhong on 2016/5/19.
+ * Created by Yuzhong on 2016/5/22.
  */
-public class SaveShoppingItemToDatabase extends AsyncTask<Void, Integer, Void> {
-    private ShoppingListItemDataSource mDataSource;
-    private ShoppingListItem shoppingListItem;
-    private ShoppingListItem newShoppingListItem;
+public class CreateShoppingList extends AsyncTask<Void, Integer, ShoppingLists> {
+    private ShoppingListsDataSource mDataSource;
+    private ShoppingLists shoppingLists;
+    private ShoppingLists newShoppingLists;
     private Context context;
 
-    public SaveShoppingItemToDatabase(Context context, ShoppingListItem shoppingListItem){
+    public CreateShoppingList(Context context, ShoppingLists shoppingLists){
         this.context = context;
-        this.shoppingListItem = shoppingListItem;
+        this.shoppingLists = shoppingLists;
     }
     // A callback method executed on UI thread on starting the task
     @Override
     protected void onPreExecute() {
         // Getting reference to the TextView tv_counter of the layout activity_main
-        mDataSource = new ShoppingListItemDataSource(context);
+        mDataSource = new ShoppingListsDataSource(context);
     }
 
     // A callback method executed on non UI thread, invoked after
@@ -31,14 +31,13 @@ public class SaveShoppingItemToDatabase extends AsyncTask<Void, Integer, Void> {
     // Takes a set of parameters of the type defined in your class implementation. This method will be
     // executed on the background thread, so it must not attempt to interact with UI objects.
     @Override
-    protected Void doInBackground(Void... params) {
+    protected ShoppingLists doInBackground(Void... params) {
         mDataSource.open();
-        Log.d("Database", "Save data:" + shoppingListItem);
-        shoppingListItem.setSelected(false);
-        newShoppingListItem = mDataSource.createHistory(shoppingListItem);
+        Log.d("Database", "ShoppingLists Created:" + shoppingLists);
+        newShoppingLists = mDataSource.createHistory(shoppingLists);
 
         mDataSource.close();
-        return null;
+        return newShoppingLists;
     }
 
     // A callback method executed on UI thread, invoked by the publishProgress()
@@ -57,9 +56,10 @@ public class SaveShoppingItemToDatabase extends AsyncTask<Void, Integer, Void> {
     // When doInbackground has completed, the return value from that method is passed into this event
     // handler.
     @Override
-    protected void onPostExecute(Void result) {
+    protected void onPostExecute(ShoppingLists result) {
         // Getting reference to the TextView tv_counter of the layout activity_main
-        Toast toast = Toast.makeText(context, "Entry #" + newShoppingListItem.getId() + "Saved", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(context, "Entry #" + newShoppingLists.getId() + "Saved", Toast.LENGTH_SHORT);
         toast.show();
     }
 }
+

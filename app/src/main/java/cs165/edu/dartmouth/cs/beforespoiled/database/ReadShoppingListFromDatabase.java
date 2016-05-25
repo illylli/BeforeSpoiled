@@ -9,9 +9,9 @@ import java.util.List;
 /**
  * Created by Yuzhong on 2016/5/19.
  */
-public class ReadShoppingListFromDatabase extends AsyncTaskLoader<List<Card>> {
+public class ReadShoppingListFromDatabase extends AsyncTaskLoader<List<ShoppingListItem>> {
 
-    private ShoppingListDataSource mDataSource;
+    private ShoppingListItemDataSource mDataSource;
     private Context context;
 
     private static final String TAG = "AsyncTask";
@@ -19,15 +19,15 @@ public class ReadShoppingListFromDatabase extends AsyncTaskLoader<List<Card>> {
     public ReadShoppingListFromDatabase(Context context){
         super(context);
         this.context = context;
-        mDataSource = new ShoppingListDataSource(context);
+        mDataSource = new ShoppingListItemDataSource(context);
     }
 
     @Override
-    public List<Card> loadInBackground() {
+    public List<ShoppingListItem> loadInBackground() {
         mDataSource.open();
         // read data from database
 //        List<ShoppingListItem> list = mDataSource.getAllItems();
-        List<Card> list = mDataSource.getAllItems();
+        List<ShoppingListItem> list = mDataSource.getAllItems();
 
         Log.d("Database", "Read All:" + list.size());
 

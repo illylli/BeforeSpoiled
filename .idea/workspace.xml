@@ -20,23 +20,9 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f915035-9673-4305-bd47-e7597247a5f0" name="Default" comment="List Database">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gs-maven-android" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_22_2_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/easyfonts_1_0_0.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_21_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/database/ShoppingListAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/view/ShoppingListAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/layout/shopping_list_item.xml" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_21_0_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_22_2_0.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_21_0_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_22_2_0.xml" />
+    <list default="true" id="1f915035-9673-4305-bd47-e7597247a5f0" name="Default" comment="Font, Finish Button">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gs-maven-android" afterPath="$PROJECT_DIR$/gs-maven-android" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ShoppingListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ShoppingListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/view/CardArrayAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/view/CardArrayAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_list_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_list_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_shopping_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_shopping_list.xml" />
     </list>
     <ignored path="BeforeSpoiled.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -77,10 +63,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ShoppingListFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ShoppingListFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ShoppingListFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29748285">
+            <state vertical-scroll-proportion="77.14815">
               <caret line="122" column="47" selection-start-line="122" selection-start-column="47" selection-end-line="122" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -95,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="53" selection-start-line="35" selection-start-column="53" selection-end-line="35" selection-end-column="53" />
+            <state vertical-scroll-proportion="0.35560346">
+              <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -2098,24 +2084,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="gs-maven-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="initial" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BeforeSpoiled" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BeforeSpoiled" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -2791,7 +2759,13 @@
       <option name="project" value="LOCAL" />
       <updated>1464137082733</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Font, Finish Button">
+      <created>1464143846264</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1464143846264</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -2859,7 +2833,8 @@
     <MESSAGE value="ListView UI" />
     <MESSAGE value="ListView Database" />
     <MESSAGE value="List Database" />
-    <option name="LAST_COMMIT_MESSAGE" value="List Database" />
+    <MESSAGE value="Font, Finish Button" />
+    <option name="LAST_COMMIT_MESSAGE" value="Font, Finish Button" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3267,14 +3242,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="53" selection-start-line="35" selection-start-column="53" selection-end-line="35" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_list_item.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.0943396">
@@ -3310,7 +3277,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/cs165/edu/dartmouth/cs/beforespoiled/ShoppingListFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29748285">
+        <state vertical-scroll-proportion="77.14815">
           <caret line="122" column="47" selection-start-line="122" selection-start-column="47" selection-end-line="122" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -3321,6 +3288,14 @@
             <element signature="e#5837#7922#0" expanded="true" />
             <element signature="e#7921#7922#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35560346">
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>

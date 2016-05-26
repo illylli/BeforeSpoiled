@@ -3,7 +3,13 @@
 
     <item
         android:id="@+id/add_item"
-        android:showAsAction="always"
         android:icon="@android:drawable/ic_menu_add"
+        android:showAsAction="ifRoom"
         android:title="Add new item" />
+
+    <item
+        android:id="@+id/speech"
+        android:icon="@android:drawable/ic_btn_speak_now"
+        android:showAsAction="ifRoom"
+        android:title="speech item" />
 </menu>

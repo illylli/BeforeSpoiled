@@ -2,12 +2,14 @@ package cs165.edu.dartmouth.cs.beforespoiled;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.speech.RecognizerIntent;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
@@ -40,16 +42,18 @@ import cs165.edu.dartmouth.cs.beforespoiled.helper.DateHelper;
 public class ManualAddItemActivity extends Activity {
 
     public static final int TAKE_PHOTO_REQUEST_CODE = 0;
+    protected static final int RESULT_SPEECH = 1;
     private static final String URI_INSTANCE_STATE_KEY = "saved_uri";
     private TextView mDisplayDateTime;
     private Calendar mBaseDateAndTime = Calendar.getInstance();
     private Calendar mDateAndTime = Calendar.getInstance();
     private EditText itemName;
     private ImageButton cameraButton;
+    private ImageButton speechButton;
     private Spinner categorySpinner;
     private Uri mImageCaptureUri;
     private String filePath;
-
+    //    private EditText txtText;
     private int[] imageResource = {R.drawable.vege, R.drawable.fruit, R.drawable.bread, R.drawable.milk, R.drawable.spices
             ,R.drawable.frozen, R.drawable.grain, R.drawable.snack, R.drawable.beverage, R.drawable.fish};
     private ArrayAdapter adapter = null;
@@ -97,6 +101,27 @@ public class ManualAddItemActivity extends Activity {
 
             }
         });
+        speechButton = (ImageButton) findViewById(R.id.SpeakButton);
+        speechButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
+
+                try {
+                    startActivityForResult(intent, RESULT_SPEECH);
+                } catch (ActivityNotFoundException a) {
+                    Toast t = Toast.makeText(getApplicationContext(),
+                            "Opps! Your device doesn't support Speech to Text",
+                            Toast.LENGTH_SHORT);
+                    t.show();
+                }
+            }
+        });
+
+
         categorySpinner = (Spinner)findViewById(R.id.spinnerCategory);
         adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, labels.toArray());
         categorySpinner.setAdapter(adapter);
@@ -171,6 +196,17 @@ public class ManualAddItemActivity extends Activity {
                 File f = new File(mImageCaptureUri.getPath());
                 if (f.exists())
                     f.delete();
+                break;
+            case RESULT_SPEECH:
+                Log.d("lly", "in manual access to speech");
+                if (resultCode == RESULT_OK && null != data) {
+
+                    ArrayList<String> text = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
+                    itemName.setText(text.get(0).toString());
+                    Log.d("lly", text.get(0).toString());
+                }
                 break;
 
         }

@@ -1,7 +1,5 @@
 package cs165.edu.dartmouth.cs.beforespoiled.database;
 
-import java.util.Calendar;
-
 /**
  * Created by Fanzy on 5/22/16.
  */
@@ -41,5 +39,10 @@ public class Label {
 
     public void setStoragePeriod(Integer storagePeriod) {
         this.storagePeriod = storagePeriod;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

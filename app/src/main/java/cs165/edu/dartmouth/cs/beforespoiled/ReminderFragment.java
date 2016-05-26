@@ -62,7 +62,7 @@ public class ReminderFragment extends Fragment implements LoaderManager.LoaderCa
         view.findViewById(R.id.btn_reminder_add_history).setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ManualAddItemActivity.class);
+                Intent intent = new Intent(getActivity(), AddFromHistoryActivity.class);
                 startActivity(intent);
             }
         });

@@ -29,6 +29,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
 			+ ShoppingListsDataSource.TABLE_SHOPPINGLISTS + "("
 			+ ShoppingListsDataSource.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ ShoppingListsDataSource.CREATE_DATE + " TEXT NOT NULL);";
+
 	private static final String LABEL_CREATE = "CREATE TABLE IF NOT EXISTS " + LabelDataSource.TABLE_LABEL + " (" +
 			LabelDataSource.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
 			LabelDataSource.COLUMN_NAME + " TEXT NOT NULL, " +

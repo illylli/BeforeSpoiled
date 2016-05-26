@@ -6,7 +6,6 @@ import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -102,7 +101,6 @@ public class LabelsSettingActivity extends ListActivity implements LoaderManager
             LabelDataSource dbHelper = new LabelDataSource(context);
             dbHelper.open();
             List<Label> result = dbHelper.fetchEntries();
-            Log.d("Fanzy", String.format("get %d results", result.size()));
             dbHelper.close();
             return result;
         }

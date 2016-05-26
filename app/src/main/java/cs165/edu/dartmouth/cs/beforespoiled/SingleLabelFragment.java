@@ -1,8 +1,6 @@
 package cs165.edu.dartmouth.cs.beforespoiled;
 
 import android.app.DialogFragment;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,34 +55,35 @@ public class SingleLabelFragment extends DialogFragment {
             }
         }
 
-        ((Button) v.findViewById(R.id.btn_settings_labels_single_save)).setOnClickListener(new Button.OnClickListener(){
+        v.findViewById(R.id.btn_settings_labels_single_save).setOnClickListener(new Button.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 boolean newLabel = false;
-                if(label == null){
+                if (label == null) {
                     newLabel = true;
                     label = new Label();
                 }
-                if(!name.getText().toString().equals("")){
+                if (!name.getText().toString().equals("")) {
                     label.setName(name.getText().toString());
                 }
-                if(!period.getText().toString().equals("")){
+                if (!period.getText().toString().equals("")) {
                     label.setStoragePeriod(Integer.parseInt(period.getText().toString()));
                 }
-                if(!days.getText().toString().equals("")){
+                if (!days.getText().toString().equals("")) {
                     label.setDaysBeforeSpoiled(Integer.parseInt(days.getText().toString()));
                 }
-                if(newLabel) {
+                if (newLabel) {
                     new LabelAsyncTask(getActivity()).execute(LabelAsyncTask.INSERT, label);
-                }else{
+                } else {
                     new LabelAsyncTask(getActivity()).execute(LabelAsyncTask.UPDATE, label);
                 }
+                ((LabelsSettingActivity) getActivity()).reloadData();
                 getDialog().cancel();
             }
         });
 
-        ((Button) v.findViewById(R.id.btn_settings_labels_single_cancel)).setOnClickListener(new Button.OnClickListener(){
+        v.findViewById(R.id.btn_settings_labels_single_cancel).setOnClickListener(new Button.OnClickListener() {
 
             @Override
             public void onClick(View view) {

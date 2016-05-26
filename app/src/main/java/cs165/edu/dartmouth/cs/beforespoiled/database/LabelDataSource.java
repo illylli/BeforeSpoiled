@@ -74,9 +74,10 @@ public class LabelDataSource {
     // Update an entry given each column value
     public int updateEntry(Label entry) {
         ContentValues values = new ContentValues();
+        values.put(COLUMN_ID, entry.getId());
         values.put(COLUMN_NAME, entry.getName());
         values.put(COLUMN_STORAGE_PERIOD, entry.getStoragePeriod());
-        values.put(COLUMN_DAYS_BEFORE_SPOILED, entry.getStoragePeriod());
+        values.put(COLUMN_DAYS_BEFORE_SPOILED, entry.getDaysBeforeSpoiled());
         return database.update(TABLE_LABEL, values, COLUMN_ID
                 + " = " + entry.getId(), null);
     }

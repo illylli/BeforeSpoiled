@@ -40,6 +40,8 @@ public class MainActivity extends Activity {
 
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setViewPager(mViewPager);
+
+        ReminderScheduler.setSchedule(this);
     }
 
     @Override

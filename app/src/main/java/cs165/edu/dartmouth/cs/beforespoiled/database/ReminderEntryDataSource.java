@@ -90,7 +90,7 @@ public class ReminderEntryDataSource {
         ReminderEntry reminder = new ReminderEntry();
         reminder.setId(cursor.getLong(0));
         reminder.setName(cursor.getString(1));
-        reminder.setLabel(cursor.getString(2));
+        reminder.setLabel(cursor.getInt(2));
         reminder.setExpireDate(DateHelper.dataToCalendar(cursor.getString(3)));
         reminder.setImage(cursor.getBlob(4));
         return reminder;

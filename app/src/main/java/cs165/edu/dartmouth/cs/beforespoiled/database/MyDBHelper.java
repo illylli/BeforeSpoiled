@@ -21,7 +21,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
 	private static final String REMINDER_CREATE = "CREATE TABLE IF NOT EXISTS " + ReminderEntryDataSource.TABLE_REMINDER + " (" +
 			ReminderEntryDataSource.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
 			ReminderEntryDataSource.COLUMN_NAME + " TEXT NOT NULL, " +
-			ReminderEntryDataSource.COLUMN_LABLE + " TEXT, " +
+			ReminderEntryDataSource.COLUMN_LABLE + " INTEGER, " +
 			ReminderEntryDataSource.COLUMN_EXPIREDATE + " DATETIME NOT NULL, " +
 			ReminderEntryDataSource.COLUMN_PHOTO + " BLOB );";
 

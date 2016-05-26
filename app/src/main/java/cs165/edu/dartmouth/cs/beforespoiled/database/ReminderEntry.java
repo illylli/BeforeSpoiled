@@ -5,7 +5,7 @@ import java.util.Calendar;
 public class ReminderEntry {
     private long id;
     private String name;
-    private String label;
+    private Integer label;
     private Calendar expireDate;
     private byte[] image;
 
@@ -25,11 +25,11 @@ public class ReminderEntry {
         this.name = name;
     }
 
-    public String getLabel() {
+    public Integer getLabel() {
         return label;
     }
 
-    public void setLabel(String label) {
+    public void setLabel(Integer label) {
         this.label = label;
     }
 

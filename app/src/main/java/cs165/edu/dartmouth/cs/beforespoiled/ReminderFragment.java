@@ -45,9 +45,8 @@ public class ReminderFragment extends Fragment implements LoaderManager.LoaderCa
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("Fanzy", "ReminderFragment");
 
-                // send necessary parameters to SubmitActivity
-                Log.d("Fanzy", "click on " + position);
             }
         });
 

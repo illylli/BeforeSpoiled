@@ -8,7 +8,7 @@ import android.widget.Toast;
 /**
  * Created by Yuzhong on 2016/5/19.
  */
-public class SaveShoppingItemToDatabase extends AsyncTask<Void, Integer, Void> {
+public class SaveShoppingItemToDatabase extends AsyncTask<Void, Integer, ShoppingListItem> {
     private ShoppingListItemDataSource mDataSource;
     private ShoppingListItem shoppingListItem;
     private ShoppingListItem newShoppingListItem;
@@ -31,14 +31,14 @@ public class SaveShoppingItemToDatabase extends AsyncTask<Void, Integer, Void> {
     // Takes a set of parameters of the type defined in your class implementation. This method will be
     // executed on the background thread, so it must not attempt to interact with UI objects.
     @Override
-    protected Void doInBackground(Void... params) {
+    protected ShoppingListItem doInBackground(Void... params) {
         mDataSource.open();
         Log.d("Database", "Save data:" + shoppingListItem);
         shoppingListItem.setSelected(false);
         newShoppingListItem = mDataSource.createHistory(shoppingListItem);
 
         mDataSource.close();
-        return null;
+        return newShoppingListItem;
     }
 
     // A callback method executed on UI thread, invoked by the publishProgress()
@@ -56,10 +56,4 @@ public class SaveShoppingItemToDatabase extends AsyncTask<Void, Integer, Void> {
 
     // When doInbackground has completed, the return value from that method is passed into this event
     // handler.
-    @Override
-    protected void onPostExecute(Void result) {
-        // Getting reference to the TextView tv_counter of the layout activity_main
-        Toast toast = Toast.makeText(context, "Entry #" + newShoppingListItem.getId() + "Saved", Toast.LENGTH_SHORT);
-        toast.show();
-    }
 }

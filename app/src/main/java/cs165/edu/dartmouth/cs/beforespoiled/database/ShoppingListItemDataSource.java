@@ -80,8 +80,8 @@ public class ShoppingListItemDataSource {
         if(check) number = 1;
         values.put(COLUMN_CHECKED, number);
 
-        database.update(TABLE_SHOPPINGLISTITEM, values, "_id=" + shoppingListItem.getId(), null);
-
+        int a = database.update(TABLE_SHOPPINGLISTITEM, values, "_id=" + shoppingListItem.getId(), null);
+        Log.d("debug", "Already" + shoppingListItem.getItemName() + " gggg " + shoppingListItem.getListId() + "@@@" + a);
         Log.d("ITEM", "Update" + shoppingListItem.getListId());
     }
 

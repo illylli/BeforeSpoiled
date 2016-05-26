@@ -33,7 +33,7 @@ public class UpdateShoppingItem extends AsyncTask<Void, Integer, Void> {
     @Override
     protected Void doInBackground(Void... params) {
         mDataSource.open();
-        Log.d("Database", "Update data:" + shoppingListItem);
+        Log.d("debug", "Update data:" + shoppingListItem.getItemName() +" : "+ shoppingListItem.getListId());
         mDataSource.updateHistory(shoppingListItem);
 
         mDataSource.close();

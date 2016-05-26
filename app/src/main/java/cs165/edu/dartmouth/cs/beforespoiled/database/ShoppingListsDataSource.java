@@ -10,7 +10,6 @@ import android.util.Log;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import cs165.edu.dartmouth.cs.beforespoiled.helper.DateHelper;
@@ -25,12 +24,11 @@ public class ShoppingListsDataSource {
     public static final String CREATE_DATE = "create_date";
 //    public static final String COLUMN_ITEMNAME = "item_name";
 //    public static final String COLUMN_ITEMNUMBER = "item_number";
-
+private static final String TAG = "DBDEMO";
     private SQLiteDatabase database;
     private MyDBHelper dbHelper;
     //    private String[] allColumns = { COLUMN_ID, CREATE_DATE, COLUMN_ITEMNAME, COLUMN_ITEMNUMBER };
     private String[] allColumns = { COLUMN_ID, CREATE_DATE };
-    private static final String TAG = "DBDEMO";
 
     public ShoppingListsDataSource(Context context) {
         dbHelper = new MyDBHelper(context);
@@ -67,6 +65,40 @@ public class ShoppingListsDataSource {
 
         cursor.close();
         return newShoppingLists;
+    }
+
+    public List<ShoppingLists> fetchRecentHistory(int count) {
+        List<ShoppingLists> entries = new ArrayList<>();
+
+        Cursor cursor = database.query(TABLE_SHOPPINGLISTS,
+                null, null, null, null, null, CREATE_DATE + " desc", count + "");
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ShoppingLists entry = cursorToShoppingLists(cursor);
+            entries.add(entry);
+            cursor.moveToNext();
+        }
+        // Make sure to close the cursor
+        cursor.close();
+        return entries;
+    }
+
+    public List<ShoppingLists> fetchHistory() {
+        List<ShoppingLists> entries = new ArrayList<>();
+
+        Cursor cursor = database.query(TABLE_SHOPPINGLISTS,
+                null, null, null, null, null, CREATE_DATE + " desc");
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ShoppingLists entry = cursorToShoppingLists(cursor);
+            entries.add(entry);
+            cursor.moveToNext();
+        }
+        // Make sure to close the cursor
+        cursor.close();
+        return entries;
     }
 
     public void deleteHistory(long id){

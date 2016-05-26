@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import cs165.edu.dartmouth.cs.beforespoiled.helper.DateHelper;
+import cs165.edu.dartmouth.cs.beforespoiled.R;
 
 /**
  * Created by Fanzy on 5/22/16.
@@ -26,6 +26,19 @@ public class LabelDataSource {
 
     public LabelDataSource ( Context context){
         dbHelper = new MyDBHelper(context);
+        open();
+        if (numOfLabel() == 0) {
+            String[] labels = context.getResources().getStringArray(R.array.CategorySpinner);
+            ContentValues values = new ContentValues();
+            for (int i = 0; i < labels.length; i++) {
+                values.put(COLUMN_ID, i);
+                values.put(COLUMN_NAME, labels[i]);
+                values.put(COLUMN_STORAGE_PERIOD, 7);
+                values.put(COLUMN_DAYS_BEFORE_SPOILED, 1);
+                database.insert(TABLE_LABEL, null, values);
+            }
+        }
+        close();
     }
 
     public void open(){
@@ -34,6 +47,12 @@ public class LabelDataSource {
 
     public void close(){
         dbHelper.close();
+    }
+
+    public int numOfLabel() {
+        Cursor cursor = database.rawQuery("SELECT count(*) FROM " + TABLE_LABEL, null);
+        cursor.moveToFirst();
+        return cursor.getInt(0);
     }
 
     // Insert an item given each column value

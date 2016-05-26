@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -27,19 +26,23 @@ import com.soundcloud.android.crop.Crop;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
+import cs165.edu.dartmouth.cs.beforespoiled.database.Label;
+import cs165.edu.dartmouth.cs.beforespoiled.database.LabelDataSource;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ReminderEntry;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ReminderEntryAsyncTask;
+import cs165.edu.dartmouth.cs.beforespoiled.helper.DateHelper;
 
 public class ManualAddItemActivity extends Activity {
 
     public static final int TAKE_PHOTO_REQUEST_CODE = 0;
     private static final String URI_INSTANCE_STATE_KEY = "saved_uri";
     private TextView mDisplayDateTime;
+    private Calendar mBaseDateAndTime = Calendar.getInstance();
     private Calendar mDateAndTime = Calendar.getInstance();
     private EditText itemName;
     private ImageButton cameraButton;
@@ -49,20 +52,37 @@ public class ManualAddItemActivity extends Activity {
 
     private int[] imageResource = {R.drawable.vege, R.drawable.fruit, R.drawable.bread, R.drawable.milk, R.drawable.spices
             ,R.drawable.frozen, R.drawable.grain, R.drawable.snack, R.drawable.beverage, R.drawable.fish};
+    private ArrayAdapter adapter = null;
+    private List<Label> labels = new ArrayList<>();
+
     private boolean photoExist = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_add_item);
+
+        LabelDataSource dataSource = new LabelDataSource(this);
+        dataSource.open();
+        labels = dataSource.fetchEntries();
+        dataSource.close();
+
         //User type item name
         itemName = (EditText) findViewById(R.id.editTextName);
         itemName.clearFocus();
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            itemName.setText(bundle.getString(AddFromHistoryActivity.ITEM_NAME));
+            mBaseDateAndTime = DateHelper.dataToCalendar(bundle.getString(AddFromHistoryActivity.BUY_DATE));
+        }
+
         //User change expire date by clicking image button.
         mDisplayDateTime = (TextView) findViewById(R.id.DateDisplayView);
+        mDateAndTime.setTime(mBaseDateAndTime.getTime());
+        mDateAndTime.add(Calendar.DATE, labels.get(0).getStoragePeriod());
         updateDateAndTimeDisplay();
-        cameraButton = (ImageButton) findViewById(R.id.ShowCameraButton);
 
+        cameraButton = (ImageButton) findViewById(R.id.ShowCameraButton);
         cameraButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,18 +98,23 @@ public class ManualAddItemActivity extends Activity {
             }
         });
         categorySpinner = (Spinner)findViewById(R.id.spinnerCategory);
+        adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, labels.toArray());
+        categorySpinner.setAdapter(adapter);
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(!photoExist) {
+                if (!photoExist) {
                     cameraButton.setImageResource(imageResource[position]);
                     cameraButton.setScaleType(ImageView.ScaleType.FIT_XY);
+                    mDateAndTime.setTime(mBaseDateAndTime.getTime());
+                    mBaseDateAndTime.add(Calendar.DATE, labels.get(position).getStoragePeriod());
+                    updateDateAndTimeDisplay();
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-               cameraButton.setImageResource(R.drawable.fish);
+                cameraButton.setImageResource(R.drawable.fish);
             }
         });
     }

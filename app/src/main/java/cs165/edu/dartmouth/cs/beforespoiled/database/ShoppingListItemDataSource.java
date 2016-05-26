@@ -18,13 +18,11 @@ public class ShoppingListItemDataSource {
     public static final String COLUMN_ITEMNAME = "item_name";
     public static final String COLUMN_ITEMNUMBER = "item_number";
     public static final String COLUMN_CHECKED = "checked";
-
+    private static final String TAG = "DBDEMO";
     private SQLiteDatabase database;
     private MyDBHelper dbHelper;
     private String[] allColumns = { COLUMN_ID, LIST_NUMBER, COLUMN_ITEMNAME,
             COLUMN_ITEMNUMBER, COLUMN_CHECKED};
-
-    private static final String TAG = "DBDEMO";
 
     public ShoppingListItemDataSource(Context context) {
         dbHelper = new MyDBHelper(context);
@@ -126,6 +124,23 @@ public class ShoppingListItemDataSource {
         while (!cursor.isAfterLast()) {
             ShoppingListItem shoppingListItem = cursorToShoppingListItem(cursor);
             Log.d(TAG, "get comment = " + cursorToShoppingListItem(cursor).toString());
+            shoppingListItems.add(shoppingListItem);
+            cursor.moveToNext();
+        }
+        // Make sure to close the cursor
+        cursor.close();
+        return shoppingListItems;
+    }
+
+    public List<ShoppingListItem> getItemsByList(long listId) {
+        List<ShoppingListItem> shoppingListItems = new ArrayList<>();
+
+        Cursor cursor = database.query(TABLE_SHOPPINGLISTITEM,
+                null, LIST_NUMBER + " = ?", new String[]{String.valueOf(listId)}, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ShoppingListItem shoppingListItem = cursorToShoppingListItem(cursor);
             shoppingListItems.add(shoppingListItem);
             cursor.moveToNext();
         }

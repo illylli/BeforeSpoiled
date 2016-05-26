@@ -38,6 +38,7 @@
     <string name="settings_labels_single_name">Name</string>
     <string name="settings_labels_single_period">Storage Period</string>
     <string name="settings_labels_single_days">Days Before Spoiled</string>
+    <string name="title_activity_add_from_history">AddFromHistoryActivity</string>
 
     <!-- Finish Upload Button -->
     <string name="btn_idle">Upload</string>

@@ -49,6 +49,16 @@ public class DateHelper {
         return DATA_FORMAT.format(date);
     }
 
+    public static Date dataToDate(String data) {
+        Date date = null;
+        try {
+            date = DATA_FORMAT.parse(data);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
     /**
      * convert seconds to x mins y secs
      *

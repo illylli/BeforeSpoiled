@@ -146,16 +146,19 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                 int checkedItemsNumber = checkedItems.size();
                 if(checkedItemsNumber > 0){
 //                    finishShoppingButton.setProgress(50);
+                    Log.d("debug", "new list!!");
                     ShoppingLists shoppingLists = new ShoppingLists(new Date());
                     CreateShoppingList task = new CreateShoppingList(getActivity().getApplicationContext(), shoppingLists);
                     task.execute();
                     try {
                         shoppingLists = task.get();
                         long listID = shoppingLists.getId();
+                        Log.d("debug", "ListId" + listID);
                         for(ShoppingListItem item : checkedItems){
                             item.setListId(listID);
                             UpdateShoppingItem update = new UpdateShoppingItem(getActivity().getApplicationContext(), item);
                             update.execute();
+                            Log.d("debug", "ShoppingListItem" + item.getItemName() + " itemId " + item.getId());
                             finishShoppingButton.setProgress(100);
                         }
                     } catch (InterruptedException e) {
@@ -270,6 +273,13 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     public void addNewItem(ShoppingListItem card) {
         SaveShoppingItemToDatabase task = new SaveShoppingItemToDatabase(getActivity().getApplicationContext(), card);
         task.execute();
+        try {
+            card.setId(task.get().getId());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         cardList.add(card);
         cardArrayAdapter.clear();
         cardArrayAdapter.addAll(cardList);

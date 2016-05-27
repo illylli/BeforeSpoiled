@@ -1,14 +1,18 @@
 package cs165.edu.dartmouth.cs.beforespoiled;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.Loader;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.transition.CircularPropagation;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,10 +24,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TabHost;
 
 import com.dd.CircularProgressButton;
+import com.manuelpeinado.fadingactionbar.FadingActionBarHelper;
 import com.vstechlab.easyfonts.EasyFonts;
 
 import java.util.ArrayList;
@@ -50,13 +57,15 @@ import cs165.edu.dartmouth.cs.beforespoiled.view.CardArrayAdapter;
  * Use the {@link ShoppingListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShoppingListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<ShoppingListItem>> {
+public class ShoppingListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<ShoppingListItem>>, SwipeRefreshLayout.OnRefreshListener {
     private View shoppingListView;
     private CircularProgressButton finishShoppingButton;
+    private CircularProgressButton callTemplateButton;
 
     private CardArrayAdapter cardArrayAdapter;
     private ListView shoppingList;
     private List<ShoppingListItem> cardList;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     private OnFragmentInteractionListener mListener;
@@ -92,9 +101,20 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         // Inflate the layout for this fragment
         updateList();
 
+        FadingActionBarHelper helper = new FadingActionBarHelper()
+                .actionBarBackground(R.drawable.ab_background)
+                .headerLayout(R.layout.header)
+                .contentLayout(R.layout.fragment_shopping_list);
+        helper.initActionBar(getActivity());
+
         shoppingListView = inflater.inflate(R.layout.fragment_shopping_list, container, false);
         shoppingList = (ListView) shoppingListView.findViewById(R.id.listView);
-
+        swipeRefreshLayout = (SwipeRefreshLayout) shoppingListView.findViewById(R.id.swipe_container);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
         shoppingList.addHeaderView(new View(getActivity()));
         shoppingList.addFooterView(new View(getActivity()));
 
@@ -126,6 +146,16 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                 });
                 warningDialog.show();
                 return true;
+            }
+        });
+
+        callTemplateButton = (CircularProgressButton) shoppingListView.findViewById(R.id.btn_call_template_activity);
+        callTemplateButton.setTypeface(EasyFonts.caviarDreamsBold(getActivity().getApplicationContext()));
+        callTemplateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TemplateActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -278,6 +308,15 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     public void onLoaderReset(Loader<List<ShoppingListItem>> loader) {
         cardArrayAdapter = new CardArrayAdapter(getActivity().getApplicationContext(), new ArrayList<ShoppingListItem>());
         shoppingList.setAdapter(cardArrayAdapter);
+    }
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }, 2000);
     }
 
 

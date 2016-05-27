@@ -1,48 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
     android:background="#e2e4fe">
 
-    <ListView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        android:id="@+id/listView"
-        android:listSelector="@android:color/transparent"
-        android:cacheColorHint="@android:color/transparent"
-        android:divider="@null"
-        android:dividerHeight="10dp">
+        android:layout_height="490dp"
+        android:id="@+id/swipe_container">
 
-    </ListView>
-
-    <!--
-    <Button
-        android:id="@+id/btn_finish_shopping"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-        -->
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listView"
+            android:listSelector="@android:color/transparent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@null"
+            android:dividerHeight="10dp">
+        </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_weight="0"
-        android:gravity="center"
-        android:orientation="horizontal">
-        <com.dd.CircularProgressButton
-            android:id="@+id/btn_finish_shopping"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="24dp"
-            android:textColor="@android:color/white"
-            android:textSize="15sp"
-            android:layout_gravity="bottom"
-            app:cpb_textComplete="@string/btn_complete"
-            app:cpb_textError="@string/btn_error"
-            app:cpb_textIdle="@string/btn_idle"
-            app:cpb_cornerRadius="48dp" />.CircularProgressButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+            <com.dd.CircularProgressButton
+                android:id="@+id/btn_finish_shopping"
+                android:layout_weight="1"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:layout_gravity="bottom"
+                app:cpb_textComplete="@string/btn_complete"
+                app:cpb_textError="@string/btn_error"
+                app:cpb_textIdle="@string/btn_idle"
+                app:cpb_cornerRadius="48dp" />.CircularProgressButton
+            <com.dd.CircularProgressButton
+                android:id="@+id/btn_call_template_activity"
+                android:layout_weight="1"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:layout_gravity="bottom"
+                app:cpb_textComplete="@string/btn_complete"
+                app:cpb_textError="@string/btn_error"
+                app:cpb_textIdle="@string/btn_idle"
+                app:cpb_cornerRadius="48dp" />.CircularProgressButton
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

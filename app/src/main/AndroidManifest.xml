@@ -48,15 +48,15 @@
 
         <activity
             android:name=".LabelsSettingActivity"
-            android:label="@string/title_activity_labels_setting" />
+            android:configChanges="orientation|screenSize|keyboardHidden" />
 
         <activity
             android:name=".TemplateActivity"
-            android:label="@string/settings_shoppinglist_template" />
+            android:configChanges="orientation|screenSize|keyboardHidden" />
 
         <activity
             android:name=".AddFromHistoryActivity"
-            android:label="@string/title_activity_add_from_history" />
+            android:configChanges="orientation|screenSize|keyboardHidden" />
 
         <receiver
             android:name=".ReminderReceiver"

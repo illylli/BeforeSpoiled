@@ -126,8 +126,8 @@ public class LabelDataSource {
         Label label = new Label();
         label.setId(cursor.getLong(0));
         label.setName(cursor.getString(1));
-        label.setDaysBeforeSpoiled(cursor.getInt(2));
-        label.setStoragePeriod(cursor.getInt(3));
+        label.setStoragePeriod(cursor.getInt(2));
+        label.setDaysBeforeSpoiled(cursor.getInt(3));
         return label;
     }
 

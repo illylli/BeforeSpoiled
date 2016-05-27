@@ -14,8 +14,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="false"
-        android:scaleType="fitXY"
-        android:src="@drawable/psm_alarm_clock" />
+        android:scaleType="fitXY" />
 
     <ImageButton
         android:id="@+id/ibtn_reminder_grid_delete"

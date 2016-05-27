@@ -123,6 +123,7 @@ public class ManualAddItemActivity extends Activity {
         mDateAndTime.add(Calendar.DATE, labels.get(0).getStoragePeriod());
         updateDateAndTimeDisplay();
 
+        // camera button
         cameraButton = (ImageButton) findViewById(R.id.ShowCameraButton);
         cameraButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -138,6 +139,8 @@ public class ManualAddItemActivity extends Activity {
 
             }
         });
+
+        //speech button
         speechButton = (ImageButton) findViewById(R.id.SpeakButton);
         speechButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -160,7 +163,7 @@ public class ManualAddItemActivity extends Activity {
 
 
         categorySpinner = (Spinner)findViewById(R.id.spinnerCategory);
-        adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, labels.toArray());
+        adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, labels.toArray());
         categorySpinner.setAdapter(adapter);
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

@@ -54,10 +54,9 @@ public class ReminderGridAdapter extends BaseAdapter {
 
     // create a new ImageView for each item referenced by the Adapter
     public View getView(final int position, View convertView, ViewGroup parent) {
-        ReminderEntry entry = entries.get(position);
-        final View gridEntry;
         final ReminderEntry entry = entries.get(position);
-        View gridEntry;
+        final View gridEntry;
+
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             gridEntry = inflater.inflate(R.layout.gridview_reminder, null);

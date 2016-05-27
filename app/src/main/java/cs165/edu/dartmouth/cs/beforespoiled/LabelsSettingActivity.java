@@ -37,14 +37,14 @@ public class LabelsSettingActivity extends ListActivity implements LoaderManager
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.add_item, menu);
+        inflater.inflate(R.menu.setting_add, menu);
         return true;
     }
 
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.add_item:
+            case R.id.setting_add:
                 //open dialog
                 SingleLabelFragment singleFragment = SingleLabelFragment.newInstance(null);
                 singleFragment.show(getFragmentManager(), "NEW LABEL");

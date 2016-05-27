@@ -1,9 +1,9 @@
 package cs165.edu.dartmouth.cs.beforespoiled;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.LoaderManager;
+import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,8 +12,8 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.RecognizerIntent;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.transition.CircularPropagation;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,12 +22,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TabHost;
+import android.widget.Toast;
 
 import com.dd.CircularProgressButton;
 import com.manuelpeinado.fadingactionbar.FadingActionBarHelper;
@@ -58,6 +55,10 @@ import cs165.edu.dartmouth.cs.beforespoiled.view.CardArrayAdapter;
  * create an instance of this fragment.
  */
 public class ShoppingListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<ShoppingListItem>>, SwipeRefreshLayout.OnRefreshListener {
+
+    public static final int RESULT_OK = -1;
+    protected static final int RESULT_SPEECH = 1;
+
     private View shoppingListView;
     private CircularProgressButton finishShoppingButton;
     private CircularProgressButton callTemplateButton;
@@ -242,8 +243,51 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                 builder.setNegativeButton("Cancel", null);
                 builder.create().show();
                 return true;
+            case R.id.speech:
+                Log.d("lly", "access to speech.");
+                Intent intent = new Intent(
+                        RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
+
+                try {
+                    startActivityForResult(intent, RESULT_SPEECH);
+//                    txtText.setText("");
+                } catch (ActivityNotFoundException a) {
+                    Toast t = Toast.makeText(getActivity().getApplicationContext(),
+                            "Opps! Your device doesn't support Speech to Text",
+                            Toast.LENGTH_SHORT);
+                    t.show();
+                }
+
+                return true;
             default:
                 return false;
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case RESULT_SPEECH: {
+                if (resultCode == RESULT_OK && null != data) {
+
+                    ArrayList<String> text = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
+                    ShoppingListItem listItem = new ShoppingListItem();
+                    listItem.setItemName(text.get(0).toString());
+                    Log.d("lly", text.get(0).toString());
+                    listItem.setItemNumber(1);
+                    listItem.setSelected(false);
+                    addNewItem(listItem);
+                }
+                break;
+            }
+
         }
     }
 
@@ -336,3 +380,4 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
 
 
 }
+

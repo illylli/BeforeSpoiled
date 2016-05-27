@@ -10,9 +10,6 @@ import java.util.List;
 
 import cs165.edu.dartmouth.cs.beforespoiled.R;
 
-/**
- * Created by Fanzy on 5/22/16.
- */
 public class LabelDataSource {
     // Database fields
     public static final String TABLE_LABEL = "label";
@@ -23,6 +20,9 @@ public class LabelDataSource {
 
     private SQLiteDatabase database;
     private MyDBHelper dbHelper;
+
+    private int[] imageResource = {R.drawable.vege, R.drawable.fruit, R.drawable.bread, R.drawable.milk, R.drawable.spices
+            , R.drawable.frozen, R.drawable.grain, R.drawable.snack, R.drawable.beverage, R.drawable.fish};
 
     public LabelDataSource ( Context context){
         dbHelper = new MyDBHelper(context);
@@ -80,6 +80,10 @@ public class LabelDataSource {
         values.put(COLUMN_DAYS_BEFORE_SPOILED, entry.getDaysBeforeSpoiled());
         return database.update(TABLE_LABEL, values, COLUMN_ID
                 + " = " + entry.getId(), null);
+    }
+
+    public int getImageReSrcById(int id) {
+        return imageResource[id];
     }
 
     // Query a specific entry by its index.

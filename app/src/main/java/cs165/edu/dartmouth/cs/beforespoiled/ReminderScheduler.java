@@ -7,17 +7,14 @@ import android.content.Intent;
 
 import java.util.Calendar;
 
-/**
- * Created by Fanzy on 5/26/16.
- */
 public class ReminderScheduler {
     // set time for alarm
     public static void setSchedule(Context context) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.SECOND, 10);
-        setSchedule(context, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND));
-        setSchedule(context, 11, 00, 0);
-        setSchedule(context, 17, 00, 0);
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.add(Calendar.SECOND, 10);
+//        setSchedule(context, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND));
+        setSchedule(context, 11, 0, 0);
+        setSchedule(context, 17, 0, 0);
     }
 
     // set time

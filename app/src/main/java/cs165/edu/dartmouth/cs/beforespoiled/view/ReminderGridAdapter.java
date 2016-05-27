@@ -7,8 +7,6 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -20,12 +18,10 @@ import java.util.Calendar;
 import java.util.List;
 
 import cs165.edu.dartmouth.cs.beforespoiled.R;
+import cs165.edu.dartmouth.cs.beforespoiled.database.LabelDataSource;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ReminderEntry;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ReminderEntryAsyncTask;
 
-/**
- * Created by oubai on 4/13/16.
- */
 public class ReminderGridAdapter extends BaseAdapter {
 
     private Context mContext;
@@ -57,25 +53,28 @@ public class ReminderGridAdapter extends BaseAdapter {
         final ReminderEntry entry = entries.get(position);
         final View gridEntry;
 
-        if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) mContext.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            gridEntry = inflater.inflate(R.layout.gridview_reminder, null);
-        } else {
-            gridEntry = convertView;
-        }
+        LayoutInflater inflater = (LayoutInflater) mContext.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        gridEntry = inflater.inflate(R.layout.gridview_reminder, null);
+
         if (entry.getImage() != null) {
-            ((ImageView) gridEntry.findViewById(R.id.iv_reminder_grid_image)).setImageBitmap(BitmapFactory.decodeByteArray(entry.getImage(), 0, entry.getImage().length));
             gridEntry.findViewById(R.id.iv_reminder_grid_image).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    final Dialog nagDialog = new Dialog(mContext, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+                    final Dialog nagDialog = new Dialog(mContext, android.R.style.Theme_Translucent_NoTitleBar);
                     nagDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    nagDialog.setCancelable(false);
+                    nagDialog.setCanceledOnTouchOutside(true);
                     nagDialog.setContentView(R.layout.dialog_image);
-                    Button btnClose = (Button) nagDialog.findViewById(R.id.btn_reminder_dialog);
+                    ImageButton btnClose = (ImageButton) nagDialog.findViewById(R.id.btn_reminder_dialog);
                     ImageView ivPreview = (ImageView) nagDialog.findViewById(R.id.iv_reminder_dialog);
-                    ivPreview.setImageBitmap(BitmapFactory.decodeByteArray(entry.getImage(), 100, entry.getImage().length));
+                    ivPreview.setImageBitmap(BitmapFactory.decodeByteArray(entry.getImage(), 0, entry.getImage().length));
 
+                    ivPreview.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View view) {
+                            nagDialog.dismiss();
+                        }
+                    });
                     btnClose.setOnClickListener(new Button.OnClickListener() {
                         @Override
                         public void onClick(View arg0) {
@@ -86,16 +85,10 @@ public class ReminderGridAdapter extends BaseAdapter {
                 }
             });
         }
-        BadgeView badge = new BadgeView(mContext.getApplicationContext(), gridEntry.findViewById(R.id.iv_reminder_grid_image));
-        badge.setText("1");
-        badge.setBadgeBackgroundColor(Color.parseColor("#A4C639"));
-//        badge.setBackgroundResource(R.drawable.badge_ifaux);
-        TranslateAnimation anim = new TranslateAnimation(-100, 0, 0, 0);
-        anim.setInterpolator(new BounceInterpolator());
-        anim.setDuration(2000);
-        badge.toggle(anim, null);
 
-
+        // label image
+        LabelDataSource labelDataSource = new LabelDataSource(mContext);
+        ((ImageView) gridEntry.findViewById(R.id.iv_reminder_grid_image)).setImageResource(labelDataSource.getImageReSrcById(entry.getLabel()));
         gridEntry.findViewById(R.id.iv_reminder_grid_image).setOnLongClickListener(new View.OnLongClickListener() {
             int deleteimageflag = 0;
 
@@ -113,22 +106,43 @@ public class ReminderGridAdapter extends BaseAdapter {
             }
         });
 
+        // days left
+//        final int badgeIndex = ((ViewGroup) gridEntry).indexOfChild(gridEntry.findViewById(R.id.iv_reminder_grid_image));
+//        Log.d("Fanzy", "badgeIndex: " + badgeIndex);
+        final BadgeView badge = new BadgeView(mContext.getApplicationContext(), gridEntry.findViewById(R.id.iv_reminder_grid_image));
+        long days = (entry.getExpireDate().getTimeInMillis() - Calendar.getInstance().getTimeInMillis()) / 1000 / 3600 / 24;
+        if (days < 0) {
+            days = 0;
+        }
+        badge.setText(days + "");
+        if (days == 0) {
+            badge.setBadgeBackgroundColor(Color.GRAY);
+        } else if (days == 1) {
+            badge.setBadgeBackgroundColor(Color.RED);
+        } else if (days == 2) {
+            badge.setBadgeBackgroundColor(Color.YELLOW);
+        } else {
+            badge.setBadgeBackgroundColor(Color.parseColor("#A4C639"));
+        }
+//        badge.setBackgroundResource(R.drawable.badge_ifaux);
+        badge.show();
+
+        // delete button
         gridEntry.findViewById(R.id.ibtn_reminder_grid_delete).setOnClickListener(new ImageButton.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new ReminderEntryAsyncTask(mContext).execute(ReminderEntryAsyncTask.DELETE, getItemId(position));
+                badge.hide();
                 entries.remove(position);
                 ReminderGridAdapter.this.notifyDataSetChanged();
                 ImageButton ib = (ImageButton) gridEntry.findViewById(R.id.ibtn_reminder_grid_delete);
                 ib.setVisibility(View.GONE);
             }
         });
+
+        // name
         ((TextView) gridEntry.findViewById(R.id.tv_reminder_grid_name)).setText(entry.getName());
 
-//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-//        int days = Integer.parseInt(preferences.getString(mContext.getString(R.string.settings_days_before_spoiled), "1"));
-
-        long days = (entry.getExpireDate().getTimeInMillis() - Calendar.getInstance().getTimeInMillis())/1000/3600/24;
 
         return gridEntry;
     }

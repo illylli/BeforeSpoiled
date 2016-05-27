@@ -1,16 +1,31 @@
 package cs165.edu.dartmouth.cs.beforespoiled;
 
 import android.app.Activity;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v13.app.FragmentPagerAdapter;
+import android.app.FragmentTransaction;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.os.Bundle;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 
 import java.util.ArrayList;
 
 import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
 import cs165.edu.dartmouth.cs.beforespoiled.view.SlidingTabLayout;
+
 
 public class MainActivity extends Activity {
     private SlidingTabLayout mSlidingTabLayout;
@@ -40,6 +55,8 @@ public class MainActivity extends Activity {
 
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setViewPager(mViewPager);
+
+        ReminderScheduler.setSchedule(this);
     }
 
     @Override

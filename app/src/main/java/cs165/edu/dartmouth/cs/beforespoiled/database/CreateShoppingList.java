@@ -59,7 +59,7 @@ public class CreateShoppingList extends AsyncTask<Void, Integer, ShoppingLists> 
     protected void onPostExecute(ShoppingLists result) {
         // Getting reference to the TextView tv_counter of the layout activity_main
         Toast toast = Toast.makeText(context, "New shopping list have been created", Toast.LENGTH_SHORT);
-        toast.show();
+//        toast.show();
     }
 }
 

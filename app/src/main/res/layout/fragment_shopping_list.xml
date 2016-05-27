@@ -29,7 +29,7 @@
             android:imeOptions="actionDone"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:hint="Add item here"
+            android:hint="I want to..."
             android:textColorHint="@color/gray_btn_bg_color"
             android:background="@drawable/shoppinglist_textview"/>
 
@@ -59,23 +59,17 @@
         </ListView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:gravity="center" >
-            <com.dd.CircularProgressButton
-                android:id="@+id/btn_finish_shopping"
-                android:layout_weight="1"
-                android:layout_width="120dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="24dp"
-                android:textColor="@android:color/white"
-                android:textSize="15sp"
-                android:layout_gravity="bottom"
-                app:cpb_textComplete="@string/btn_complete"
-                app:cpb_textError="@string/btn_error"
-                app:cpb_textIdle="@string/btn_idle"
-                app:cpb_cornerRadius="48dp" />.CircularProgressButton
-    </LinearLayout>
+    <com.dd.CircularProgressButton
+        android:id="@+id/btn_finish_shopping"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        android:layout_gravity="center_horizontal"
+        app:cpb_textComplete="@string/btn_complete"
+        app:cpb_textError="@string/btn_error"
+        app:cpb_textIdle="@string/btn_idle"
+        app:cpb_cornerRadius="48dp" />
+
 </LinearLayout>

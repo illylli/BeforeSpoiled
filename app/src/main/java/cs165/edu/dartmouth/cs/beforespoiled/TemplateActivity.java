@@ -1,10 +1,14 @@
 package cs165.edu.dartmouth.cs.beforespoiled;
 
 import android.app.Activity;
+import android.app.LoaderManager;
+import android.content.Intent;
+import android.content.Loader;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter;
@@ -14,6 +18,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import cs165.edu.dartmouth.cs.beforespoiled.database.ReadShoppingListFromDatabase;
+import cs165.edu.dartmouth.cs.beforespoiled.database.ReadTemplateFromDataBase;
+import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
 import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateChild;
 import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateCover;
 import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateExpandableAdapter;
@@ -22,7 +29,7 @@ import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateExpandableAdapter;
 /**
  * Created by oubai on 5/25/16.
  */
-public class TemplateActivity extends Activity {
+public class TemplateActivity extends Activity implements LoaderManager.LoaderCallbacks<List<TemplateCover>>{
 
     private List<TemplateCover> templateCoverList = new ArrayList<>();
     private RecyclerView mRecyclerView;
@@ -49,41 +56,12 @@ public class TemplateActivity extends Activity {
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
-//        recyclerView.setAdapter(mAdapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//
-//        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-//        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//        mAdapter = new TemplateExpandableAdapter(this, templateCoverList);
-//        mRecyclerView.setAdapter(mAdapter);
-
-//        setContentView(R.layout.activity_template_recyclerview);
-//
-//        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-//        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//
-//        mAdapter = new TemplateExpandableAdapter(this, prepareTempateData());
-////        mAdapter.onRestoreInstanceState(savedInstanceState);
-//        mRecyclerView.setAdapter(mAdapter);
     }
 
-//    private List<ParentListItem> prepareTempateData() {
-//        TemplateChild beef = new TemplateChild("beef");
-//        TemplateChild cheese = new TemplateChild("cheese");
-//        TemplateChild salsa = new TemplateChild("salsa");
-//        TemplateChild tortilla = new TemplateChild("tortilla");
-//        TemplateCover cover = new TemplateCover("meal 1", "description 1", R.drawable.beverage, Arrays.asList(beef, cheese, salsa, tortilla));
-//        templateCoverList.add(cover);
-//        cover = new TemplateCover("meal 2", "description 2", R.drawable.beverage, Arrays.asList(beef, cheese, salsa, tortilla));
-//        templateCoverList.add(cover);
-//        cover = new TemplateCover("meal 3", "description 3", R.drawable.beverage, Arrays.asList(beef, cheese, salsa, tortilla));
-//        templateCoverList.add(cover);
-//
-//        return templateCoverList;
-//    }
+    public void onAddTemplateClick(View view){
+        Intent intent = new Intent(this, AddTemplateActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -95,5 +73,22 @@ public class TemplateActivity extends Activity {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mAdapter.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public Loader<List<TemplateCover>> onCreateLoader(int id, Bundle args) {
+        return new ReadTemplateFromDataBase(getApplication().getApplicationContext());
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<TemplateCover>> loader, List<TemplateCover> data) {
+        templateCoverList.clear();
+        templateCoverList.addAll(data);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<TemplateCover>> loader) {
+
     }
 }

@@ -8,16 +8,33 @@ import java.util.List;
  * Created by oubai on 5/25/16.
  */
 public class TemplateCover implements ParentListItem {
+    private long id;
     private String templateName;
     private String templateDes;
     private int photoId;
     private List<TemplateChild> mChildrenList;
+
+    public TemplateCover() {}
+
+    public TemplateCover(String name,  int id, String des) {
+        this.templateName = name;
+        this.templateDes = des;
+        this.photoId = id;
+    }
 
     public TemplateCover(String name, String des, int id, List ingredients) {
         this.templateName = name;
         this.templateDes = des;
         this.photoId = id;
         mChildrenList = ingredients;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTemplateName() {

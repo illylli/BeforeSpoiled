@@ -71,7 +71,7 @@ public class CardArrayAdapter extends ArrayAdapter<ShoppingListItem> {
 
         viewHolder = new CardViewHolder();
         viewHolder.itemName = (TextView) row.findViewById(R.id.item_name);
-        viewHolder.itemName.setTypeface(EasyFonts.caviarDreams(getContext()));
+        viewHolder.itemName.setTypeface(EasyFonts.caviarDreamsBold(getContext()));
 //        viewHolder.itemNumber = (TextView) row.findViewById(R.id.item_number);
         viewHolder.ifBought = (CheckBox) row.findViewById(R.id.check_box);
         row.setTag(viewHolder);

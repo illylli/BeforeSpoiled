@@ -4,10 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:background="#e2e4fe">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -24,7 +23,6 @@
             app:biu_text_start_size="15dp"
             android:id="@+id/add_item"
             android:layout_width="match_parent"
-            android:layout_weight="1"
             android:textSize="15dp"
             android:layout_height="40dp"
             android:singleLine="true"
@@ -36,14 +34,14 @@
             android:background="@drawable/shoppinglist_textview"/>
 
         <ImageButton
+            android:layout_gravity="right"
             android:id="@+id/SpeakButton2"
-            android:layout_weight="0.01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
             android:background="#00000000"
             android:src="@android:drawable/ic_btn_speak_now" />
-    </LinearLayout>
+    </FrameLayout>
     <android.support.v4.widget.SwipeRefreshLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -62,10 +60,10 @@
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:gravity="bottom">
+            android:gravity="center" >
             <com.dd.CircularProgressButton
                 android:id="@+id/btn_finish_shopping"
                 android:layout_weight="1"

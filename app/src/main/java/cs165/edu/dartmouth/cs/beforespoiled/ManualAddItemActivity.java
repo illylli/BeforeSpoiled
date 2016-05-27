@@ -1,15 +1,19 @@
 package cs165.edu.dartmouth.cs.beforespoiled;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
@@ -53,9 +57,6 @@ public class ManualAddItemActivity extends Activity {
     private Spinner categorySpinner;
     private Uri mImageCaptureUri;
     private String filePath;
-    //    private EditText txtText;
-    private int[] imageResource = {R.drawable.vege, R.drawable.fruit, R.drawable.bread, R.drawable.milk, R.drawable.spices
-            ,R.drawable.frozen, R.drawable.grain, R.drawable.snack, R.drawable.beverage, R.drawable.fish};
     private ArrayAdapter adapter = null;
     private List<Label> labels = new ArrayList<>();
 
@@ -66,6 +67,42 @@ public class ManualAddItemActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_add_item);
 
+        //request permissions
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.CAMERA)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.CAMERA}, 0);
+            }
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+            }
+        }
+
+        //load data
         LabelDataSource dataSource = new LabelDataSource(this);
         dataSource.open();
         labels = dataSource.fetchEntries();
@@ -129,7 +166,8 @@ public class ManualAddItemActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (!photoExist) {
-                    cameraButton.setImageResource(imageResource[position]);
+                    LabelDataSource labelDataSource = new LabelDataSource(ManualAddItemActivity.this);
+                    cameraButton.setImageResource(labelDataSource.getImageReSrcById(position));
                     cameraButton.setScaleType(ImageView.ScaleType.FIT_XY);
                     mDateAndTime.setTime(mBaseDateAndTime.getTime());
                     mDateAndTime.add(Calendar.DATE, labels.get(position).getStoragePeriod());
@@ -199,13 +237,13 @@ public class ManualAddItemActivity extends Activity {
                 break;
             case RESULT_SPEECH:
                 Log.d("lly", "in manual access to speech");
-                if (resultCode == RESULT_OK && null != data) {
+                if (null != data) {
 
                     ArrayList<String> text = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
-                    itemName.setText(text.get(0).toString());
-                    Log.d("lly", text.get(0).toString());
+                    itemName.setText(text.get(0));
+                    Log.d("lly", text.get(0));
                 }
                 break;
 
@@ -246,10 +284,12 @@ public class ManualAddItemActivity extends Activity {
         entry.setLabel(categorySpinner.getSelectedItemPosition());
         entry.setExpireDate(mDateAndTime);
 
-        cameraButton.buildDrawingCache();
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        cameraButton.getDrawingCache().compress(Bitmap.CompressFormat.PNG, 100, stream);
-        entry.setImage(stream.toByteArray());
+        if (photoExist) {
+            cameraButton.buildDrawingCache();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            cameraButton.getDrawingCache().compress(Bitmap.CompressFormat.PNG, 100, stream);
+            entry.setImage(stream.toByteArray());
+        }
 
         (new ReminderEntryAsyncTask(this)).execute(ReminderEntryAsyncTask.INSERT, entry);
         finish();

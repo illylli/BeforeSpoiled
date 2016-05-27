@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.RecognizerIntent;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -225,6 +226,14 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                 final SweetAlertDialog warningDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
                 warningDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
                 warningDialog.setTitleText("Delete this item?");
+                warningDialog.setCancelText("No, cancel it");
+                warningDialog.setConfirmText("Yes, delete it");
+                warningDialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        warningDialog.cancel();
+                    }
+                });
                 warningDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {

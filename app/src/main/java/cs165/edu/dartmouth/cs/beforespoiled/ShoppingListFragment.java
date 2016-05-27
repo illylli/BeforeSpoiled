@@ -4,9 +4,12 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.Loader;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -16,16 +19,21 @@ import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -74,9 +82,15 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     private ListView shoppingList;
     private List<ShoppingListItem> cardList;
     private SwipeRefreshLayout swipeRefreshLayout;
-
+    private ImageButton speechButton;
+    private TextView addItem;
 
     private OnFragmentInteractionListener mListener;
+
+    private BroadcastReceiver receiverSync = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) { cardArrayAdapter.notifyDataSetChanged(); }
+    };
 
     public ShoppingListFragment() {
         // Required empty public constructor
@@ -106,7 +120,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         updateList();
 
         FadingActionBarHelper helper = new FadingActionBarHelper()
@@ -114,6 +127,9 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                 .headerLayout(R.layout.header)
                 .contentLayout(R.layout.fragment_shopping_list);
         helper.initActionBar(getActivity());
+
+        IntentFilter filter = new IntentFilter("Check");
+        getActivity().registerReceiver(receiverSync, filter);
 
         shoppingListView = inflater.inflate(R.layout.fragment_shopping_list, container, false);
         shoppingList = (ListView) shoppingListView.findViewById(R.id.listView);
@@ -125,13 +141,62 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                 android.R.color.holo_red_light);
         shoppingList.addHeaderView(new View(getActivity()));
         shoppingList.addFooterView(new View(getActivity()));
+        addItem = (EditText) shoppingListView.findViewById(R.id.add_item);
+        addItem.setCursorVisible(false);
+        addItem.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                switch (actionId) {
+                    case EditorInfo.IME_NULL:
+                        System.out.println("null for default_content: " + v.getText());
+                        break;
+                    case EditorInfo.IME_ACTION_SEND:
+                        System.out.println("action send for email_content: " + v.getText());
+                        break;
+                    case EditorInfo.IME_ACTION_DONE:
+                        String itemName = addItem.getText().toString();
+                        if(!itemName.equals("")) {
+                            addItem.clearFocus();
+                            addItem.setCursorVisible(false);
+                            ShoppingListItem listItem = new ShoppingListItem();
+                            listItem.setItemName(itemName);
+                            listItem.setItemNumber(1);
+                            listItem.setSelected(false);
+                            addNewItem(listItem);
+                            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(addItem.getWindowToken(), 0);
+                        }
+                        break;
+                }
+                return true;
+            }
+        });
+
+        addItem.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    addItem.setText("");
+                }
+            }
+        });
+
+        addItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                if (v.getId() != R.id.add_item) {
+//                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                    addItem.setCursorVisible(false);
+//                    imm.hideSoftInputFromWindow(addItem.getWindowToken(), 0);
+//                    Log.d("Edittext", "Clcik outside1");
+//                }
+                addItem.setCursorVisible(true);
+            }
+        });
 
         cardArrayAdapter = new CardArrayAdapter(getActivity().getApplicationContext(), cardList);
-//        AlphaInAnimationAdapter animationAdapter = new AlphaInAnimationAdapter(shoppingListAdapter);
-//        animationAdapter.setAbsListView(shoppingList);
-//        shoppingList.setAdapter(animationAdapter);
         shoppingList.setAdapter(cardArrayAdapter);
-//        shoppingList.setDraggableManager(new TouchViewDraggableManager(R.id.itemrow_gripview));
+
         shoppingList.setLongClickable(true);
         shoppingList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -140,18 +205,14 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                 TextView tv = (TextView) view.findViewById(R.id.item_name);
                 ShoppingListItem item = cardList.get(position - 1);
                 UpdateShoppingItem task;
-                if(checkBox.isChecked()) {
+                if (checkBox.isChecked()) {
                     item.setSelected(false);
                     task = new UpdateShoppingItem(getActivity().getApplicationContext(), item);
                     task.execute();
-//                    tv.setPaintFlags(tv.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
-//                    checkBox.setSelected(false);
                 } else {
                     item.setSelected(true);
                     task = new UpdateShoppingItem(getActivity().getApplicationContext(), item);
                     task.execute();
-//                    tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-//                    checkBox.setSelected(true);
                 }
                 cardArrayAdapter.notifyDataSetChanged();
             }
@@ -196,7 +257,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                 }
 
                 int checkedItemsNumber = checkedItems.size();
-                if(checkedItemsNumber > 0){
+                if (checkedItemsNumber > 0) {
 //                    finishShoppingButton.setProgress(50);
                     Log.d("debug", "new list!!");
                     ShoppingLists shoppingLists = new ShoppingLists(new Date());
@@ -206,7 +267,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                         shoppingLists = task.get();
                         long listID = shoppingLists.getId();
                         Log.d("debug", "ListId" + listID);
-                        for(ShoppingListItem item : checkedItems){
+                        for (ShoppingListItem item : checkedItems) {
                             item.setListId(listID);
                             UpdateShoppingItem update = new UpdateShoppingItem(getActivity().getApplicationContext(), item);
                             update.execute();
@@ -229,8 +290,30 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                 finishShoppingButton.setProgress(0);
             }
         });
+
+
+        speechButton = (ImageButton) shoppingListView.findViewById(R.id.SpeakButton2);
+        speechButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
+
+                try {
+                    startActivityForResult(intent, RESULT_SPEECH);
+                } catch (ActivityNotFoundException a) {
+                    Toast t = Toast.makeText(getActivity().getApplicationContext(),
+                            "Opps! Your device doesn't support Speech to Text",
+                            Toast.LENGTH_SHORT);
+                    t.show();
+                }
+            }
+        });
         return shoppingListView;
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -243,45 +326,45 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.add_item:
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Add an item");
-                final EditText itemText = new EditText(getActivity());
-                builder.setView(itemText);
-                builder.setPositiveButton("Add Item", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        String itemName = itemText.getText().toString();
-                        ContentValues values = new ContentValues();
-                        values.clear();
-                        ShoppingListItem listItem = new ShoppingListItem();
-                        listItem.setItemName(itemName);
-                        listItem.setItemNumber(1);
-                        listItem.setSelected(false);
-                        addNewItem(listItem);
-                    }
-                });
-                builder.setNegativeButton("Cancel", null);
-                builder.create().show();
-                return true;
-            case R.id.speech:
-                Log.d("lly", "access to speech.");
-                Intent intent = new Intent(
-                        RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-
-                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
-
-                try {
-                    startActivityForResult(intent, RESULT_SPEECH);
+//            case R.id.add_item:
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                builder.setTitle("Add an item");
+//                final EditText itemText = new EditText(getActivity());
+//                builder.setView(itemText);
+//                builder.setPositiveButton("Add Item", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        String itemName = itemText.getText().toString();
+//                        ContentValues values = new ContentValues();
+//                        values.clear();
+//                        ShoppingListItem listItem = new ShoppingListItem();
+//                        listItem.setItemName(itemName);
+//                        listItem.setItemNumber(1);
+//                        listItem.setSelected(false);
+//                        addNewItem(listItem);
+//                    }
+//                });
+//                builder.setNegativeButton("Cancel", null);
+//                builder.create().show();
+//                return true;
+//            case R.id.speech:
+//                Log.d("lly", "access to speech.");
+//                Intent intent = new Intent(
+//                        RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+//
+//                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
+//
+//                try {
+//                    startActivityForResult(intent, RESULT_SPEECH);
 //                    txtText.setText("");
-                } catch (ActivityNotFoundException a) {
-                    Toast t = Toast.makeText(getActivity().getApplicationContext(),
-                            "Opps! Your device doesn't support Speech to Text",
-                            Toast.LENGTH_SHORT);
-                    t.show();
-                }
-
-                return true;
+//                } catch (ActivityNotFoundException a) {
+//                    Toast t = Toast.makeText(getActivity().getApplicationContext(),
+//                            "Opps! Your device doesn't support Speech to Text",
+//                            Toast.LENGTH_SHORT);
+//                    t.show();
+//                }
+//
+//                return true;
             default:
                 return false;
         }
@@ -301,7 +384,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
 
                     ShoppingListItem listItem = new ShoppingListItem();
                     listItem.setItemName(text.get(0).toString());
-                    Log.d("lly", text.get(0).toString());
                     listItem.setItemNumber(1);
                     listItem.setSelected(false);
                     addNewItem(listItem);
@@ -378,12 +460,36 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onRefresh() {
         new Handler().postDelayed(new Runnable() {
-            @Override public void run() {
+            @Override
+            public void run() {
                 swipeRefreshLayout.setRefreshing(false);
             }
         }, 2000);
     }
 
+//    @Override
+//    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//        switch(actionId){
+//            case EditorInfo.IME_NULL:
+//                System.out.println("null for default_content: " + v.getText() );
+//                break;
+//            case EditorInfo.IME_ACTION_SEND:
+//                System.out.println("action send for email_content: "  + v.getText());
+//                break;
+//            case EditorInfo.IME_ACTION_DONE:
+//                Log.d("ADD", "laimei");
+//                System.out.println("action done for number_content: "  + v.getText());
+//                String itemName = addItem.getText().toString();
+//                ShoppingListItem listItem = new ShoppingListItem();
+//                listItem.setItemName(itemName);
+//                listItem.setItemNumber(1);
+//                listItem.setSelected(false);
+//                addNewItem(listItem);
+//                break;
+//        }
+        //Toast.makeText(this, v.getText()+"--" + actionId, Toast.LENGTH_LONG).show();
+//        return true;
+//    }
 
     /**
      * This interface must be implemented by activities that contain this

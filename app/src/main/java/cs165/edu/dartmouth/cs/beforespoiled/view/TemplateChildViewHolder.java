@@ -5,6 +5,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
+import com.vstechlab.easyfonts.EasyFonts;
 
 import cs165.edu.dartmouth.cs.beforespoiled.R;
 import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateChild;

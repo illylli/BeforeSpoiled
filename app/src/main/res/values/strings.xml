@@ -42,7 +42,7 @@
     <string name="title_activity_add_from_history">AddFromHistoryActivity</string>
 
     <!-- Finish Upload Button -->
-    <string name="btn_idle">Upload</string>
+    <string name="btn_idle">Finish Shopping</string>
     <string name="btn_in_progress">In Progress</string>
     <string name="btn_complete">Complete</string>
     <string name="btn_error">No Selection</string>

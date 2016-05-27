@@ -36,6 +36,12 @@ public class MyDBHelper extends SQLiteOpenHelper {
 			LabelDataSource.COLUMN_STORAGE_PERIOD + " INTEGER NOT NULL, " +
 			LabelDataSource.COLUMN_DAYS_BEFORE_SPOILED + " INTEGER);";
 
+	private static final String TEMPLATE_CREATE = "CREATE TABLE IF NOT EXISTS " + TemplateDataSource.TABLE_TEMPLATE + " (" +
+			TemplateDataSource.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+			TemplateDataSource.TEMPLATE_NAME + " TEXT NOT NULL, " +
+			TemplateDataSource.TEMPLATE_IMAGE + " INTEGER, " +
+			TemplateDataSource.TEMPLATE_DES + " TEXT);";
+
 	public MyDBHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
@@ -46,6 +52,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
 		database.execSQL(REMINDER_CREATE);
 		database.execSQL(SHOPPINGLISTS_CREATE);
 		database.execSQL(LABEL_CREATE);
+		database.execSQL(TEMPLATE_CREATE);
 	}
 
 	@Override
@@ -57,6 +64,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + ReminderEntryDataSource.TABLE_REMINDER);
 		db.execSQL("DROP TABLE IF EXISTS " + ShoppingListsDataSource.TABLE_SHOPPINGLISTS);
 		db.execSQL("DROP TABLE IF EXISTS " + LabelDataSource.TABLE_LABEL);
+		db.execSQL("DROP TABLE IF EXISTS " + TemplateDataSource.TABLE_TEMPLATE);
 		onCreate(db);
 	}
 

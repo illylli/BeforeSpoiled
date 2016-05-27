@@ -7,7 +7,7 @@
         android:id="@+id/template_ingredient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:padding="8dp"></TextView>
 
 </LinearLayout>

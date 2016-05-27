@@ -6,9 +6,6 @@ import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -32,25 +29,6 @@ public class LabelsSettingActivity extends ListActivity implements LoaderManager
         adapter = new LabelAdapter(this, labels);
         setListAdapter(adapter);
         getLoaderManager().initLoader(0, null, this).forceLoad();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.setting_add, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.setting_add:
-                //open dialog
-                SingleLabelFragment singleFragment = SingleLabelFragment.newInstance(null);
-                singleFragment.show(getFragmentManager(), "NEW LABEL");
-                return true;
-        }
-        return super.onMenuItemSelected(featureId, item);
     }
 
     @Override
@@ -78,7 +56,7 @@ public class LabelsSettingActivity extends ListActivity implements LoaderManager
 
     // reload the data shown in ReminderFragment
     public void reloadData() {
-        getLoaderManager().getLoader(0).onContentChanged();
+        getLoaderManager().restartLoader(0, null, this).forceLoad();
     }
 
     // create DataLoader with AsyncTaskLoader

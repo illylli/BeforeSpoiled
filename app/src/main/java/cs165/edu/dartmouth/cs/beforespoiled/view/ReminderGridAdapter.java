@@ -91,7 +91,6 @@ public class ReminderGridAdapter extends BaseAdapter {
         ((ImageView) gridEntry.findViewById(R.id.iv_reminder_grid_image)).setImageResource(labelDataSource.getImageReSrcById(entry.getLabel()));
         gridEntry.findViewById(R.id.iv_reminder_grid_image).setOnLongClickListener(new View.OnLongClickListener() {
             int deleteimageflag = 0;
-
             @Override
             public boolean onLongClick(View view) {
                 ImageButton ib = (ImageButton) gridEntry.findViewById(R.id.ibtn_reminder_grid_delete);
@@ -106,9 +105,6 @@ public class ReminderGridAdapter extends BaseAdapter {
             }
         });
 
-        // days left
-//        final int badgeIndex = ((ViewGroup) gridEntry).indexOfChild(gridEntry.findViewById(R.id.iv_reminder_grid_image));
-//        Log.d("Fanzy", "badgeIndex: " + badgeIndex);
         final BadgeView badge = new BadgeView(mContext.getApplicationContext(), gridEntry.findViewById(R.id.iv_reminder_grid_image));
         long days = (entry.getExpireDate().getTimeInMillis() - Calendar.getInstance().getTimeInMillis()) / 1000 / 3600 / 24;
         if (days < 0) {

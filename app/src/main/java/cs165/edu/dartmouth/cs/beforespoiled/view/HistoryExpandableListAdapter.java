@@ -70,7 +70,7 @@ public class HistoryExpandableListAdapter extends BaseExpandableListAdapter {
         if (view == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = infalInflater.inflate(android.R.layout.simple_expandable_list_item_1, null);
+            view = infalInflater.inflate(android.R.layout.simple_expandable_list_item_2, null);
         }
 
         TextView lblListHeader = (TextView) view.findViewById(android.R.id.text1);
@@ -86,7 +86,7 @@ public class HistoryExpandableListAdapter extends BaseExpandableListAdapter {
         if (view == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = infalInflater.inflate(android.R.layout.simple_expandable_list_item_1, null);
+            view = infalInflater.inflate(android.R.layout.simple_expandable_list_item_2, null);
         }
 
         TextView txtListChild = (TextView) view.findViewById(android.R.id.text1);

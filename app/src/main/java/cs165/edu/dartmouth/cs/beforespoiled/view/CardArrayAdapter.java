@@ -79,6 +79,10 @@ public class CardArrayAdapter extends ArrayAdapter<ShoppingListItem> {
         viewHolder.itemName.setText(card.getItemName());
 //        viewHolder.itemNumber.setText(String.valueOf(card.getItemNumber()));
         viewHolder.ifBought.setChecked(card.isSelected());
+
+        if(card.isSelected()) viewHolder.itemName.setPaintFlags(viewHolder.itemName.getPaintFlags() | (Paint.STRIKE_THRU_TEXT_FLAG));
+        else viewHolder.itemName.setPaintFlags(viewHolder.itemName.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+
         viewHolder.ifBought.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

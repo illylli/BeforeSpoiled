@@ -46,4 +46,8 @@
     <string name="btn_in_progress">In Progress</string>
     <string name="btn_complete">Complete</string>
     <string name="btn_error">No Selection</string>
+
+    <!-- Template -->
+    <string name="collapsed">collapsed: %s</string>
+    <string name="expanded">expanded: %s</string>
 </resources>

@@ -1,6 +1,7 @@
 package cs165.edu.dartmouth.cs.beforespoiled.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
@@ -28,6 +29,7 @@ import cs165.edu.dartmouth.cs.beforespoiled.database.UpdateShoppingItem;
 public class CardArrayAdapter extends ArrayAdapter<ShoppingListItem> {
     private Context context;
     private List<ShoppingListItem> cardList;
+    CardViewHolder viewHolder;
 
     static class CardViewHolder {
         TextView itemName;
@@ -61,7 +63,7 @@ public class CardArrayAdapter extends ArrayAdapter<ShoppingListItem> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
-        CardViewHolder viewHolder;
+
         if (row == null) {
             LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(R.layout.fragment_list_item, parent, false);
@@ -87,6 +89,8 @@ public class CardArrayAdapter extends ArrayAdapter<ShoppingListItem> {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 UpdateShoppingItem task;
+                Intent intent = new Intent("Check");
+
                 if(isChecked) {
                     card.setSelected(true);
                     task = new UpdateShoppingItem(getContext(), card);
@@ -96,6 +100,7 @@ public class CardArrayAdapter extends ArrayAdapter<ShoppingListItem> {
                     task = new UpdateShoppingItem(getContext(), card);
                     task.execute();
                 }
+                context.sendBroadcast(intent);
             }
         });
         return row;
@@ -104,4 +109,5 @@ public class CardArrayAdapter extends ArrayAdapter<ShoppingListItem> {
     public Bitmap decodeToBitmap(byte[] decodedByte) {
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
+
 }

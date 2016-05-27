@@ -11,7 +11,6 @@ import android.widget.Toast;
 public class UpdateShoppingItem extends AsyncTask<Void, Integer, Void> {
     private ShoppingListItemDataSource mDataSource;
     private ShoppingListItem shoppingListItem;
-    private ShoppingListItem newShoppingListItem;
     private Context context;
 
     public UpdateShoppingItem(Context context, ShoppingListItem shoppingListItem){

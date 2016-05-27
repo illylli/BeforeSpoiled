@@ -1,5 +1,6 @@
 package cs165.edu.dartmouth.cs.beforespoiled.view;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -8,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.TranslateAnimation;
+import android.view.Window;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -53,6 +56,8 @@ public class ReminderGridAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ReminderEntry entry = entries.get(position);
         final View gridEntry;
+        final ReminderEntry entry = entries.get(position);
+        View gridEntry;
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             gridEntry = inflater.inflate(R.layout.gridview_reminder, null);
@@ -61,6 +66,26 @@ public class ReminderGridAdapter extends BaseAdapter {
         }
         if (entry.getImage() != null) {
             ((ImageView) gridEntry.findViewById(R.id.iv_reminder_grid_image)).setImageBitmap(BitmapFactory.decodeByteArray(entry.getImage(), 0, entry.getImage().length));
+            gridEntry.findViewById(R.id.iv_reminder_grid_image).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final Dialog nagDialog = new Dialog(mContext, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+                    nagDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    nagDialog.setCancelable(false);
+                    nagDialog.setContentView(R.layout.dialog_image);
+                    Button btnClose = (Button) nagDialog.findViewById(R.id.btn_reminder_dialog);
+                    ImageView ivPreview = (ImageView) nagDialog.findViewById(R.id.iv_reminder_dialog);
+                    ivPreview.setImageBitmap(BitmapFactory.decodeByteArray(entry.getImage(), 100, entry.getImage().length));
+
+                    btnClose.setOnClickListener(new Button.OnClickListener() {
+                        @Override
+                        public void onClick(View arg0) {
+                            nagDialog.dismiss();
+                        }
+                    });
+                    nagDialog.show();
+                }
+            });
         }
         BadgeView badge = new BadgeView(mContext.getApplicationContext(), gridEntry.findViewById(R.id.iv_reminder_grid_image));
         badge.setText("1");
@@ -105,7 +130,6 @@ public class ReminderGridAdapter extends BaseAdapter {
 //        int days = Integer.parseInt(preferences.getString(mContext.getString(R.string.settings_days_before_spoiled), "1"));
 
         long days = (entry.getExpireDate().getTimeInMillis() - Calendar.getInstance().getTimeInMillis())/1000/3600/24;
-
 
         return gridEntry;
     }

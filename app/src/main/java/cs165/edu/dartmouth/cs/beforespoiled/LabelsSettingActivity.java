@@ -57,7 +57,6 @@ public class LabelsSettingActivity extends ListActivity implements LoaderManager
     protected void onListItemClick(ListView l, View v, int position, long id) {
         SingleLabelFragment singleFragment = SingleLabelFragment.newInstance(labels.get(position));
         singleFragment.show(getFragmentManager(), "EDIT LABEL");
-        super.onListItemClick(l, v, position, id);
     }
 
     @Override

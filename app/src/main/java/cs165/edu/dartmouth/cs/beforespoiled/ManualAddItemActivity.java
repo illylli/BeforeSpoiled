@@ -73,12 +73,12 @@ public class ManualAddItemActivity extends Activity {
 
         //User type item name
         itemName = (EditText) findViewById(R.id.editTextName);
-        itemName.clearFocus();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             itemName.setText(bundle.getString(AddFromHistoryActivity.ITEM_NAME));
             mBaseDateAndTime = DateHelper.dataToCalendar(bundle.getString(AddFromHistoryActivity.BUY_DATE));
         }
+        itemName.clearFocus();
 
         //User change expire date by clicking image button.
         mDisplayDateTime = (TextView) findViewById(R.id.DateDisplayView);
@@ -132,7 +132,7 @@ public class ManualAddItemActivity extends Activity {
                     cameraButton.setImageResource(imageResource[position]);
                     cameraButton.setScaleType(ImageView.ScaleType.FIT_XY);
                     mDateAndTime.setTime(mBaseDateAndTime.getTime());
-                    mBaseDateAndTime.add(Calendar.DATE, labels.get(position).getStoragePeriod());
+                    mDateAndTime.add(Calendar.DATE, labels.get(position).getStoragePeriod());
                     updateDateAndTimeDisplay();
                 }
             }
@@ -243,7 +243,7 @@ public class ManualAddItemActivity extends Activity {
 
         ReminderEntry entry = new ReminderEntry();
         entry.setName(itemName.getText().toString());
-        entry.setLabel(getResources().getStringArray(R.array.CategorySpinner)[categorySpinner.getSelectedItemPosition()]);
+        entry.setLabel(categorySpinner.getSelectedItemPosition());
         entry.setExpireDate(mDateAndTime);
 
         cameraButton.buildDrawingCache();

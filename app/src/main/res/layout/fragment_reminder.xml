@@ -34,13 +34,13 @@
             android:layout_marginRight="10dp"
             android:layout_weight="0.5"
             android:padding="15dp"
-            fancy:fb_borderColor="#7ed862"
-            fancy:fb_borderWidth="3dp"
+            fancy:fb_textColor="#ffffff"
+
             fancy:fb_focusColor="#ffa8f192"
-            fancy:fb_ghost="true"
+            fancy:fb_defaultColor="#03A9F4"
             fancy:fb_radius="40dp"
             fancy:fb_text="@string/reminder_button_manual"
-            fancy:fb_textColor="#ffa8f192" />
+            />
 
         <mehdi.sakout.fancybuttons.FancyButton
             android:id="@+id/btn_reminder_add_history"
@@ -50,12 +50,13 @@
             android:layout_marginRight="15dp"
             android:layout_weight="0.5"
             android:padding="15dp"
-            fancy:fb_defaultColor="#7ed862"
+            fancy:fb_defaultColor="#03A9F4"
             fancy:fb_focusColor="#2e5071"
+            fancy:fb_textColor="#ffffff"
             fancy:fb_radius="40dp"
 
             fancy:fb_text="@string/reminder_button_history"
-            fancy:fb_textColor="#ffffff" />
+             />
     </LinearLayout>
 
 </RelativeLayout>

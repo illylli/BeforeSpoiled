@@ -12,6 +12,8 @@ public class ShoppingListItem {
 
     public ShoppingListItem(){
         this.listId = -1;
+        this.itemNumber = 1;
+        this.selected = false;
     }
 
     public ShoppingListItem(String name, int itemNumber, boolean selected){

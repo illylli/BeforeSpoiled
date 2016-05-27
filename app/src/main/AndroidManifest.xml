@@ -58,6 +58,11 @@
             android:name=".AddFromHistoryActivity"
             android:configChanges="orientation|screenSize|keyboardHidden" />
 
+        <activity
+            android:name=".AddTemplateActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+
+
         <receiver
             android:name=".ReminderReceiver"
             android:enabled="true"

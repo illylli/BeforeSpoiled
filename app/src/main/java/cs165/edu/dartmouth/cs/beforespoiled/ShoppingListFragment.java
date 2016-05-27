@@ -181,16 +181,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
             }
         });
 
-        callTemplateButton = (CircularProgressButton) shoppingListView.findViewById(R.id.btn_call_template_activity);
-        callTemplateButton.setTypeface(EasyFonts.caviarDreamsBold(getActivity().getApplicationContext()));
-        callTemplateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), TemplateActivity.class);
-                startActivity(intent);
-            }
-        });
-
         finishShoppingButton = (CircularProgressButton) shoppingListView.findViewById(R.id.btn_finish_shopping);
         finishShoppingButton.setTypeface(EasyFonts.caviarDreamsBold(getActivity().getApplicationContext()));
         finishShoppingButton.setIndeterminateProgressMode(true);

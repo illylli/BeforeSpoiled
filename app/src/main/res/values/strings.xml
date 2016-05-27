@@ -50,4 +50,7 @@
     <!-- Template -->
     <string name="collapsed">collapsed: %s</string>
     <string name="expanded">expanded: %s</string>
+
+    <!-- AddFromHistory -->
+    <string name="reminder_history_title">Shopping History</string>
 </resources>

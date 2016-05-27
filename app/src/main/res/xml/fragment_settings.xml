@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <EditTextPreference
-        android:dialogTitle="@string/settings_days_before_spoiled"
-        android:key="@string/preference_days_before_spoiled"
-        android:title="@string/settings_days_before_spoiled" />
+    <!--<EditTextPreference-->
+    <!--android:dialogTitle="@string/settings_days_before_spoiled"-->
+    <!--android:key="@string/preference_days_before_spoiled"-->
+    <!--android:title="@string/settings_days_before_spoiled" />-->
 
     <PreferenceScreen
         android:title="@string/settings_labels">
 
-        <intent android:targetPackage="cs165.edu.dartmouth.cs.beforespoiled"
-        android:targetClass="cs165.edu.dartmouth.cs.beforespoiled.LabelsSettingActivity" />
+        <intent
+            android:targetClass="cs165.edu.dartmouth.cs.beforespoiled.LabelsSettingActivity"
+            android:targetPackage="cs165.edu.dartmouth.cs.beforespoiled" />
 
     </PreferenceScreen>
 
     <PreferenceScreen
         android:title="@string/settings_shoppinglist_template">
 
-        <intent android:targetPackage="cs165.edu.dartmouth.cs.beforespoiled"
-            android:targetClass="cs165.edu.dartmouth.cs.beforespoiled.TemplateActivity" />
+        <intent
+            android:targetClass="cs165.edu.dartmouth.cs.beforespoiled.TemplateActivity"
+            android:targetPackage="cs165.edu.dartmouth.cs.beforespoiled" />
 
     </PreferenceScreen>
 

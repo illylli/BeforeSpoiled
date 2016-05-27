@@ -5,13 +5,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.google.gson.Gson;
 
 import cs165.edu.dartmouth.cs.beforespoiled.database.Label;
 import cs165.edu.dartmouth.cs.beforespoiled.database.LabelAsyncTask;
+import cs165.edu.dartmouth.cs.beforespoiled.database.LabelDataSource;
 
 public class SingleLabelFragment extends DialogFragment {
     private static final String ARG_LABEL = "label";
@@ -43,10 +46,17 @@ public class SingleLabelFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
         View v = inflater.inflate(R.layout.fragment_single_label, container, false);
+        final ImageView image = (ImageView) v.findViewById(R.id.iv_settings_labels_single_image);
         final EditText name = (EditText) v.findViewById(R.id.et_settings_labels_single_name);
         final EditText period = (EditText) v.findViewById(R.id.et_settings_labels_single_period);
         final EditText days = (EditText) v.findViewById(R.id.et_settings_labels_single_days);
+
+        LabelDataSource labelDataSource = new LabelDataSource(getActivity());
+        image.setImageResource(labelDataSource.getImageReSrcById((int) label.getId()));
+
         if(label != null) {
             name.setText(label.getName());
             period.setText(label.getStoragePeriod() + "");

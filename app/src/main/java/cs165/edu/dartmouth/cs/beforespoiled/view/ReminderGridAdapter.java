@@ -116,7 +116,7 @@ public class ReminderGridAdapter extends BaseAdapter {
         } else if (days == 1) {
             badge.setBadgeBackgroundColor(Color.RED);
         } else if (days == 2) {
-            badge.setBadgeBackgroundColor(Color.YELLOW);
+            badge.setBadgeBackgroundColor(Color.parseColor("#C0CF21"));
         } else {
             badge.setBadgeBackgroundColor(Color.parseColor("#A4C639"));
         }

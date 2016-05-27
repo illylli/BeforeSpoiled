@@ -49,6 +49,11 @@
         <activity
             android:name=".LabelsSettingActivity"
             android:label="@string/title_activity_labels_setting" />
+
+        <activity
+            android:name=".TemplateActivity"
+            android:label="@string/settings_shoppinglist_template" />
+
         <activity
             android:name=".AddFromHistoryActivity"
             android:label="@string/title_activity_add_from_history" />

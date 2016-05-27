@@ -33,6 +33,7 @@
     <string name="preference_days_before_spoiled">days_before_spoiled</string>
     <string name="settings_labels">Labels Setting</string>
     <string name="title_activity_labels_setting">LabelsSettingActivity</string>
+    <string name="settings_shoppinglist_template">ShoppingList Template</string>
 
     <!-- Single Label -->
     <string name="settings_labels_single_name">Name</string>
@@ -44,5 +45,5 @@
     <string name="btn_idle">Upload</string>
     <string name="btn_in_progress">In Progress</string>
     <string name="btn_complete">Complete</string>
-    <string name="btn_error">Error</string>
+    <string name="btn_error">No Selection</string>
 </resources>

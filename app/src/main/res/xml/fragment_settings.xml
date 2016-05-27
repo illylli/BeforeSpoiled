@@ -14,4 +14,12 @@
 
     </PreferenceScreen>
 
+    <PreferenceScreen
+        android:title="@string/settings_shoppinglist_template">
+
+        <intent android:targetPackage="cs165.edu.dartmouth.cs.beforespoiled"
+            android:targetClass="cs165.edu.dartmouth.cs.beforespoiled.TemplateActivity" />
+
+    </PreferenceScreen>
+
 </PreferenceScreen>

@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,11 +24,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import com.dd.CircularProgressButton;
 import com.manuelpeinado.fadingactionbar.FadingActionBarHelper;
@@ -125,6 +128,30 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         shoppingList.setAdapter(cardArrayAdapter);
 //        shoppingList.setDraggableManager(new TouchViewDraggableManager(R.id.itemrow_gripview));
         shoppingList.setLongClickable(true);
+        shoppingList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                CheckBox checkBox = (CheckBox) view.findViewById(R.id.check_box);
+                TextView tv = (TextView) view.findViewById(R.id.item_name);
+                ShoppingListItem item = cardList.get(position - 1);
+                UpdateShoppingItem task;
+                if(checkBox.isChecked()) {
+                    item.setSelected(false);
+                    task = new UpdateShoppingItem(getActivity().getApplicationContext(), item);
+                    task.execute();
+//                    tv.setPaintFlags(tv.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+//                    checkBox.setSelected(false);
+                } else {
+                    item.setSelected(true);
+                    task = new UpdateShoppingItem(getActivity().getApplicationContext(), item);
+                    task.execute();
+//                    tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+//                    checkBox.setSelected(true);
+                }
+                cardArrayAdapter.notifyDataSetChanged();
+            }
+        });
+
         shoppingList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {

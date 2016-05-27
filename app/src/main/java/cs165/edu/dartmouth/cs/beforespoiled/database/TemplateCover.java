@@ -1,22 +1,23 @@
 package cs165.edu.dartmouth.cs.beforespoiled.database;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 
-import cs165.edu.dartmouth.cs.beforespoiled.R;
+import java.util.List;
 
 /**
  * Created by oubai on 5/25/16.
  */
-public class TemplateCover {
+public class TemplateCover implements ParentListItem {
     private String templateName;
     private String templateDes;
     private int photoId;
+    private List<TemplateChild> mChildrenList;
 
-    public TemplateCover(String name, String des, int id) {
+    public TemplateCover(String name, String des, int id, List ingredients) {
         this.templateName = name;
         this.templateDes = des;
         this.photoId = id;
+        mChildrenList = ingredients;
     }
 
     public String getTemplateName() {
@@ -41,6 +42,16 @@ public class TemplateCover {
 
     public void setPhotoId(int id) {
         this.photoId = id;
+    }
+
+    @Override
+    public List<?> getChildItemList() {
+        return mChildrenList;
+    }
+
+    @Override
+    public boolean isInitiallyExpanded() {
+        return false;
     }
 }
 

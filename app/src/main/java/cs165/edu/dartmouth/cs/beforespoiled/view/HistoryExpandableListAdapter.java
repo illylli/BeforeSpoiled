@@ -76,6 +76,7 @@ public class HistoryExpandableListAdapter extends BaseExpandableListAdapter {
         TextView lblListHeader = (TextView) view.findViewById(android.R.id.text1);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(lists.getDate().toString());
+        lblListHeader.setTextSize(15);
         return view;
     }
 
@@ -90,6 +91,7 @@ public class HistoryExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView txtListChild = (TextView) view.findViewById(android.R.id.text1);
+        txtListChild.setTextSize(10);
         txtListChild.setText(listItem.getItemName());
         return view;
     }

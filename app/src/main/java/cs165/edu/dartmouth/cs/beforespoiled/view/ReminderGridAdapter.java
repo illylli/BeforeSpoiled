@@ -91,6 +91,7 @@ public class ReminderGridAdapter extends BaseAdapter {
         ((ImageView) gridEntry.findViewById(R.id.iv_reminder_grid_image)).setImageResource(labelDataSource.getImageReSrcById(entry.getLabel()));
         gridEntry.findViewById(R.id.iv_reminder_grid_image).setOnLongClickListener(new View.OnLongClickListener() {
             int deleteimageflag = 0;
+
             @Override
             public boolean onLongClick(View view) {
                 ImageButton ib = (ImageButton) gridEntry.findViewById(R.id.ibtn_reminder_grid_delete);
@@ -116,7 +117,7 @@ public class ReminderGridAdapter extends BaseAdapter {
         } else if (days == 1) {
             badge.setBadgeBackgroundColor(Color.RED);
         } else if (days == 2) {
-            badge.setBadgeBackgroundColor(Color.YELLOW);
+            badge.setBadgeBackgroundColor(Color.parseColor("#C0CF21"));
         } else {
             badge.setBadgeBackgroundColor(Color.parseColor("#A4C639"));
         }

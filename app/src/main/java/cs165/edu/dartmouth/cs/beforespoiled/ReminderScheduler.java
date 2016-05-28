@@ -10,9 +10,9 @@ import java.util.Calendar;
 public class ReminderScheduler {
     // set time for alarm
     public static void setSchedule(Context context) {
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.add(Calendar.SECOND, 10);
-//        setSchedule(context, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND));
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.SECOND, 10);
+        setSchedule(context, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND));
         setSchedule(context, 11, 0, 0);
         setSchedule(context, 17, 0, 0);
     }

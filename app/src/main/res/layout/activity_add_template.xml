@@ -1,76 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_height="match_parent"
+android:layout_width="match_parent"
+android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TemplateName"
-        android:id="@+id/textView2" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <EditText
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TemplateName"
+            android:id="@+id/textView2" />
+
+        <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/template_name"
         android:layout_gravity="center_horizontal" />
 
-    <TextView
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TemplateDes"
         android:id="@+id/textView3" />
 
-    <EditText
+        <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/template_description" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Item1"
-        android:id="@+id/textView4" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/item1"
-        android:layout_gravity="center_horizontal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="item2"
-        android:id="@+id/textView5" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/item2"
-        android:layout_gravity="center_horizontal" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
-
-        <Button
+        <com.dd.CircularProgressButton
+            android:id="@+id/add_template_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save"
+            android:layout_marginTop="24dp"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
             android:onClick="onTemplateSave"
-            android:id="@+id/add_template_save" />
+            app:cpb_textComplete="@string/btn_complete"
+            app:cpb_textError="@string/btn_error"
+            app:cpb_textIdle="@string/btn_idle"
+            app:cpb_cornerRadius="48dp" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:onClick="onTemplateCancel"
-            android:id="@+id/add_template_cancel" />
     </LinearLayout>
 
+    <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp">
 
+        <me.james.biuedittext.BiuEditText
+        app:biu_duration="800"
+        app:biu_text_color="@android:color/white"
+        app:biu_text_scale="1.5"
+        app:biu_type="flyup"
+        app:biu_text_start_size="15dp"
+        android:id="@+id/add_template"
+        android:layout_width="match_parent"
+        android:textSize="15dp"
+        android:layout_height="40dp"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:hint="I want to..."
+        android:textColorHint="@color/gray_btn_bg_color"
+        android:background="@drawable/shoppinglist_textview"/>
+
+    <ImageButton
+        android:layout_gravity="right"
+        android:id="@+id/SpeakButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="#00000000"
+        android:src="@android:drawable/ic_btn_speak_now" />
+</FrameLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:id="@+id/swipe_container">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/template_listView"
+        android:listSelector="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:dividerHeight="10dp">
+    </ListView>
+</android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

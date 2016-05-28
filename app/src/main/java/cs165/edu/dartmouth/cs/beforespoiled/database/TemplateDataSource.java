@@ -24,12 +24,13 @@ public class TemplateDataSource {
     public static final String TEMPLATE_NAME = "template_name";
     public static final String TEMPLATE_IMAGE = "template_image";
     public static final String TEMPLATE_DES = "template_des";
+    public static final String TEMPLATE_ITEMS = "template_items";
 
     private static final String TAG = "DBDEMO";
     private SQLiteDatabase database;
     private MyDBHelper dbHelper;
     //    private String[] allColumns = { COLUMN_ID, CREATE_DATE, COLUMN_ITEMNAME, COLUMN_ITEMNUMBER };
-    private String[] allColumns = { COLUMN_ID, TEMPLATE_NAME, TEMPLATE_IMAGE, TEMPLATE_DES};
+    private String[] allColumns = { COLUMN_ID, TEMPLATE_NAME, TEMPLATE_IMAGE, TEMPLATE_DES, TEMPLATE_ITEMS};
 
     public TemplateDataSource(Context context) {
         dbHelper = new MyDBHelper(context);
@@ -51,6 +52,10 @@ public class TemplateDataSource {
         values.put(TEMPLATE_NAME, templateCover.getTemplateName());
         values.put(TEMPLATE_IMAGE, templateCover.getPhotoId());
         values.put(TEMPLATE_DES, templateCover.getTemplateDes());
+        String list = templateCover.getItemsGson();
+
+        Log.d("template", "create template: the list is" + list);
+        if(list != null) values.put(TEMPLATE_ITEMS, list);
 
         long insertId = database.insert(TABLE_TEMPLATE, null,
                 values);
@@ -134,6 +139,10 @@ public class TemplateDataSource {
         templateCover.setTemplateName(cursor.getString(1));
         templateCover.setPhotoId(cursor.getInt(2));
         templateCover.setTemplateDes(cursor.getString(3));
+        String list = cursor.getString(4);
+        if(list != null){
+            templateCover.setItemsFromGson(list);
+        }
 
         return templateCover;
     }

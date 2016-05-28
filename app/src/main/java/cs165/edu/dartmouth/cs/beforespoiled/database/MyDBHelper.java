@@ -40,7 +40,10 @@ public class MyDBHelper extends SQLiteOpenHelper {
 			TemplateDataSource.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
 			TemplateDataSource.TEMPLATE_NAME + " TEXT NOT NULL, " +
 			TemplateDataSource.TEMPLATE_IMAGE + " INTEGER, " +
-			TemplateDataSource.TEMPLATE_DES + " TEXT);";
+			TemplateDataSource.TEMPLATE_DES + " TEXT, " +
+			TemplateDataSource.TEMPLATE_ITEMS + " TEXT);";
+
+
 
 	public MyDBHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);

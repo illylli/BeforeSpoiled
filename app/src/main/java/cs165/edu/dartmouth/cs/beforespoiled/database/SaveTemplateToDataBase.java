@@ -7,13 +7,13 @@ import android.util.Log;
 /**
  * Created by Yuzhong on 2016/5/27.
  */
-public class SaveTemplateToDataSource extends AsyncTask<Void, Integer, TemplateCover> {
+public class SaveTemplateToDataBase extends AsyncTask<Void, Integer, TemplateCover> {
     private TemplateDataSource mDataSource;
     private TemplateCover templateCover;
     private TemplateCover newTemplateCover;
     private Context context;
 
-    public SaveTemplateToDataSource(Context context, TemplateCover templateCover){
+    public SaveTemplateToDataBase(Context context, TemplateCover templateCover){
         this.context = context;
         this.templateCover = templateCover;
     }

@@ -91,6 +91,7 @@ public class ReminderGridAdapter extends BaseAdapter {
         ((ImageView) gridEntry.findViewById(R.id.iv_reminder_grid_image)).setImageResource(labelDataSource.getImageReSrcById(entry.getLabel()));
         gridEntry.findViewById(R.id.iv_reminder_grid_image).setOnLongClickListener(new View.OnLongClickListener() {
             int deleteimageflag = 0;
+
             @Override
             public boolean onLongClick(View view) {
                 ImageButton ib = (ImageButton) gridEntry.findViewById(R.id.ibtn_reminder_grid_delete);

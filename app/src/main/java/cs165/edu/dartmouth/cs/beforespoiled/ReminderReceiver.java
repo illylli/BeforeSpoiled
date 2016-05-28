@@ -69,7 +69,7 @@ public class ReminderReceiver extends BroadcastReceiver {
         Notification notification = new Notification.Builder(context)
                 .setContentTitle(context.getResources().getString(R.string.app_name))
                 .setContentText(buffer.toString())
-                .setSmallIcon(R.drawable.ic_menu_camera)
+                .setSmallIcon(R.mipmap.appicon2)
                 .setContentIntent(contentIntent).build();
 
         ((NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE)).notify(0, notification);

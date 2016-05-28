@@ -47,4 +47,13 @@
         android:layout_alignParentRight="true"
         android:src="@drawable/selector_arrow_down"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ToList"
+        android:id="@+id/to_shopping_list"
+        android:layout_alignBottom="@+id/template_photo"
+        android:layout_toLeftOf="@+id/template_arrow"
+        android:layout_toStartOf="@+id/template_arrow" />
+
 </RelativeLayout>

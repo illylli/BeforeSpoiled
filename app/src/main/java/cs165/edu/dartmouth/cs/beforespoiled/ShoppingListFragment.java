@@ -156,7 +156,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                         break;
                     case EditorInfo.IME_ACTION_DONE:
                         String itemName = addItem.getText().toString();
-                        if(!itemName.equals("")) {
+                        if (!itemName.equals("")) {
                             addItem.clearFocus();
                             addItem.setCursorVisible(false);
                             ShoppingListItem listItem = new ShoppingListItem();
@@ -176,7 +176,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         addItem.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus) {
+                if (hasFocus) {
                     addItem.setText("");
                 }
             }
@@ -198,7 +198,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         cardArrayAdapter = new CardArrayAdapter(getActivity().getApplicationContext(), cardList);
         shoppingList.setAdapter(cardArrayAdapter);
 
-        shoppingList.setLongClickable(true);
         shoppingList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -219,6 +218,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
             }
         });
 
+        shoppingList.setLongClickable(true);
         shoppingList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -451,15 +451,16 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onLoadFinished(Loader<List<ShoppingListItem>> loader, List<ShoppingListItem> items) {
         cardArrayAdapter.clear();
-        cardList = items;
+        if(items != null)
+            cardList = items;
         cardArrayAdapter.addAll(cardList);
         cardArrayAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onLoaderReset(Loader<List<ShoppingListItem>> loader) {
-        cardArrayAdapter = new CardArrayAdapter(getActivity().getApplicationContext(), new ArrayList<ShoppingListItem>());
-        shoppingList.setAdapter(cardArrayAdapter);
+//        cardArrayAdapter = new CardArrayAdapter(getActivity().getApplicationContext(), new ArrayList<ShoppingListItem>());
+//        shoppingList.setAdapter(cardArrayAdapter);
     }
 
     @Override
@@ -513,6 +514,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onDestroy(){
         super.onDestroy();
+        getActivity().unregisterReceiver(receiverSync);
     }
 
 }

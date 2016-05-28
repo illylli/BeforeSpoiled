@@ -33,7 +33,8 @@ public class TemplateExpandableAdapter extends ExpandableRecyclerAdapter<Templat
     @Override
     public TemplateParentViewHolder onCreateParentViewHolder(ViewGroup parentViewGroup) {
         View view = mInflater.inflate(R.layout.activity_template_parentview, parentViewGroup, false);
-        return new TemplateParentViewHolder(view);
+        return new TemplateParentViewHolder(mInflater.getContext(), view);
+
     }
 
     @Override

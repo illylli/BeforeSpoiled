@@ -23,13 +23,13 @@
             app:biu_text_start_size="15dp"
             android:id="@+id/add_item"
             android:layout_width="match_parent"
-            android:textSize="15dp"
+            android:textSize="17dp"
             android:layout_height="40dp"
             android:singleLine="true"
             android:imeOptions="actionDone"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:hint="I want to..."
+            android:hint="I want..."
             android:textColorHint="@color/gray_btn_bg_color"
             android:background="@drawable/shoppinglist_textview"/>
 
@@ -70,6 +70,6 @@
         app:cpb_textComplete="@string/btn_complete"
         app:cpb_textError="@string/btn_error"
         app:cpb_textIdle="@string/btn_idle"
-        app:cpb_cornerRadius="48dp" />
+        app:cpb_cornerRadius="8dp" />
 
 </LinearLayout>

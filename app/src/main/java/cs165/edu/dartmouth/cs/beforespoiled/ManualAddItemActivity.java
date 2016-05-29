@@ -28,7 +28,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.appengine.api.datastore.Text;
 import com.soundcloud.android.crop.Crop;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.vstechlab.easyfonts.EasyFonts;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -54,7 +57,7 @@ public class ManualAddItemActivity extends Activity {
     private EditText itemName;
     private ImageButton cameraButton;
     private ImageButton speechButton;
-    private Spinner categorySpinner;
+    private SearchableSpinner categorySpinner;
     private Uri mImageCaptureUri;
     private String filePath;
     private ArrayAdapter adapter = null;
@@ -66,6 +69,11 @@ public class ManualAddItemActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_add_item);
+
+        TextView textView1 = (TextView) findViewById(R.id.textView);
+        textView1.setTypeface(EasyFonts.caviarDreamsBold(getApplicationContext()));
+        TextView textView2 = (TextView) findViewById(R.id.textViewCategory);
+        textView2.setTypeface(EasyFonts.caviarDreamsBold(getApplicationContext()));
 
         //request permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
@@ -162,7 +170,9 @@ public class ManualAddItemActivity extends Activity {
         });
 
 
-        categorySpinner = (Spinner)findViewById(R.id.spinnerCategory);
+        categorySpinner = (SearchableSpinner) findViewById(R.id.spinnerCategory);
+        categorySpinner.setPositiveButton("OK");
+        categorySpinner.setTitle("Select Item");
         adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, labels.toArray());
         categorySpinner.setAdapter(adapter);
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

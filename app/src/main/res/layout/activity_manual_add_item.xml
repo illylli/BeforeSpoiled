@@ -2,6 +2,7 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
     android:id="@+id/ManualAddScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,18 +31,27 @@
                 android:adjustViewBounds="true"
                 android:background="#00000000" />
 
-            <EditText
+            <me.james.biuedittext.BiuEditText
+                app:biu_duration="800"
+                app:biu_text_color="@android:color/white"
+                app:biu_text_scale="1.5"
+                app:biu_type="flyup"
+                app:biu_text_start_size="15dp"
+                android:textSize="17dp"
+                android:layout_height="40dp"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginLeft="31dp"
                 android:layout_marginRight="0dp"
                 android:layout_marginTop="30dp"
-
+                android:textColorHint="@color/gray_btn_bg_color"
+                android:background="@drawable/shoppinglist_textview"
                 android:layout_weight="0.96"
-                android:hint="I bought ..."
-                android:imeOptions="actionDone"
-                android:singleLine="true" />
+                android:hint="I bought ..."/>
 
             <ImageButton
                 android:id="@+id/SpeakButton"
@@ -67,9 +77,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="15dp"
+                android:textSize="17dp"
                 android:text="Category" />
 
-            <Spinner
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:id="@+id/spinnerCategory"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -95,6 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="28dp"
                 android:layout_marginTop="10dp"
+                android:textSize="17dp"
                 android:text="Best Before" />
 
             <TextView
@@ -137,12 +149,12 @@
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
 
-                fancy:fb_defaultColor="#03A9F4"
+                fancy:fb_defaultColor="#0099CC"
                 fancy:fb_focusColor="#2e5071"
                 fancy:fb_textColor="#ffffff"
                 fancy:fb_fontIconSize="30sp"
 
-                fancy:fb_radius="40dp"
+                fancy:fb_radius="8dp"
                 fancy:fb_text="Cancel"
                 />
 
@@ -160,11 +172,13 @@
 
                 android:paddingRight="28dp"
                 android:paddingTop="19dp"
-                fancy:fb_defaultColor="#03A9F4"
+                fancy:fb_defaultColor="#0099CC"
                 fancy:fb_focusColor="#2e5071"
-                fancy:fb_radius="50dp"
+                fancy:fb_radius="8dp"
                 fancy:fb_text="Save"
-                fancy:fb_textColor="#ffffff" />
+                fancy:fb_textColor="#ffffff"
+                android:layout_toRightOf="@+id/CancelButton"
+                android:layout_marginLeft="71dp" />
         </RelativeLayout>
 
     </LinearLayout>

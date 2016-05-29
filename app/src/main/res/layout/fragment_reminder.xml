@@ -37,8 +37,8 @@
             fancy:fb_textColor="#ffffff"
 
             fancy:fb_focusColor="#ffa8f192"
-            fancy:fb_defaultColor="#03A9F4"
-            fancy:fb_radius="40dp"
+            fancy:fb_defaultColor="#0099CC"
+            fancy:fb_radius="8dp"
             fancy:fb_text="@string/reminder_button_manual"
             />
 
@@ -50,10 +50,10 @@
             android:layout_marginRight="15dp"
             android:layout_weight="0.5"
             android:padding="15dp"
-            fancy:fb_defaultColor="#03A9F4"
+            fancy:fb_defaultColor="#0099CC"
             fancy:fb_focusColor="#2e5071"
             fancy:fb_textColor="#ffffff"
-            fancy:fb_radius="40dp"
+            fancy:fb_radius="8dp"
 
             fancy:fb_text="@string/reminder_button_history"
              />

@@ -4,35 +4,67 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 android:layout_height="match_parent"
 android:layout_width="match_parent"
+    android:background="#F5F5F5"
 android:orientation="vertical">
 
     <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
+            android:textSize="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TemplateName"
+            android:text="Template Name:"
             android:id="@+id/textView2" />
 
-        <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/template_name"
-        android:layout_gravity="center_horizontal" />
+        <me.james.biuedittext.BiuEditText
+            app:biu_duration="800"
+            app:biu_text_color="@android:color/white"
+            app:biu_text_scale="1.5"
+            app:biu_type="flyup"
+            app:biu_text_start_size="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textColorHint="@color/gray_btn_bg_color"
+            android:background="@drawable/shoppinglist_textview"
+            android:textSize="17dp"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:id="@+id/template_name"
+            android:layout_gravity="center_horizontal" />
 
         <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TemplateDes"
-        android:id="@+id/textView3" />
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Template Descrpition:"
+            android:id="@+id/textView3" />
 
-        <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/template_description" />
+        <me.james.biuedittext.BiuEditText
+            android:id="@+id/template_description"
+            app:biu_duration="800"
+            app:biu_text_color="@android:color/white"
+            app:biu_text_scale="1.5"
+            app:biu_type="flyup"
+            app:biu_text_start_size="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textColorHint="@color/gray_btn_bg_color"
+            android:background="@drawable/shoppinglist_textview"
+            android:textSize="17dp"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_gravity="center_horizontal" />
 
         <com.dd.CircularProgressButton
             android:id="@+id/add_template_save"
@@ -43,20 +75,20 @@ android:orientation="vertical">
             android:textSize="15sp"
             android:onClick="onTemplateSave"
             app:cpb_textComplete="@string/btn_complete"
-            app:cpb_textError="@string/btn_error"
-            app:cpb_textIdle="@string/btn_idle"
-            app:cpb_cornerRadius="48dp" />
+            app:cpb_textError="Null input"
+            app:cpb_textIdle="Add"
+            app:cpb_cornerRadius="8dp" />
 
     </LinearLayout>
 
     <FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="15dp"
-    android:layout_marginBottom="15dp"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
 
         <me.james.biuedittext.BiuEditText
         app:biu_duration="800"
@@ -72,7 +104,7 @@ android:orientation="vertical">
         android:imeOptions="actionDone"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:hint="I want to..."
+        android:hint="I want..."
         android:textColorHint="@color/gray_btn_bg_color"
         android:background="@drawable/shoppinglist_textview"/>
 
@@ -87,20 +119,20 @@ android:orientation="vertical">
 </FrameLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="400dp"
-    android:id="@+id/swipe_container">
-
-    <ListView
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/template_listView"
-        android:listSelector="@android:color/transparent"
-        android:cacheColorHint="@android:color/transparent"
-        android:divider="@null"
-        android:dividerHeight="10dp">
-    </ListView>
-</android.support.v4.widget.SwipeRefreshLayout>
+        android:layout_height="400dp"
+        android:id="@+id/swipe_container">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/template_listView"
+            android:listSelector="@android:color/transparent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@null"
+            android:dividerHeight="10dp">
+        </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

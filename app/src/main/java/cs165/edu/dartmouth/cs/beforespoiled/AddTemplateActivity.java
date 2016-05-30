@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.vstechlab.easyfonts.EasyFonts;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -38,6 +40,8 @@ public class AddTemplateActivity extends Activity {
     private ListView templateItemList;
     private TemplateItemAdapter itemListAdpater;
     private List<String> itemList = new ArrayList<>();
+    private TextView textViewName;
+    private TextView textViewDes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,11 @@ public class AddTemplateActivity extends Activity {
         templateName = (EditText) findViewById(R.id.template_name);
         templateDes = (EditText) findViewById(R.id.template_description);
         templateItemList = (ListView) findViewById(R.id.template_listView);
+        textViewName = (TextView) findViewById(R.id.textView2);
+        textViewDes = (TextView) findViewById(R.id.textView3);
+        textViewName.setTypeface(EasyFonts.caviarDreamsBold(getApplicationContext()));
+        textViewDes.setTypeface(EasyFonts.caviarDreamsBold(getApplicationContext()));
+
 
         templateItemList.setLongClickable(true);
         templateItemList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {

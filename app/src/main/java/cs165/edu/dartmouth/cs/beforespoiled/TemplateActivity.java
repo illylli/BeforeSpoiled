@@ -44,6 +44,7 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
     private RecyclerView mRecyclerView;
     private TemplateExpandableAdapter mAdapter;
     private RecyclerView recyclerView;
+    Intent edit = new Intent(this, AddTemplateActivity.class);
 
     private BroadcastReceiver receiverSync = new BroadcastReceiver() {
         @Override
@@ -60,6 +61,13 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
             Log.d("template", "addtolist" + pos);
 
             if(pos != -1) saveToShoppingList(pos);
+        }
+    };
+
+    private BroadcastReceiver receiverEdit = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            startActivity(edit);
         }
     };
 
@@ -112,8 +120,13 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
             shoppingListItem.setItemName(item);
             SaveShoppingItemToDatabase task = new SaveShoppingItemToDatabase(this, shoppingListItem);
             task.execute();
-            Intent intent = new Intent("Check");
-            sendBroadcast(intent);
+            try {
+                Thread.sleep(2000);
+                Intent intent = new Intent("Check");
+                sendBroadcast(intent);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -62,7 +62,7 @@ public class AddTemplateActivity extends Activity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 Log.d("daniel", "long press");
-                final SweetAlertDialog warningDialog = new SweetAlertDialog(getApplicationContext(), SweetAlertDialog.WARNING_TYPE);
+                final SweetAlertDialog warningDialog = new SweetAlertDialog(AddTemplateActivity.this, SweetAlertDialog.WARNING_TYPE);
                 warningDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
                 warningDialog.setTitleText("Delete this item?");
                 warningDialog.setCancelText("No, cancel it");
@@ -76,12 +76,13 @@ public class AddTemplateActivity extends Activity {
                 warningDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        SweetAlertDialog successDialog = new SweetAlertDialog(getApplicationContext(), SweetAlertDialog.SUCCESS_TYPE);
+                        SweetAlertDialog successDialog = new SweetAlertDialog(AddTemplateActivity.this, SweetAlertDialog.SUCCESS_TYPE);
                         successDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
                         successDialog.setTitle("Deleted!");
                         successDialog.setTitleText("This item is deleted!");
                         successDialog.show();
-                        itemList.remove(position - 1);
+                        itemList.remove(position);
+                        itemListAdpater.notifyDataSetChanged();
                         warningDialog.cancel();
                     }
                 });

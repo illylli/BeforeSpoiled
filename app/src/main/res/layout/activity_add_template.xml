@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="#F5F5F5"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:screenOrientation="portrait">
 
     <LinearLayout
         android:layout_marginTop="15dp"
@@ -66,18 +67,7 @@
             android:focusableInTouchMode="true"
             android:layout_gravity="center_horizontal" />
 
-        <com.dd.CircularProgressButton
-            android:id="@+id/add_template_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:textColor="@android:color/white"
-            android:textSize="15sp"
-            android:onClick="onTemplateSave"
-            app:cpb_textComplete="@string/btn_complete"
-            app:cpb_textError="Null input"
-            app:cpb_textIdle="Add"
-            app:cpb_cornerRadius="8dp" />
+
 
     </LinearLayout>
 
@@ -120,26 +110,54 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="300dp">
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/template_listView"
+            android:textSize="17dp"
             android:listSelector="@android:color/transparent"
             android:cacheColorHint="@android:color/transparent"
             android:divider="@null"
             android:dividerHeight="10dp">
         </ListView>
     </LinearLayout>
-<!--
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:orientation="vertical"
+
+    <LinearLayout
+        android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:id="@+id/swipe_container">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.dd.CircularProgressButton
+            android:id="@+id/add_template_save"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="24dp"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            android:onClick="onTemplateSave"
+            app:cpb_textComplete="@string/btn_complete"
+            app:cpb_textError="Null input"
+            app:cpb_textIdle="Add"
+            app:cpb_cornerRadius="8dp"/>
 
-
-    </android.support.v4.widget.SwipeRefreshLayout>
-    -->
-
+        <com.dd.CircularProgressButton
+            android:id="@+id/add_template_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="24dp"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            android:onClick="onTemplateSave"
+            app:cpb_textComplete="@string/btn_complete"
+            app:cpb_textError="Null input"
+            app:cpb_textIdle="Cancel"
+            app:cpb_cornerRadius="8dp"/>
+    </LinearLayout>
 </LinearLayout>

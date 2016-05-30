@@ -18,9 +18,6 @@ import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateCover;
 import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateChildViewHolder;
 import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateParentViewHolder;
 
-/**
- * Created by oubai on 5/27/16.
- */
 public class TemplateExpandableAdapter extends ExpandableRecyclerAdapter<TemplateParentViewHolder, TemplateChildViewHolder> {
 
     private LayoutInflater mInflater;

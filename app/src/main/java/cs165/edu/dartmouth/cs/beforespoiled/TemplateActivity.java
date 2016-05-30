@@ -34,6 +34,7 @@ import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateCover;
 import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateChildViewHolder;
 import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateExpandableAdapter;
 
+public class TemplateActivity extends Activity implements LoaderManager.LoaderCallbacks<List<TemplateCover>>{
 
 /**
  * Created by oubai on 5/25/16.
@@ -41,10 +42,9 @@ import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateExpandableAdapter;
 public class TemplateActivity extends Activity implements LoaderManager.LoaderCallbacks<List<TemplateCover>>, UIReloader{
 
     private List<TemplateCover> templateCoverList = new ArrayList<>();
-    private RecyclerView mRecyclerView;
     private TemplateExpandableAdapter mAdapter;
     private RecyclerView recyclerView;
-    Intent edit = new Intent(this, AddTemplateActivity.class);
+//    Intent edit = new Intent(this, AddTemplateActivity.class);
 
     private BroadcastReceiver receiverSync = new BroadcastReceiver() {
         @Override
@@ -67,7 +67,7 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
     private BroadcastReceiver receiverEdit = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            startActivity(edit);
+//            startActivity(edit);
         }
     };
 

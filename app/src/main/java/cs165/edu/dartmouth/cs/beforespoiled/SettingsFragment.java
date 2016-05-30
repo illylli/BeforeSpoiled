@@ -3,9 +3,6 @@ package cs165.edu.dartmouth.cs.beforespoiled;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 
-/**
- * Created by oubai on 5/19/16.
- */
 public class SettingsFragment extends PreferenceFragment {
 
     public SettingsFragment() {

@@ -9,8 +9,10 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.vstechlab.easyfonts.EasyFonts;
 
 import cs165.edu.dartmouth.cs.beforespoiled.database.Label;
 import cs165.edu.dartmouth.cs.beforespoiled.database.LabelAsyncTask;
@@ -20,6 +22,9 @@ public class SingleLabelFragment extends DialogFragment {
     private static final String ARG_LABEL = "label";
 
     private Label label;
+    private TextView textViewName;
+    private TextView textViewStorage;
+    private TextView textViewDay;
 
     public SingleLabelFragment() {
         // Required empty public constructor
@@ -53,6 +58,13 @@ public class SingleLabelFragment extends DialogFragment {
         final EditText name = (EditText) v.findViewById(R.id.et_settings_labels_single_name);
         final EditText period = (EditText) v.findViewById(R.id.et_settings_labels_single_period);
         final EditText days = (EditText) v.findViewById(R.id.et_settings_labels_single_days);
+
+        textViewName = (TextView) v.findViewById(R.id.add_item_name);
+        textViewStorage = (TextView) v.findViewById(R.id.add_item_storage);
+        textViewDay = (TextView) v.findViewById(R.id.add_item_day);
+        textViewName.setTypeface(EasyFonts.caviarDreamsBold(getActivity().getApplicationContext()));
+        textViewStorage.setTypeface(EasyFonts.caviarDreamsBold(getActivity().getApplicationContext()));
+        textViewDay.setTypeface(EasyFonts.caviarDreamsBold(getActivity().getApplicationContext()));
 
         LabelDataSource labelDataSource = new LabelDataSource(getActivity());
         image.setImageResource(labelDataSource.getImageReSrcById((int) label.getId()));

@@ -19,9 +19,6 @@ import cs165.edu.dartmouth.cs.beforespoiled.database.SaveShoppingItemToDatabase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
 import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateCover;
 
-/**
- * Created by oubai on 5/27/16.
- */
 public class TemplateParentViewHolder extends ParentViewHolder {
 
     private static final float INITIAL_POSITION = 0.0f;

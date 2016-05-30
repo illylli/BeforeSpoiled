@@ -10,9 +10,6 @@ import com.vstechlab.easyfonts.EasyFonts;
 import cs165.edu.dartmouth.cs.beforespoiled.R;
 import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateChild;
 
-/**
- * Created by oubai on 5/27/16.
- */
 public class TemplateChildViewHolder extends ChildViewHolder {
 
     public TextView mIngredients;

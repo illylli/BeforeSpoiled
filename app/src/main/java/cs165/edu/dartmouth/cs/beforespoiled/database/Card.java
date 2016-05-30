@@ -1,10 +1,5 @@
 package cs165.edu.dartmouth.cs.beforespoiled.database;
 
-import android.widget.CheckBox;
-
-/**
- * Created by oubai on 5/22/16.
- */
 public class Card {
     private long id;
     private String itemName;

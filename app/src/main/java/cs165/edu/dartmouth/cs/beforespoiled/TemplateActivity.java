@@ -31,6 +31,7 @@ import cs165.edu.dartmouth.cs.beforespoiled.database.SaveShoppingItemToDatabase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
 import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateChild;
 import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateCover;
+import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateChildViewHolder;
 import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateExpandableAdapter;
 
 

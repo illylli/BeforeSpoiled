@@ -54,7 +54,7 @@
         android:id="@+id/to_shopping_list"
         android:layout_alignBottom="@+id/template_photo"
         android:layout_toLeftOf="@+id/template_arrow"
-        android:layout_toStartOf="@+id/template_arrow" />
+        android:layout_toStartOf="@+id/template_arrow"/>
 
 
 </RelativeLayout>

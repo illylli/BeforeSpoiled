@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter;
 import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +40,7 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
     private List<TemplateCover> templateCoverList = new ArrayList<>();
     private TemplateExpandableAdapter mAdapter;
     private RecyclerView recyclerView;
-//    Intent edit = new Intent(this, AddTemplateActivity.class);
+    
 
     private BroadcastReceiver receiverSync = new BroadcastReceiver() {
         @Override
@@ -62,10 +63,20 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
     private BroadcastReceiver receiverEdit = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-//            startActivity(edit);
+            int pos = intent.getIntExtra("Position", -1);
+            editTemplate(pos);
         }
     };
 
+    public void editTemplate(int pos){
+        Intent edit = new Intent(this, AddTemplateActivity.class);
+        Gson gson = new Gson();
+        Log.d("EditTemplate", "postion: " + pos);
+        String list = gson.toJson(templateCoverList.get(pos));
+        Log.d("EditTemplate", list);
+        edit.putExtra("template", list);
+        startActivity(edit);
+    }
 
     public void update(){
         getLoaderManager().initLoader(0, null, this).forceLoad();
@@ -81,6 +92,9 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
 
         IntentFilter filter2 = new IntentFilter("AddToList");
         this.registerReceiver(receiverAddToList, filter2);
+
+        IntentFilter filter3 = new IntentFilter("Edit");
+        this.registerReceiver(receiverEdit, filter3);
 
         TemplateChild beef = new TemplateChild("beef");
         TemplateChild cheese = new TemplateChild("cheese");
@@ -172,5 +186,6 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
         super.onDestroy();
         unregisterReceiver(receiverSync);
         unregisterReceiver(receiverAddToList);
+        unregisterReceiver(receiverEdit);
     }
 }

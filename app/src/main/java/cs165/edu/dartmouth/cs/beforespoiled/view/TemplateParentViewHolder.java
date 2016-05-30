@@ -50,7 +50,7 @@ public class TemplateParentViewHolder extends ParentViewHolder {
         desView = (TextView) view.findViewById(R.id.template_description);
         arrayExpand = (ImageView) view.findViewById(R.id.template_arrow);
         toShoppingList = (Button) view.findViewById(R.id.to_shopping_list);
-        edit = (Button) view.findViewById(R.id.to_shopping_list);
+        edit = (Button) view.findViewById(R.id.edit_template);
         context = con;
 
         toShoppingList.setOnClickListener(new View.OnClickListener() {

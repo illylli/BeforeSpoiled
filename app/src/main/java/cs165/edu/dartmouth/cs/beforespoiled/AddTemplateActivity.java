@@ -16,16 +16,21 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.appengine.repackaged.com.google.gson.reflect.TypeToken;
+import com.google.gson.Gson;
 import com.vstechlab.easyfonts.EasyFonts;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import cs165.edu.dartmouth.cs.beforespoiled.database.SaveShoppingItemToDatabase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.SaveTemplateToDataBase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
 import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateCover;
+import cs165.edu.dartmouth.cs.beforespoiled.database.UpdateTemplateItem;
 import cs165.edu.dartmouth.cs.beforespoiled.view.CardArrayAdapter;
 import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateItemAdapter;
 
@@ -39,9 +44,11 @@ public class AddTemplateActivity extends Activity {
     private EditText text2;
     private ListView templateItemList;
     private TemplateItemAdapter itemListAdpater;
-    private List<String> itemList = new ArrayList<>();
+    private List<String> itemList;
     private TextView textViewName;
     private TextView textViewDes;
+    private TemplateCover templateCover;
+    private boolean isEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +63,15 @@ public class AddTemplateActivity extends Activity {
         textViewName.setTypeface(EasyFonts.caviarDreamsBold(getApplicationContext()));
         textViewDes.setTypeface(EasyFonts.caviarDreamsBold(getApplicationContext()));
 
+        itemList = new ArrayList<>();
+
+        Intent i = getIntent();
+        String temp = i.getStringExtra("template");
+        Log.d("EditTemplate", temp + " string template");
+
+        Type type = new TypeToken<TemplateCover>() {}.getType();
+        Gson gson = new Gson();
+        templateCover = gson.fromJson(temp, type);
 
         templateItemList.setLongClickable(true);
         templateItemList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -114,7 +130,10 @@ public class AddTemplateActivity extends Activity {
                             addItem.clearFocus();
                             addItem.setCursorVisible(false);
                             itemList.add(itemName);
-
+                            Log.d("EditTemplate", "I am here");
+                            Log.d("EditTemplate", "size" + itemList.size());
+                            itemListAdpater.clear();
+                            itemListAdpater.addAll(itemList);
                             itemListAdpater.notifyDataSetChanged();
                             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(addItem.getWindowToken(), 0);
@@ -140,6 +159,25 @@ public class AddTemplateActivity extends Activity {
                 addItem.setCursorVisible(true);
             }
         });
+
+        setData();
+    }
+
+    public void setData(){
+        Log.d("EditTemplate", templateCover + " this is template");
+
+        if(templateCover != null){
+
+            Log.d("EditTemplate", templateCover.getTemplateName() + " this is name!!!");
+            templateName.setText(templateCover.getTemplateName());
+            templateDes.setText(templateCover.getTemplateDes());
+
+            itemList = templateCover.getItems();
+            itemListAdpater.clear();
+            itemListAdpater.addAll(itemList);
+            itemListAdpater.notifyDataSetChanged();
+            isEdit = true;
+        }
     }
 
 
@@ -151,8 +189,13 @@ public class AddTemplateActivity extends Activity {
         TemplateCover templateCover = new TemplateCover(tName, picId, tDes);
         templateCover.setItemsAll(itemList);
 
-        SaveTemplateToDataBase task = new SaveTemplateToDataBase(getApplication().getApplicationContext(), templateCover);
-        task.execute();
+        if(!isEdit) {
+            SaveTemplateToDataBase task = new SaveTemplateToDataBase(getApplication().getApplicationContext(), templateCover);
+            task.execute();
+        }else {
+            UpdateTemplateItem task = new UpdateTemplateItem(getApplication().getApplicationContext(), templateCover);
+            task.execute();
+        }
 
         Intent i = new Intent("AddTemplate");
         sendBroadcast(i);

@@ -55,6 +55,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import cs165.edu.dartmouth.cs.beforespoiled.database.CreateShoppingList;
 import cs165.edu.dartmouth.cs.beforespoiled.database.DeleteShoppingItemFromDatabase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ReadShoppingListFromDatabase;
+import cs165.edu.dartmouth.cs.beforespoiled.database.ReorderShoppingList;
 import cs165.edu.dartmouth.cs.beforespoiled.database.SaveShoppingItemToDatabase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingLists;
@@ -70,7 +71,7 @@ import cs165.edu.dartmouth.cs.beforespoiled.view.CardArrayAdapter;
  * Use the {@link ShoppingListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShoppingListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<ShoppingListItem>>, SwipeRefreshLayout.OnRefreshListener {
+public class ShoppingListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<ShoppingListItem>>, SwipeRefreshLayout.OnRefreshListener, UIReloader {
 
     public static final int RESULT_OK = -1;
     protected static final int RESULT_SPEECH = 1;
@@ -130,7 +131,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        updateList();
 
         FadingActionBarHelper helper = new FadingActionBarHelper()
                 .actionBarBackground(R.drawable.ab_background)
@@ -325,6 +325,9 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                 }
             }
         });
+
+        updateList();
+
         return shoppingListView;
     }
 
@@ -475,13 +478,13 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
 
     @Override
     public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        }, 2000);
-        updateList();
+        (new ReorderShoppingList(getActivity(), this)).execute();
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                swipeRefreshLayout.setRefreshing(false);
+//            }
+//        }, 2000);
     }
 
 //    @Override
@@ -526,6 +529,11 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     public void onDestroy(){
         super.onDestroy();
         getActivity().unregisterReceiver(receiverSync);
+    }
+
+    public void reloadData() {
+        getLoaderManager().getLoader(0).onContentChanged();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
 }

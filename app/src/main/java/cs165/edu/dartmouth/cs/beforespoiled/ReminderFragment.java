@@ -12,11 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import cs165.edu.dartmouth.cs.beforespoiled.database.ReminderEntry;
+import cs165.edu.dartmouth.cs.beforespoiled.database.ReminderEntryAsyncTask;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ReminderEntryDataSource;
 import cs165.edu.dartmouth.cs.beforespoiled.view.ReminderGridAdapter;
 
@@ -24,6 +27,7 @@ public class ReminderFragment extends Fragment implements LoaderManager.LoaderCa
 
     private List<ReminderEntry> entries = new ArrayList<>();
     private ReminderGridAdapter gridAdapter = null;
+    private GridView gridView = null;
 
     public ReminderFragment() {
 
@@ -37,7 +41,7 @@ public class ReminderFragment extends Fragment implements LoaderManager.LoaderCa
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reminder, container, false);
 
-        GridView gridView = (GridView) view.findViewById(R.id.gv_reminder);
+        gridView = (GridView) view.findViewById(R.id.gv_reminder);
         gridAdapter = new ReminderGridAdapter(getActivity(), entries);
         gridView.setAdapter(gridAdapter);
 
@@ -54,6 +58,28 @@ public class ReminderFragment extends Fragment implements LoaderManager.LoaderCa
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), AddFromHistoryActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        view.findViewById(R.id.ibtn_reminder_delete).setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gridAdapter.setDeleteimageflag(false);
+                view.setVisibility(View.INVISIBLE);
+                //delete entry in UI
+                List<ImageButton> buttons = new ArrayList<ImageButton>();
+                for(int i = 0; i < entries.size(); i++){
+                    ImageButton tmp = (ImageButton) gridView.getChildAt(i).findViewById(R.id.ibtn_reminder_grid_delete);
+                    tmp.setVisibility(View.INVISIBLE);
+                    if(entries.get(i).getExpireDate().before(Calendar.getInstance())){
+                        buttons.add(tmp);
+                    }
+                }
+                for(ImageButton btn : buttons){
+                    btn.performClick();
+                }
+                //remove from database
+                (new ReminderEntryAsyncTask(getActivity())).execute(ReminderEntryAsyncTask.DELETE_OUT_OF_DATE_FOOD);
             }
         });
 

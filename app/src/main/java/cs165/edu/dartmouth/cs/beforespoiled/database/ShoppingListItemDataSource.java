@@ -90,6 +90,12 @@ public class ShoppingListItemDataSource {
                 + " = " + id, null);
     }
 
+    public void deleteCurrentList() {
+        System.out.println("HistroyEntries deleted all");
+        Log.d(TAG, "delete all = ");
+        database.delete(TABLE_SHOPPINGLISTITEM, LIST_NUMBER + " = -1", null);
+    }
+
     public void deleteAllHistories() {
         System.out.println("HistroyEntries deleted all");
         Log.d(TAG, "delete all = ");
@@ -124,6 +130,23 @@ public class ShoppingListItemDataSource {
         while (!cursor.isAfterLast()) {
             ShoppingListItem shoppingListItem = cursorToShoppingListItem(cursor);
             Log.d(TAG, "get comment = " + cursorToShoppingListItem(cursor).toString());
+            shoppingListItems.add(shoppingListItem);
+            cursor.moveToNext();
+        }
+        // Make sure to close the cursor
+        cursor.close();
+        return shoppingListItems;
+    }
+
+    public List<ShoppingListItem> getItemsBySelected() {
+        List<ShoppingListItem> shoppingListItems = new ArrayList<>();
+
+        Cursor cursor = database.query(TABLE_SHOPPINGLISTITEM,
+                allColumns, LIST_NUMBER + " = ?", new String[]{ String.valueOf(-1) }, null, null, COLUMN_CHECKED + " asc");
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            ShoppingListItem shoppingListItem = cursorToShoppingListItem(cursor);
             shoppingListItems.add(shoppingListItem);
             cursor.moveToNext();
         }

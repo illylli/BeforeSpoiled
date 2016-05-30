@@ -12,7 +12,7 @@ public class ReminderEntryAsyncTask extends AsyncTask<Object, Void, String> {
     public static final String DATA = "data";
     public static final int INSERT = 0;
     public static final int DELETE = 1;
-    public static final int QUERY = 2;
+    public static final int DELETE_OUT_OF_DATE_FOOD = 2;
 
     Context context = null;
 
@@ -34,7 +34,9 @@ public class ReminderEntryAsyncTask extends AsyncTask<Object, Void, String> {
             Long id = (Long) args[1];
             dbHelper.removeEntry(id);
             msg = "delete " + id + " successfully";
-        } else if (request == QUERY) {
+        } else if (request == DELETE_OUT_OF_DATE_FOOD) {
+            dbHelper.removeOutOfDateEntry();
+            msg = "delete out-of-date foods successfully";
         }
         dbHelper.close();
         return msg;

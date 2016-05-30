@@ -4,12 +4,14 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +28,7 @@ public class ReminderGridAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<ReminderEntry> entries;
+    private boolean deleteimageflag = false;
 
     // ReminderGridAdapter for GridView, receive context and the index
     public ReminderGridAdapter(Context c, List<ReminderEntry> entries) {
@@ -49,7 +52,7 @@ public class ReminderGridAdapter extends BaseAdapter {
     }
 
     // create a new ImageView for each item referenced by the Adapter
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         final ReminderEntry entry = entries.get(position);
         final View gridEntry;
 
@@ -90,17 +93,23 @@ public class ReminderGridAdapter extends BaseAdapter {
         LabelDataSource labelDataSource = new LabelDataSource(mContext);
         ((ImageView) gridEntry.findViewById(R.id.iv_reminder_grid_image)).setImageResource(labelDataSource.getImageReSrcById(entry.getLabel()));
         gridEntry.findViewById(R.id.iv_reminder_grid_image).setOnLongClickListener(new View.OnLongClickListener() {
-            int deleteimageflag = 0;
-
             @Override
             public boolean onLongClick(View view) {
-                ImageButton ib = (ImageButton) gridEntry.findViewById(R.id.ibtn_reminder_grid_delete);
-                if (deleteimageflag == 0) {
+                GridView gridView = (GridView) parent;
+                ImageButton ib = (ImageButton) (((View) gridView.getParent()).findViewById(R.id.ibtn_reminder_delete));
+                int count = gridView.getChildCount();
+                if (!deleteimageflag) {
+                    for(int i = 0; i < count; i++){
+                        gridView.getChildAt(i).findViewById(R.id.ibtn_reminder_grid_delete).setVisibility(View.VISIBLE);
+                    }
                     ib.setVisibility(View.VISIBLE);
-                    deleteimageflag = 1;
+                    deleteimageflag = true;
                 } else {
+                    for(int i = 0; i < count; i++){
+                        gridView.getChildAt(i).findViewById(R.id.ibtn_reminder_grid_delete).setVisibility(View.INVISIBLE);
+                    }
                     ib.setVisibility(View.INVISIBLE);
-                    deleteimageflag = 0;
+                    deleteimageflag = false;
                 }
                 return true;
             }
@@ -125,12 +134,18 @@ public class ReminderGridAdapter extends BaseAdapter {
         badge.show();
 
         // delete button
-        gridEntry.findViewById(R.id.ibtn_reminder_grid_delete).setOnClickListener(new ImageButton.OnClickListener() {
+        ImageButton btnDelete = (ImageButton) gridEntry.findViewById(R.id.ibtn_reminder_grid_delete);
+        btnDelete.setVisibility(deleteimageflag ? View.VISIBLE : View.INVISIBLE);
+        btnDelete.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new ReminderEntryAsyncTask(mContext).execute(ReminderEntryAsyncTask.DELETE, getItemId(position));
                 badge.hide();
                 entries.remove(position);
+                if(entries.isEmpty()){
+                    deleteimageflag = false;
+                    ((View) parent.getParent()).findViewById(R.id.ibtn_reminder_delete).setVisibility(View.INVISIBLE);
+                }
                 ReminderGridAdapter.this.notifyDataSetChanged();
                 ImageButton ib = (ImageButton) gridEntry.findViewById(R.id.ibtn_reminder_grid_delete);
                 ib.setVisibility(View.GONE);
@@ -142,5 +157,13 @@ public class ReminderGridAdapter extends BaseAdapter {
 
 
         return gridEntry;
+    }
+
+    public boolean isDeleteimageflag() {
+        return deleteimageflag;
+    }
+
+    public void setDeleteimageflag(boolean deleteimageflag) {
+        this.deleteimageflag = deleteimageflag;
     }
 }

@@ -37,4 +37,9 @@ public class SaveTemplateToDataBase extends AsyncTask<Void, Integer, TemplateCov
         mDataSource.close();
         return newTemplateCover;
     }
+
+    @Override
+    protected void onPostExecute(TemplateCover templateCover) {
+        super.onPostExecute(templateCover);
+    }
 }

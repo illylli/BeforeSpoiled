@@ -34,11 +34,6 @@ import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateCover;
 import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateChildViewHolder;
 import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateExpandableAdapter;
 
-public class TemplateActivity extends Activity implements LoaderManager.LoaderCallbacks<List<TemplateCover>>{
-
-/**
- * Created by oubai on 5/25/16.
- */
 public class TemplateActivity extends Activity implements LoaderManager.LoaderCallbacks<List<TemplateCover>>, UIReloader{
 
     private List<TemplateCover> templateCoverList = new ArrayList<>();

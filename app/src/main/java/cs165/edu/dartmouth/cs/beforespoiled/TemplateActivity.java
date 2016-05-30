@@ -38,7 +38,7 @@ import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateExpandableAdapter;
 /**
  * Created by oubai on 5/25/16.
  */
-public class TemplateActivity extends Activity implements LoaderManager.LoaderCallbacks<List<TemplateCover>>{
+public class TemplateActivity extends Activity implements LoaderManager.LoaderCallbacks<List<TemplateCover>>, UIReloader{
 
     private List<TemplateCover> templateCoverList = new ArrayList<>();
     private RecyclerView mRecyclerView;
@@ -133,6 +133,10 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
     public void onAddTemplateClick(View view){
         Intent intent = new Intent(this, AddTemplateActivity.class);
         startActivity(intent);
+    }
+
+    public void reloadData() {
+        getLoaderManager().getLoader(0).onContentChanged();
     }
 
     @Override

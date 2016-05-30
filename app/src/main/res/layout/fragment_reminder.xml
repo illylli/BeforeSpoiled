@@ -18,6 +18,21 @@
         android:paddingRight="10dp"
         android:verticalSpacing="5dp" />
 
+    <ImageButton
+        android:id="@+id/ibtn_reminder_delete"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:layout_alignBottom="@+id/gv_reminder"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="10dp"
+        android:visibility="invisible"
+        android:src="@drawable/recycle_bin"
+        android:scaleType="fitXY"/>
+
     <LinearLayout
         android:id="@+id/ll_reminder"
         android:layout_width="match_parent"

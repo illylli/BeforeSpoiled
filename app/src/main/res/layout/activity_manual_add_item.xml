@@ -32,27 +32,17 @@
                 android:adjustViewBounds="true"
                 android:background="#00000000" />
 
-            <me.james.biuedittext.BiuEditText
-                app:biu_duration="800"
-                app:biu_text_color="@android:color/white"
-                app:biu_text_scale="1.5"
-                app:biu_type="flyup"
-                app:biu_text_start_size="15dp"
-                android:textSize="17dp"
-                android:layout_height="40dp"
-                android:singleLine="true"
-                android:imeOptions="actionDone"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
+            <EditText
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="31dp"
                 android:layout_marginRight="0dp"
                 android:layout_marginTop="30dp"
-                android:textColorHint="@color/gray_btn_bg_color"
-                android:background="@drawable/shoppinglist_textview"
                 android:layout_weight="0.96"
-                android:hint="I bought ..."/>
+                android:hint="I bought ..."
+                android:imeOptions="actionDone"
+                android:singleLine="true" />
 
             <ImageButton
                 android:id="@+id/SpeakButton"

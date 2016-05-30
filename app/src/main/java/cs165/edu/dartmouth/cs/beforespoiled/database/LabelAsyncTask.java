@@ -7,7 +7,7 @@ import android.widget.Toast;
 /**
  * Created by Fanzy on 5/22/16.
  */
-public class LabelAsyncTask  extends AsyncTask<Object, Void, String> {
+public class LabelAsyncTask extends AsyncTask<Object, Void, String> {
 
     public static final int INSERT = 0;
     public static final int DELETE = 1;

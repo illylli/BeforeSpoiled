@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import cs165.edu.dartmouth.cs.beforespoiled.helper.DateHelper;
@@ -50,6 +51,10 @@ public class ReminderEntryDataSource {
                 + " = " + rowIndex, null);
     }
 
+    public int removeOutOfDateEntry() {
+        return database.delete(TABLE_REMINDER, COLUMN_EXPIREDATE + " < ?", new String[]{DateHelper.calendarToString(Calendar.getInstance())});
+    }
+
     // Query a specific entry by its index.
     public ReminderEntry fetchEntryByIndex(long rowId) {
         Cursor cursor = database.query(TABLE_REMINDER,
@@ -67,7 +72,7 @@ public class ReminderEntryDataSource {
         List<ReminderEntry> entries = new ArrayList<>();
 
         Cursor cursor = database.query(TABLE_REMINDER,
-                null, null, null, null, null, null);
+                null, null, null, null, null, COLUMN_EXPIREDATE + " asc");
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {

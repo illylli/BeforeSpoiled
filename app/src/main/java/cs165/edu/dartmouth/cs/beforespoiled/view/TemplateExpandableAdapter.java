@@ -48,6 +48,7 @@ public class TemplateExpandableAdapter extends ExpandableRecyclerAdapter<Templat
     public void onBindParentViewHolder(TemplateParentViewHolder parentViewHolder, int i, ParentListItem parentListItem) {
         Log.d("fuck", "parentviewholder");
         TemplateCover cover = (TemplateCover) parentListItem;
+        parentViewHolder.setCoverPosition(i);
         parentViewHolder.bind(cover);
     }
 
@@ -57,4 +58,6 @@ public class TemplateExpandableAdapter extends ExpandableRecyclerAdapter<Templat
         TemplateChild child = (TemplateChild) childListItem;
         childViewHolder.bind(child);
     }
+
+
 }

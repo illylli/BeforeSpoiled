@@ -23,7 +23,7 @@ import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
 import cs165.edu.dartmouth.cs.beforespoiled.database.UpdateShoppingItem;
 
 /**
- * Created by Shicheng on 2016/5/28.
+ * Created by Yuzhong on 2016/5/28.
  */
 public class TemplateItemAdapter extends ArrayAdapter<String> {
     private Context context;

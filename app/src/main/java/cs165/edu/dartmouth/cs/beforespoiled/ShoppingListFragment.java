@@ -90,7 +90,16 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
 
     private BroadcastReceiver receiverSync = new BroadcastReceiver() {
         @Override
-        public void onReceive(Context context, Intent intent) { cardArrayAdapter.notifyDataSetChanged(); }
+        public void onReceive(Context context, Intent intent) {
+            Log.d("template", "shoppingList");
+            try {
+                Thread.sleep(500);
+                updateList();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
     };
 
     public ShoppingListFragment() {
@@ -461,6 +470,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     public void onLoaderReset(Loader<List<ShoppingListItem>> loader) {
 //        cardArrayAdapter = new CardArrayAdapter(getActivity().getApplicationContext(), new ArrayList<ShoppingListItem>());
 //        shoppingList.setAdapter(cardArrayAdapter);
+        cardArrayAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -471,6 +481,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
                 swipeRefreshLayout.setRefreshing(false);
             }
         }, 2000);
+        updateList();
     }
 
 //    @Override

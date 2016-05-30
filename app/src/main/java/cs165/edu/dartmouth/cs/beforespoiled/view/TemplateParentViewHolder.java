@@ -32,8 +32,10 @@ public class TemplateParentViewHolder extends ParentViewHolder {
     public TextView desView;
     public ImageView arrayExpand;
     public Button toShoppingList;
+    public Button edit;
     public TemplateCover templateCover;
     public Context context;
+    public int position;
 
     public TemplateParentViewHolder(View view) {
         super(view);
@@ -51,13 +53,22 @@ public class TemplateParentViewHolder extends ParentViewHolder {
         desView = (TextView) view.findViewById(R.id.template_description);
         arrayExpand = (ImageView) view.findViewById(R.id.template_arrow);
         toShoppingList = (Button) view.findViewById(R.id.to_shopping_list);
+        edit = (Button) view.findViewById(R.id.to_shopping_list);
         context = con;
 
         toShoppingList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                long position = getAdapterPosition();
                 Intent intent = new Intent("AddToList");
+                intent.putExtra("Position", position);
+                context.sendBroadcast(intent);
+            }
+        });
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("Edit");
                 intent.putExtra("Position", position);
                 context.sendBroadcast(intent);
             }
@@ -69,6 +80,15 @@ public class TemplateParentViewHolder extends ParentViewHolder {
         imageView.setImageResource(cover.getPhotoId());
         nameView.setText(cover.getTemplateName());;
         desView.setText(cover.getTemplateDes());
+    }
+
+
+    public int getCoverPosition() {
+        return position;
+    }
+
+    public void setCoverPosition(int position) {
+        this.position = position;
     }
 
     @Override

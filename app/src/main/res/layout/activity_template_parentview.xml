@@ -3,6 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusable="true"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
@@ -28,8 +29,7 @@
         android:layout_toRightOf="@+id/template_photo"
         android:layout_alignParentTop="true"
         android:textColor="#000000"
-        android:textSize="30sp"
-        />
+        android:textSize="30sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -47,23 +47,62 @@
         android:layout_alignParentRight="true"
         android:src="@drawable/selector_arrow_down"/>
 
-    <Button
+    <LinearLayout
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ToList"
-        android:id="@+id/to_shopping_list"
-        android:layout_alignBottom="@+id/template_photo"
-        android:layout_toLeftOf="@+id/template_arrow"
-        android:layout_toStartOf="@+id/template_arrow"/>
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <com.dd.CircularProgressButton
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/to_shopping_list"
+            app:cpb_cornerRadius="40dp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:textSize="10sp"
+            app:cpb_textIdle="List"
+            android:layout_alignBottom="@+id/template_photo"
+            android:layout_toLeftOf="@+id/template_arrow"
+            android:layout_toStartOf="@+id/template_arrow"/>
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Edit"
-        android:id="@+id/button"
-        android:layout_alignBottom="@+id/template_photo"
-        android:layout_toLeftOf="@+id/to_shopping_list"
-        android:layout_toStartOf="@+id/to_shopping_list" />
+        <com.dd.CircularProgressButton
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            app:cpb_textIdle="Edit"
+            android:textColor="@android:color/white"
+            android:id="@+id/edit_template"
+            app:cpb_cornerRadius="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:textSize="10sp"
+            android:layout_alignBottom="@+id/template_photo"
+            android:layout_toLeftOf="@+id/to_shopping_list"
+            android:layout_toStartOf="@+id/to_shopping_list" />
+
+        <com.dd.CircularProgressButton
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            app:cpb_textIdle="Delete"
+            android:textColor="@android:color/white"
+            android:id="@+id/delete_template"
+            app:cpb_cornerRadius="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:textSize="10sp"
+            android:layout_alignBottom="@+id/template_photo"
+            android:layout_toLeftOf="@+id/to_shopping_list"
+            android:layout_toStartOf="@+id/to_shopping_list" />
+    </LinearLayout>
+
+
 
 </RelativeLayout>

@@ -69,6 +69,25 @@ public class TemplateDataSource {
         return newTemplateCover;
     }
 
+
+    //add one history to database
+    public void updateHistory(TemplateCover templateCover) {
+        ContentValues values = new ContentValues();
+
+        //get one historyEntry values
+        values.put(TEMPLATE_NAME, templateCover.getTemplateName());
+        values.put(TEMPLATE_IMAGE, templateCover.getPhotoId());
+        values.put(TEMPLATE_DES, templateCover.getTemplateDes());
+        String list = templateCover.getItemsGson();
+
+        Log.d("Add template", "create template: the list is" + list);
+        if(list != null) values.put(TEMPLATE_ITEMS, list);
+
+        int a = database.update(TABLE_TEMPLATE, values, "_id=" + templateCover.getId(), null);
+        Log.d("Add template", a + "   ");
+
+    }
+
     public List<TemplateCover> fetchRecentHistory(int count) {
         List<TemplateCover> entries = new ArrayList<>();
 

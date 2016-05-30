@@ -24,12 +24,7 @@
             android:text="Template Name:"
             android:id="@+id/textView2" />
 
-        <me.james.biuedittext.BiuEditText
-            app:biu_duration="800"
-            app:biu_text_color="@android:color/white"
-            app:biu_text_scale="1.5"
-            app:biu_type="flyup"
-            app:biu_text_start_size="15dp"
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:textColorHint="@color/gray_btn_bg_color"
@@ -49,13 +44,8 @@
             android:text="Template Descrpition:"
             android:id="@+id/textView3" />
 
-        <me.james.biuedittext.BiuEditText
+        <EditText
             android:id="@+id/template_description"
-            app:biu_duration="800"
-            app:biu_text_color="@android:color/white"
-            app:biu_text_scale="1.5"
-            app:biu_type="flyup"
-            app:biu_text_start_size="15dp"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:textColorHint="@color/gray_btn_bg_color"

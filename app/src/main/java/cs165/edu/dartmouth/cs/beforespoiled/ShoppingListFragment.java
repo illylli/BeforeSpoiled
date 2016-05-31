@@ -82,7 +82,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d("template", "shoppingList");
-            ShoppingListFragment.this.getLoaderManager().restartLoader(0, null, ShoppingListFragment.this).forceLoad();
+            reloadData();
         }
     };
 
@@ -109,6 +109,18 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         setHasOptionsMenu(true);
 
         cardList = new ArrayList<>();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        reloadData();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("Fanzy", "onResume");
     }
 
     @Override
@@ -309,7 +321,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
             }
         });
 
-        updateList();
+        getLoaderManager().initLoader(0, null, this).forceLoad();
 
         return shoppingListView;
     }
@@ -400,8 +412,8 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         }
     }
 
-    public void updateList(){
-        getLoaderManager().initLoader(0, null, this).forceLoad();
+    public void updateList() {
+        getLoaderManager().restartLoader(0, null, this).forceLoad();
     }
 
     public void addNewItem(ShoppingListItem card) {
@@ -433,12 +445,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    @Override
     public Loader<List<ShoppingListItem>> onCreateLoader(int i, Bundle bundle) {
         return new ReadShoppingListFromDatabase(getActivity().getApplicationContext());
     }
@@ -446,10 +452,10 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onLoadFinished(Loader<List<ShoppingListItem>> loader, List<ShoppingListItem> items) {
         cardArrayAdapter.clear();
-        if(items != null)
-            cardList = items;
-        cardArrayAdapter.addAll(cardList);
+        cardList = items;
+        cardArrayAdapter.addAll(items);
         cardArrayAdapter.notifyDataSetChanged();
+        Log.d("Fanzy", "onLoadFinished" + items.size());
     }
 
     @Override
@@ -462,12 +468,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onRefresh() {
         (new ReorderShoppingList(getActivity(), this)).execute();
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                swipeRefreshLayout.setRefreshing(false);
-//            }
-//        }, 2000);
     }
 
 //    @Override

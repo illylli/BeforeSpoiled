@@ -1,6 +1,7 @@
 package cs165.edu.dartmouth.cs.beforespoiled.database;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 
 public class SaveTemplateToDataBase extends AsyncTask<Void, Integer, TemplateCover> {
@@ -37,5 +38,6 @@ public class SaveTemplateToDataBase extends AsyncTask<Void, Integer, TemplateCov
     @Override
     protected void onPostExecute(TemplateCover templateCover) {
         super.onPostExecute(templateCover);
+        context.sendBroadcast(new Intent("AddTemplate"));
     }
 }

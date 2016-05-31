@@ -1,6 +1,7 @@
 package cs165.edu.dartmouth.cs.beforespoiled.database;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 
 public class UpdateTemplateItem extends AsyncTask<Void, Integer, Void> {
@@ -38,4 +39,11 @@ public class UpdateTemplateItem extends AsyncTask<Void, Integer, Void> {
 
     // Overrider this handler to post interim updates to the UI thread. This handler receives the set of parameters
     // passed in publishProgress from within doInbackground.
+
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+        context.sendBroadcast(new Intent("AddTemplate"));
+    }
 }

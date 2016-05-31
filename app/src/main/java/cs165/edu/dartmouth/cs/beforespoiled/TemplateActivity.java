@@ -26,6 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import cs165.edu.dartmouth.cs.beforespoiled.database.DeleteTemplateFromDatabase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ReadShoppingListFromDatabase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ReadTemplateFromDataBase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.SaveShoppingItemToDatabase;
@@ -64,7 +65,9 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
         @Override
         public void onReceive(Context context, Intent intent) {
             int pos = intent.getIntExtra("Position", -1);
-            editTemplate(pos);
+            String flag = intent.getStringExtra("Operation");
+            if(flag.equals("Edit")) editTemplate(pos);
+            else deleteTemplate(pos);
         }
     };
 
@@ -76,6 +79,19 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
         Log.d("EditTemplate", list);
         edit.putExtra("template", list);
         startActivity(edit);
+    }
+
+    public void deleteTemplate(int pos){
+        TemplateCover t = templateCoverList.get(pos);
+        long id = t.getId();
+        DeleteTemplateFromDatabase task = new DeleteTemplateFromDatabase(this.getApplicationContext(), id);
+        task.execute();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        update();
     }
 
     public void update(){
@@ -142,6 +158,10 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
     public void onAddTemplateClick(View view){
         Intent intent = new Intent(this, AddTemplateActivity.class);
         startActivity(intent);
+    }
+
+    public void onAddTemplateCancel(View view){
+        finish();
     }
 
     public void reloadData() {

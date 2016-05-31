@@ -30,6 +30,7 @@ public class TemplateParentViewHolder extends ParentViewHolder {
     public ImageView arrayExpand;
     public Button toShoppingList;
     public Button edit;
+    public Button delete;
     public TemplateCover templateCover;
     public Context context;
     public int position;
@@ -51,6 +52,7 @@ public class TemplateParentViewHolder extends ParentViewHolder {
         arrayExpand = (ImageView) view.findViewById(R.id.template_arrow);
         toShoppingList = (Button) view.findViewById(R.id.to_shopping_list);
         edit = (Button) view.findViewById(R.id.edit_template);
+        delete = (Button) view.findViewById(R.id.delete_template);
         context = con;
 
         toShoppingList.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +69,17 @@ public class TemplateParentViewHolder extends ParentViewHolder {
             public void onClick(View v) {
                 Intent intent = new Intent("Edit");
                 intent.putExtra("Position", position);
+                intent.putExtra("Operation", "Edit");
+                context.sendBroadcast(intent);
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("Edit");
+                intent.putExtra("Position", position);
+                intent.putExtra("Operation", "Delete");
                 context.sendBroadcast(intent);
             }
         });

@@ -80,11 +80,11 @@ public class TemplateDataSource {
         values.put(TEMPLATE_DES, templateCover.getTemplateDes());
         String list = templateCover.getItemsGson();
 
-        Log.d("Add template", "create template: the list is" + list);
+        Log.d("EditTemplate", "create template: the list is" + list);
         if(list != null) values.put(TEMPLATE_ITEMS, list);
 
         int a = database.update(TABLE_TEMPLATE, values, "_id=" + templateCover.getId(), null);
-        Log.d("Add template", a + "   ");
+        Log.d("EditTemplate", a + " @@@@  " + templateCover.getId());
 
     }
 

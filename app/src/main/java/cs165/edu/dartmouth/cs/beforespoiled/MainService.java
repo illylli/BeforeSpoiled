@@ -11,46 +11,25 @@ import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
 
-import java.util.List;
-
-import cs165.edu.dartmouth.cs.beforespoiled.database.Card;
-
 public class MainService extends Service {
-    public MainService() {
-    }
-
     public static final int MSG_REGISTER_CLIENT = 1;
     public static final int MSG_UNREGISTER_CLIENT = 2;
-    public static final int MSG_UPDATE_ENTRY = 3;
-
-    public static final int READSHOPPINGLIST = 4;
-    public final static int SAVESHOPPINGLIST = 5;
-
-//    private List<ShoppingListItem> shoppingListItems;
-    private List<Card> shoppingListItems;
-
-    private static boolean isRunning = false;
     private final Messenger mMessenger = new Messenger(
             new IncomingMessageHandler());
     private NotificationManager mNotificationManager;
-    private Messenger mClient = null;
 
-    public static boolean isRunning() {
-        return isRunning;
+    public MainService() {
     }
 
     @Override
     public void onCreate() {
-        Log.d("Fanzy", "TrackingService onCreate");
         super.onCreate();
-        isRunning = true;
         showNotification();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        isRunning = false;
         mNotificationManager.cancelAll();
     }
 
@@ -93,7 +72,7 @@ public class MainService extends Service {
             switch (msg.what) {
                 case MSG_REGISTER_CLIENT:
                     break;
-                case MSG_UNREGISTER_CLIENT:;
+                case MSG_UNREGISTER_CLIENT:
                     break;
                 default:
                     super.handleMessage(msg);

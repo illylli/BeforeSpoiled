@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
 
         <TextView
             android:id="@+id/textViewItem"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.6"
             android:text="Item name here..."
-            android:textSize="15dp" />
+            android:textSize="20sp" />
 
-        <Button
+        <com.dd.CircularProgressButton
             android:id="@+id/delete_template_item"
-            android:layout_width="152dp"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
             android:layout_gravity="right"
+            android:layout_weight="1"
             android:onClick="onDeleteTemplateItem"
-            android:text="Delete" />
+            android:text="Delete"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            app:cpb_cornerRadius="4dp"
+            app:cpb_textComplete="@string/btn_complete"
+            app:cpb_textError="Error"
+            app:cpb_textIdle="Delete" />
 
     </LinearLayout>
 

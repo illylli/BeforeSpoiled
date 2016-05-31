@@ -79,7 +79,7 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
         DeleteTemplateFromDatabase task = new DeleteTemplateFromDatabase(this.getApplicationContext(), id);
         task.execute();
         try {
-            Thread.sleep(500);
+            Thread.sleep(200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -124,7 +124,6 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
         update();
     }
 
-    //!!!!!!!!!!!!!!!save template!!!!!!!!!!!!
     public void saveToShoppingList(int position){
         TemplateCover cover = templateCoverList.get(position);
         long id = cover.getId();
@@ -137,6 +136,8 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
             shoppingListItem.setItemName(item);
             SaveShoppingItemToDatabase task = new SaveShoppingItemToDatabase(this, shoppingListItem, this);
             task.execute();
+            Intent intent = new Intent("Check");
+            sendBroadcast(intent);
         }
     }
 

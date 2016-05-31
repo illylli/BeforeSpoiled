@@ -31,10 +31,29 @@ public class LabelDataSource {
             String[] labels = context.getResources().getStringArray(R.array.CategorySpinner);
             ContentValues values = new ContentValues();
             for (int i = 0; i < labels.length; i++) {
+                String item = labels[i];
+                if (item.equals("Vegetables")) {
+                    values.put(COLUMN_STORAGE_PERIOD, 7);
+                    values.put(COLUMN_DAYS_BEFORE_SPOILED, 2);
+                } else if (item.equals("Fruit")) {
+                    values.put(COLUMN_STORAGE_PERIOD, 3);
+                    values.put(COLUMN_DAYS_BEFORE_SPOILED, 1);
+                } else if (item.equals("Bread&Patries")) {
+                    values.put(COLUMN_STORAGE_PERIOD, 15);
+                    values.put(COLUMN_DAYS_BEFORE_SPOILED, 3);
+                } else if (item.equals("Spices")) {
+                    values.put(COLUMN_STORAGE_PERIOD, 30);
+                    values.put(COLUMN_DAYS_BEFORE_SPOILED, 5);
+                } else if (item.equals("Frozen Food")) {
+                    values.put(COLUMN_STORAGE_PERIOD, 30);
+                    values.put(COLUMN_DAYS_BEFORE_SPOILED, 2);
+                } else {
+
+                    values.put(COLUMN_STORAGE_PERIOD, 7);
+                    values.put(COLUMN_DAYS_BEFORE_SPOILED, 1);
+                }
                 values.put(COLUMN_ID, i);
                 values.put(COLUMN_NAME, labels[i]);
-                values.put(COLUMN_STORAGE_PERIOD, 7);
-                values.put(COLUMN_DAYS_BEFORE_SPOILED, 1);
                 database.insert(TABLE_LABEL, null, values);
             }
         }

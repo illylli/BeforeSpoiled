@@ -81,7 +81,7 @@
             android:textColorHint="@color/gray_btn_bg_color"
             android:textSize="15dp"
             app:biu_duration="800"
-            app:biu_text_color="@android:color/white"
+            app:biu_text_color="@android:color/holo_blue_light"
             app:biu_text_scale="1.5"
             app:biu_text_start_size="15dp"
             app:biu_type="flyup" />

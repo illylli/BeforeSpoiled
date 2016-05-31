@@ -31,7 +31,6 @@
             android:background="@drawable/shoppinglist_textview"
             android:textSize="17dp"
             android:singleLine="true"
-            android:imeOptions="actionDone"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:id="@+id/template_name"
@@ -52,7 +51,6 @@
             android:background="@drawable/shoppinglist_textview"
             android:textSize="17dp"
             android:singleLine="true"
-            android:imeOptions="actionDone"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:layout_gravity="center_horizontal" />
@@ -131,7 +129,7 @@
             android:onClick="onTemplateSave"
             app:cpb_textComplete="@string/btn_complete"
             app:cpb_textError="Null input"
-            app:cpb_textIdle="Add"
+            app:cpb_textIdle="Finish"
             app:cpb_cornerRadius="8dp"/>
 
         <com.dd.CircularProgressButton
@@ -144,7 +142,7 @@
             android:layout_weight="1"
             android:textColor="@android:color/white"
             android:textSize="15sp"
-            android:onClick="onTemplateSave"
+            android:onClick="onTemplateCancel"
             app:cpb_textComplete="@string/btn_complete"
             app:cpb_textError="Null input"
             app:cpb_textIdle="Cancel"

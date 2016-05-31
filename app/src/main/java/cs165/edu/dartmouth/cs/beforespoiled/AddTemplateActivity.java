@@ -63,16 +63,18 @@ public class AddTemplateActivity extends Activity {
         textViewName.setTypeface(EasyFonts.caviarDreamsBold(getApplicationContext()));
         textViewDes.setTypeface(EasyFonts.caviarDreamsBold(getApplicationContext()));
 
-        itemList = new ArrayList<>();
-
         Intent i = getIntent();
         String temp = i.getStringExtra("template");
-        Log.d("EditTemplate", temp + " string template");
+        if(temp != null) {
+            Log.d("EditTemplate", temp + " string template");
 
-        Type type = new TypeToken<TemplateCover>() {}.getType();
-        Gson gson = new Gson();
-        templateCover = gson.fromJson(temp, type);
+            Type type = new TypeToken<TemplateCover>() {
+            }.getType();
+            Gson gson = new Gson();
+            templateCover = gson.fromJson(temp, type);
+        }
 
+        itemList = new ArrayList<>();
         templateItemList.setLongClickable(true);
         templateItemList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -114,6 +116,8 @@ public class AddTemplateActivity extends Activity {
         addItem = (EditText) findViewById(R.id.add_template);
         addItem.setCursorVisible(false);
 
+        setData();
+
         addItem.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -131,9 +135,7 @@ public class AddTemplateActivity extends Activity {
                             addItem.setCursorVisible(false);
                             itemList.add(itemName);
                             Log.d("EditTemplate", "I am here");
-                            Log.d("EditTemplate", "size" + itemList.size());
-                            itemListAdpater.clear();
-                            itemListAdpater.addAll(itemList);
+                            Log.d("EditTemplate", "size" + itemList.size() + itemList);
                             itemListAdpater.notifyDataSetChanged();
                             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(addItem.getWindowToken(), 0);
@@ -147,7 +149,7 @@ public class AddTemplateActivity extends Activity {
         addItem.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus) {
+                if (hasFocus) {
                     addItem.setText("");
                 }
             }
@@ -160,7 +162,6 @@ public class AddTemplateActivity extends Activity {
             }
         });
 
-        setData();
     }
 
     public void setData(){
@@ -168,14 +169,18 @@ public class AddTemplateActivity extends Activity {
 
         if(templateCover != null){
 
-            Log.d("EditTemplate", templateCover.getTemplateName() + " this is name!!!");
+            Log.d("EditTemplate", templateCover.getTemplateName() + " this is name!!! this is id " + templateCover.getId());
             templateName.setText(templateCover.getTemplateName());
             templateDes.setText(templateCover.getTemplateDes());
 
-            itemList = templateCover.getItems();
-            itemListAdpater.clear();
-            itemListAdpater.addAll(itemList);
-            itemListAdpater.notifyDataSetChanged();
+//            itemList = templateCover.getItems();
+            List<String> l = templateCover.getItems();
+            if(l == null) {
+                l = new ArrayList<>();
+            }
+            for(String str: l) itemList.add(str);
+//            itemListAdpater.clear();
+//            itemListAdpater.notifyDataSetChanged();
             isEdit = true;
         }
     }
@@ -186,14 +191,17 @@ public class AddTemplateActivity extends Activity {
         String tDes = templateDes.getText().toString();
         int picId = R.drawable.beverage;
 
-        TemplateCover templateCover = new TemplateCover(tName, picId, tDes);
-        templateCover.setItemsAll(itemList);
+        TemplateCover newTemplateCover = new TemplateCover(tName, picId, tDes);
+        newTemplateCover.setItemsAll(itemList);
 
         if(!isEdit) {
-            SaveTemplateToDataBase task = new SaveTemplateToDataBase(getApplication().getApplicationContext(), templateCover);
+            Log.d("EditTemplate", newTemplateCover + " add to database!!");
+            SaveTemplateToDataBase task = new SaveTemplateToDataBase(getApplication().getApplicationContext(), newTemplateCover);
             task.execute();
         }else {
-            UpdateTemplateItem task = new UpdateTemplateItem(getApplication().getApplicationContext(), templateCover);
+            newTemplateCover.setId(templateCover.getId());
+            Log.d("EditTemplate", newTemplateCover + " update from database@@@ " + newTemplateCover.getId() + "****" + newTemplateCover.getItems());
+            UpdateTemplateItem task = new UpdateTemplateItem(getApplication().getApplicationContext(), newTemplateCover);
             task.execute();
         }
 

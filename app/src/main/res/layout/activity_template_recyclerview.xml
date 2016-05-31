@@ -26,7 +26,7 @@
             android:layout_marginBottom="5dp"
             app:cpb_cornerRadius="8dp"
             android:layout_weight="1"
-            app:cpb_textIdle="ADD"
+            app:cpb_textIdle="Add"
             android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,9 +39,12 @@
             android:layout_weight="1"
             app:cpb_cornerRadius="8dp"
             android:textColor="@color/white"
-            app:cpb_textIdle="CANCEL"
+            app:cpb_textIdle="Cancel"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:onClick="onAddTemplateCancel"
+            />
+
     </LinearLayout>
 
 </LinearLayout>

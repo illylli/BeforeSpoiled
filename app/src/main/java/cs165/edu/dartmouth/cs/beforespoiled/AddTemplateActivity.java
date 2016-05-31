@@ -56,7 +56,6 @@ public class AddTemplateActivity extends Activity {
     private BroadcastReceiver receiverSync = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-//            mAdapter.notifyDataSetChanged();
             update(intent);
         }
     };
@@ -239,7 +238,6 @@ public class AddTemplateActivity extends Activity {
             templateName.setText(templateCover.getTemplateName());
             templateDes.setText(templateCover.getTemplateDes());
 
-//            itemList = templateCover.getItems();
             List<String> l = templateCover.getItems();
             if(l == null) {
                 l = new ArrayList<>();

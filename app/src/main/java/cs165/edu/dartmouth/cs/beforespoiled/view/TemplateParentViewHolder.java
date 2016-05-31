@@ -1,9 +1,9 @@
 package cs165.edu.dartmouth.cs.beforespoiled.view;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
@@ -12,11 +12,7 @@ import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder;
 
-import java.util.List;
-
 import cs165.edu.dartmouth.cs.beforespoiled.R;
-import cs165.edu.dartmouth.cs.beforespoiled.database.SaveShoppingItemToDatabase;
-import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
 import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateCover;
 
 public class TemplateParentViewHolder extends ParentViewHolder {
@@ -58,6 +54,7 @@ public class TemplateParentViewHolder extends ParentViewHolder {
         toShoppingList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("Fanzy", "click toShoppingList");
                 Intent intent = new Intent("AddToList");
                 intent.putExtra("Position", position);
                 context.sendBroadcast(intent);
@@ -88,7 +85,7 @@ public class TemplateParentViewHolder extends ParentViewHolder {
 
     public void bind(TemplateCover cover) {
         imageView.setImageResource(cover.getPhotoId());
-        nameView.setText(cover.getTemplateName());;
+        nameView.setText(cover.getTemplateName());
         desView.setText(cover.getTemplateDes());
     }
 

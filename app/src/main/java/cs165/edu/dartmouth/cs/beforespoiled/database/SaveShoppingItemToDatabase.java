@@ -3,20 +3,20 @@ package cs165.edu.dartmouth.cs.beforespoiled.database;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
-/**
- * Created by Yuzhong on 2016/5/19.
- */
+import cs165.edu.dartmouth.cs.beforespoiled.UIReloader;
+
 public class SaveShoppingItemToDatabase extends AsyncTask<Void, Integer, ShoppingListItem> {
     private ShoppingListItemDataSource mDataSource;
     private ShoppingListItem shoppingListItem;
     private ShoppingListItem newShoppingListItem;
     private Context context;
+    private UIReloader reloader;
 
-    public SaveShoppingItemToDatabase(Context context, ShoppingListItem shoppingListItem){
+    public SaveShoppingItemToDatabase(Context context, ShoppingListItem shoppingListItem, UIReloader reloader) {
         this.context = context;
         this.shoppingListItem = shoppingListItem;
+        this.reloader = reloader;
     }
     // A callback method executed on UI thread on starting the task
     @Override
@@ -41,19 +41,11 @@ public class SaveShoppingItemToDatabase extends AsyncTask<Void, Integer, Shoppin
         return newShoppingListItem;
     }
 
-    // A callback method executed on UI thread, invoked by the publishProgress()
-    // from doInBackground() method
-
-    // Overrider this handler to post interim updates to the UI thread. This handler receives the set of parameters
-    // passed in publishProgress from within doInbackground.
     @Override
-    protected void onProgressUpdate(Integer... values) {
-        // Getting reference to the TextView tv_counter of the layout activity_main
-
+    protected void onPostExecute(ShoppingListItem shoppingListItem) {
+        super.onPostExecute(shoppingListItem);
+        if (reloader != null) {
+            reloader.reloadData();
+        }
     }
-
-    // A callback method executed on UI thread, invoked after the completion of the task
-
-    // When doInbackground has completed, the return value from that method is passed into this event
-    // handler.
 }

@@ -11,10 +11,9 @@ import java.util.List;
  */
 public class ReadShoppingListFromDatabase extends AsyncTaskLoader<List<ShoppingListItem>> {
 
+    private static final String TAG = "AsyncTask";
     private ShoppingListItemDataSource mDataSource;
     private Context context;
-
-    private static final String TAG = "AsyncTask";
 
     public ReadShoppingListFromDatabase(Context context){
         super(context);
@@ -26,7 +25,6 @@ public class ReadShoppingListFromDatabase extends AsyncTaskLoader<List<ShoppingL
     public List<ShoppingListItem> loadInBackground() {
         mDataSource.open();
         // read data from database
-//        List<ShoppingListItem> list = mDataSource.getAllItems();
         List<ShoppingListItem> list = mDataSource.getItems();
 
         Log.d("Database", "Read All:" + list.size());

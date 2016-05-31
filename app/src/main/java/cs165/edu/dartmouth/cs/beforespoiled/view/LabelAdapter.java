@@ -1,8 +1,6 @@
 package cs165.edu.dartmouth.cs.beforespoiled.view;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +11,6 @@ import java.util.List;
 
 import cs165.edu.dartmouth.cs.beforespoiled.database.Label;
 
-/**
- * Created by Fanzy on 5/22/16.
- */
 public class LabelAdapter extends ArrayAdapter<Label> {
 
     private Context context;

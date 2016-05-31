@@ -2,7 +2,6 @@ package cs165.edu.dartmouth.cs.beforespoiled.view;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,6 @@ import java.util.List;
 import cs165.edu.dartmouth.cs.beforespoiled.R;
 import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateChild;
 import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateCover;
-import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateChildViewHolder;
-import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateParentViewHolder;
 
 public class TemplateExpandableAdapter extends ExpandableRecyclerAdapter<TemplateParentViewHolder, TemplateChildViewHolder> {
 
@@ -36,14 +33,12 @@ public class TemplateExpandableAdapter extends ExpandableRecyclerAdapter<Templat
 
     @Override
     public TemplateChildViewHolder onCreateChildViewHolder(ViewGroup childViewGroup) {
-        Log.d("fuck", "getchild");
         View view = mInflater.inflate(R.layout.activity_template_childview, childViewGroup, false);
         return new TemplateChildViewHolder(view);
     }
 
     @Override
     public void onBindParentViewHolder(TemplateParentViewHolder parentViewHolder, int i, ParentListItem parentListItem) {
-        Log.d("fuck", "parentviewholder");
         TemplateCover cover = (TemplateCover) parentListItem;
         parentViewHolder.setCoverPosition(i);
         parentViewHolder.bind(cover);
@@ -51,7 +46,6 @@ public class TemplateExpandableAdapter extends ExpandableRecyclerAdapter<Templat
 
     @Override
     public void onBindChildViewHolder(TemplateChildViewHolder childViewHolder, int i, Object childListItem) {
-        Log.d("fuck", "childviewholder");
         TemplateChild child = (TemplateChild) childListItem;
         childViewHolder.bind(child);
     }

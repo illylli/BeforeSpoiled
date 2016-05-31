@@ -3,14 +3,11 @@ package cs165.edu.dartmouth.cs.beforespoiled.database;
 import android.content.Context;
 import android.os.AsyncTask;
 
-/**
- * Created by Shicheng on 2016/5/30.
- */
 public class DeleteTemplateFromDatabase extends AsyncTask<Void, Integer, Void> {
 
+    TemplateDataSource mDataSource;
     private Context context;
     private long pos;
-    TemplateDataSource mDataSource;
 
     public DeleteTemplateFromDatabase(Context context, long pos){
         this.context = context;

@@ -2,7 +2,6 @@ package cs165.edu.dartmouth.cs.beforespoiled.database;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import cs165.edu.dartmouth.cs.beforespoiled.UIReloader;
 
@@ -33,7 +32,6 @@ public class SaveShoppingItemToDatabase extends AsyncTask<Void, Integer, Shoppin
     @Override
     protected ShoppingListItem doInBackground(Void... params) {
         mDataSource.open();
-        Log.d("Database", "Save data:" + shoppingListItem);
         shoppingListItem.setSelected(false);
         newShoppingListItem = mDataSource.createHistory(shoppingListItem);
 

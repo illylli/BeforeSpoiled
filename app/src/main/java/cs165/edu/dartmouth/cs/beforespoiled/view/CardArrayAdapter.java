@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,27 +18,16 @@ import com.vstechlab.easyfonts.EasyFonts;
 import java.util.List;
 
 import cs165.edu.dartmouth.cs.beforespoiled.R;
-import cs165.edu.dartmouth.cs.beforespoiled.database.Card;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
 import cs165.edu.dartmouth.cs.beforespoiled.database.UpdateShoppingItem;
 
-/**
- * Created by oubai on 5/22/16.
- */
 public class CardArrayAdapter extends ArrayAdapter<ShoppingListItem> {
+    CardViewHolder viewHolder;
     private Context context;
     private List<ShoppingListItem> cardList;
-    CardViewHolder viewHolder;
-
-    static class CardViewHolder {
-        TextView itemName;
-        TextView itemNumber;
-        CheckBox ifBought;
-    }
 
     public CardArrayAdapter(Context context, List<ShoppingListItem> cardList) {
         super(context, R.layout.fragment_list_item, cardList);
-        Log.d("View", "Hello + +");
         this.context = context;
         this.cardList = cardList;
     }
@@ -74,12 +62,10 @@ public class CardArrayAdapter extends ArrayAdapter<ShoppingListItem> {
         viewHolder = new CardViewHolder();
         viewHolder.itemName = (TextView) row.findViewById(R.id.item_name);
         viewHolder.itemName.setTypeface(EasyFonts.caviarDreamsBold(getContext()));
-//        viewHolder.itemNumber = (TextView) row.findViewById(R.id.item_number);
         viewHolder.ifBought = (CheckBox) row.findViewById(R.id.check_box);
         row.setTag(viewHolder);
         final ShoppingListItem card = cardList.get(position);
         viewHolder.itemName.setText(card.getItemName());
-//        viewHolder.itemNumber.setText(String.valueOf(card.getItemNumber()));
         viewHolder.ifBought.setChecked(card.isSelected());
 
         if(card.isSelected()) viewHolder.itemName.setPaintFlags(viewHolder.itemName.getPaintFlags() | (Paint.STRIKE_THRU_TEXT_FLAG));
@@ -108,6 +94,11 @@ public class CardArrayAdapter extends ArrayAdapter<ShoppingListItem> {
 
     public Bitmap decodeToBitmap(byte[] decodedByte) {
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+    }
+
+    static class CardViewHolder {
+        TextView itemName;
+        CheckBox ifBought;
     }
 
 }

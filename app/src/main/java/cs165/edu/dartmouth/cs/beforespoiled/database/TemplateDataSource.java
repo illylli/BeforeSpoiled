@@ -5,18 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import cs165.edu.dartmouth.cs.beforespoiled.helper.DateHelper;
-
-/**
- * Created by Yuzhong on 2016/5/27.
- */
 public class TemplateDataSource {
     // Database fields
     public static final String TABLE_TEMPLATE = "Template";
@@ -26,10 +18,8 @@ public class TemplateDataSource {
     public static final String TEMPLATE_DES = "template_des";
     public static final String TEMPLATE_ITEMS = "template_items";
 
-    private static final String TAG = "DBDEMO";
     private SQLiteDatabase database;
     private MyDBHelper dbHelper;
-    //    private String[] allColumns = { COLUMN_ID, CREATE_DATE, COLUMN_ITEMNAME, COLUMN_ITEMNUMBER };
     private String[] allColumns = { COLUMN_ID, TEMPLATE_NAME, TEMPLATE_IMAGE, TEMPLATE_DES, TEMPLATE_ITEMS};
 
     public TemplateDataSource(Context context) {
@@ -54,7 +44,6 @@ public class TemplateDataSource {
         values.put(TEMPLATE_DES, templateCover.getTemplateDes());
         String list = templateCover.getItemsGson();
 
-        Log.d("template", "create template: the list is" + list);
         if(list != null) values.put(TEMPLATE_ITEMS, list);
 
         long insertId = database.insert(TABLE_TEMPLATE, null,
@@ -80,12 +69,9 @@ public class TemplateDataSource {
         values.put(TEMPLATE_DES, templateCover.getTemplateDes());
         String list = templateCover.getItemsGson();
 
-        Log.d("EditTemplate", "create template: the list is" + list);
         if(list != null) values.put(TEMPLATE_ITEMS, list);
 
         int a = database.update(TABLE_TEMPLATE, values, "_id=" + templateCover.getId(), null);
-        Log.d("EditTemplate", a + " @@@@  " + templateCover.getId());
-
     }
 
     public List<TemplateCover> fetchRecentHistory(int count) {
@@ -129,7 +115,6 @@ public class TemplateDataSource {
 
     public void deleteAllHistories() {
         System.out.println("HistroyEntries deleted all");
-        Log.d(TAG, "delete all = ");
         database.delete(TABLE_TEMPLATE, null, null);
     }
 
@@ -142,7 +127,6 @@ public class TemplateDataSource {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             TemplateCover templateCover = cursorToTemplateCover(cursor);
-            Log.d(TAG, "get comment = " + cursorToTemplateCover(cursor).toString());
             templateCoverList.add(templateCover);
             cursor.moveToNext();
         }

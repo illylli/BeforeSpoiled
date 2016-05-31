@@ -3,11 +3,7 @@ package cs165.edu.dartmouth.cs.beforespoiled.database;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
-/**
- * Created by Yuzhong on 2016/5/19.
- */
 public class UpdateShoppingItem extends AsyncTask<Void, Integer, Void> {
     private ShoppingListItemDataSource mDataSource;
     private ShoppingListItem shoppingListItem;

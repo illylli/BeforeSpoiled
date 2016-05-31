@@ -5,15 +5,12 @@ import android.os.AsyncTask;
 
 import java.util.ArrayList;
 
-/**
- * Created by Yuzhong on 2016/4/23.
- */
 public class DeleteShoppingItemFromDatabase extends AsyncTask<Void, Integer, Void> {
 
+    ShoppingListItemDataSource mDataSource;
     private Context context;
     private long pos;
     private ArrayList<Long> poses = null;
-    ShoppingListItemDataSource mDataSource;
 
     public DeleteShoppingItemFromDatabase(){ }
 

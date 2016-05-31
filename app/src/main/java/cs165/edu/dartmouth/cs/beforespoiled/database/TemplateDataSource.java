@@ -6,8 +6,12 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.google.appengine.repackaged.com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import cs165.edu.dartmouth.cs.beforespoiled.R;
 
 public class TemplateDataSource {
     // Database fields
@@ -24,6 +28,35 @@ public class TemplateDataSource {
 
     public TemplateDataSource(Context context) {
         dbHelper = new MyDBHelper(context);
+        open();
+        if (numOfLabel() == 0) {
+            ContentValues values = new ContentValues();
+            values.put(TEMPLATE_NAME, "Healthy");
+            values.put(TEMPLATE_IMAGE, R.drawable.beverage);
+            values.put(TEMPLATE_DES, "Eating Health");
+            List<String> listItems = new ArrayList<>();
+            listItems.add("Chips");
+            listItems.add("Cupcake");
+            listItems.add("Donuts");
+            listItems.add("Ice cream");
+            Gson gson = new Gson();
+            String list = gson.toJson(listItems);
+            values.put(TEMPLATE_ITEMS, list);
+            database.insert(TABLE_TEMPLATE, null, values);
+
+            values.put(TEMPLATE_NAME, "Diet");
+            values.put(TEMPLATE_IMAGE, R.drawable.beverage);
+            values.put(TEMPLATE_DES, "Slim");
+            listItems = new ArrayList<>();
+            listItems.add("Water");
+            listItems.add("Coke");
+            listItems.add("Sprite");
+            list = gson.toJson(listItems);
+            values.put(TEMPLATE_ITEMS, list);
+            database.insert(TABLE_TEMPLATE, null, values);
+        }
+
+        close();
     }
 
     public void open() throws SQLException {
@@ -32,6 +65,12 @@ public class TemplateDataSource {
 
     public void close() {
         dbHelper.close();
+    }
+
+    public int numOfLabel() {
+        Cursor cursor = database.rawQuery("SELECT count(*) FROM " + TABLE_TEMPLATE, null);
+        cursor.moveToFirst();
+        return cursor.getInt(0);
     }
 
     //add one history to database

@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,9 +115,10 @@ public class ReminderGridAdapter extends BaseAdapter {
         });
 
         final BadgeView badge = new BadgeView(mContext.getApplicationContext(), gridEntry.findViewById(R.id.iv_reminder_grid_image));
-        long days = (entry.getExpireDate().getTimeInMillis() - Calendar.getInstance().getTimeInMillis()) / 1000 / 3600 / 24;
-        if (days < 0) {
-            days = 0;
+        long timeDiff = entry.getExpireDate().getTimeInMillis() - Calendar.getInstance().getTimeInMillis();
+        long days = 0;
+        if (timeDiff > 0) {
+            days = timeDiff / 1000 / 3600 / 24 + 1;
         }
         badge.setText(days + "");
         if (days == 0) {
@@ -126,7 +126,7 @@ public class ReminderGridAdapter extends BaseAdapter {
         } else if (days == 1) {
             badge.setBadgeBackgroundColor(Color.RED);
         } else if (days == 2) {
-            badge.setBadgeBackgroundColor(Color.parseColor("#C0CF21"));
+            badge.setBadgeBackgroundColor(Color.parseColor("#FBC02D"));
         } else {
             badge.setBadgeBackgroundColor(Color.parseColor("#A4C639"));
         }

@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -38,7 +37,6 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
     private BroadcastReceiver receiverSync = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-//            mAdapter.notifyDataSetChanged();
             update();
         }
     };
@@ -47,8 +45,6 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
         @Override
         public void onReceive(Context context, Intent intent) {
             int pos = intent.getIntExtra("Position", -1);
-            Log.d("template", "addtolist" + pos);
-
             if(pos != -1) saveToShoppingList(pos);
         }
     };
@@ -66,9 +62,7 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
     public void editTemplate(int pos){
         Intent edit = new Intent(this, AddTemplateActivity.class);
         Gson gson = new Gson();
-        Log.d("EditTemplate", "postion: " + pos);
         String list = gson.toJson(templateCoverList.get(pos));
-        Log.d("EditTemplate", list);
         edit.putExtra("template", list);
         startActivity(edit);
     }
@@ -127,8 +121,6 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
     public void saveToShoppingList(int position){
         TemplateCover cover = templateCoverList.get(position);
         long id = cover.getId();
-
-        Log.d("template", "addtoshoppinglist !!!");
         List<String> items = cover.getItems();
 
         for(String item: items){
@@ -151,7 +143,6 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
     }
 
     public void reloadData() {
-        Log.d("Fanzy", "reload data");
         Intent intent = new Intent("Check");
         sendBroadcast(intent);
     }
@@ -176,7 +167,6 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
     @Override
     public void onLoadFinished(Loader<List<TemplateCover>> loader, List<TemplateCover> data) {
         templateCoverList.clear();
-        Log.d("template", data.size() + " ");
         if(data != null)
             templateCoverList.addAll(data);
         mAdapter = new TemplateExpandableAdapter(this, templateCoverList);

@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
-import android.util.Log;
 
 public class MainService extends Service {
     public static final int MSG_REGISTER_CLIENT = 1;
@@ -35,7 +34,6 @@ public class MainService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.d("Fanzy", "Service:onBind() - return mMessenger.getBinder()");
         return mMessenger.getBinder();
     }
 
@@ -68,7 +66,6 @@ public class MainService extends Service {
         // from clients.
         @Override
         public void handleMessage(Message msg) {
-            Log.d("Fanzy", "Service:handleMessage: " + msg.what);
             switch (msg.what) {
                 case MSG_REGISTER_CLIENT:
                     break;

@@ -6,14 +6,10 @@ import android.util.Log;
 
 import java.util.List;
 
-/**
- * Created by Yuzhong on 2016/5/27.
- */
 public class ReadTemplateFromDataBase extends AsyncTaskLoader<List<TemplateCover>> {
+    private static final String TAG = "AsyncTask";
     private TemplateDataSource mDataSource;
     private Context context;
-
-    private static final String TAG = "AsyncTask";
 
     public ReadTemplateFromDataBase(Context context){
         super(context);

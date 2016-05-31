@@ -3,7 +3,6 @@ package cs165.edu.dartmouth.cs.beforespoiled.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
@@ -54,7 +53,6 @@ public class TemplateParentViewHolder extends ParentViewHolder {
         toShoppingList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Fanzy", "click toShoppingList");
                 Intent intent = new Intent("AddToList");
                 intent.putExtra("Position", position);
                 context.sendBroadcast(intent);

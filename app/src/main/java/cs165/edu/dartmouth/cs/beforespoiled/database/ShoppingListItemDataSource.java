@@ -18,7 +18,6 @@ public class ShoppingListItemDataSource {
     public static final String COLUMN_ITEMNAME = "item_name";
     public static final String COLUMN_ITEMNUMBER = "item_number";
     public static final String COLUMN_CHECKED = "checked";
-    private static final String TAG = "DBDEMO";
     private SQLiteDatabase database;
     private MyDBHelper dbHelper;
     private String[] allColumns = { COLUMN_ID, LIST_NUMBER, COLUMN_ITEMNAME,
@@ -40,7 +39,6 @@ public class ShoppingListItemDataSource {
     public ShoppingListItem createHistory(ShoppingListItem shoppingListItem) {
         ContentValues values = new ContentValues();
 
-        Log.d("Create", "Create " +shoppingListItem.getListId()+ "@" +shoppingListItem.getItemName()+" * " + shoppingListItem.getItemNumber() + "&"+ shoppingListItem.isSelected());
         //get one historyEntry values
         values.put(LIST_NUMBER, shoppingListItem.getListId());
         values.put(COLUMN_ITEMNAME, shoppingListItem.getItemName());
@@ -57,10 +55,6 @@ public class ShoppingListItemDataSource {
                 null, null, null);
         cursor.moveToFirst();
         ShoppingListItem newShoppingListItem = cursorToShoppingListItem(cursor);
-
-        // Log the comment stored
-        Log.d(TAG, "shoppingListItem = " + cursorToShoppingListItem(cursor).toString()
-                + " insert ID = " + insertId);
 
         cursor.close();
         return newShoppingListItem;
@@ -81,8 +75,6 @@ public class ShoppingListItemDataSource {
         values.put(COLUMN_CHECKED, number);
 
         int a = database.update(TABLE_SHOPPINGLISTITEM, values, "_id=" + shoppingListItem.getId(), null);
-        Log.d("debug", "Already" + shoppingListItem.getItemName() + " gggg " + shoppingListItem.getListId() + "@@@" + a);
-        Log.d("ITEM", "Update" + shoppingListItem.getListId());
     }
 
     public void deleteHistory(long id){
@@ -92,13 +84,11 @@ public class ShoppingListItemDataSource {
 
     public void deleteCurrentList() {
         System.out.println("HistroyEntries deleted all");
-        Log.d(TAG, "delete all = ");
         database.delete(TABLE_SHOPPINGLISTITEM, LIST_NUMBER + " = -1", null);
     }
 
     public void deleteAllHistories() {
         System.out.println("HistroyEntries deleted all");
-        Log.d(TAG, "delete all = ");
         database.delete(TABLE_SHOPPINGLISTITEM, null, null);
     }
 
@@ -111,7 +101,6 @@ public class ShoppingListItemDataSource {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ShoppingListItem shoppingListItem = cursorToShoppingListItem(cursor);
-            Log.d(TAG, "get comment = " + cursorToShoppingListItem(cursor).toString());
             shoppingListItems.add(shoppingListItem);
             cursor.moveToNext();
         }
@@ -129,7 +118,6 @@ public class ShoppingListItemDataSource {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ShoppingListItem shoppingListItem = cursorToShoppingListItem(cursor);
-            Log.d(TAG, "get comment = " + cursorToShoppingListItem(cursor).toString());
             shoppingListItems.add(shoppingListItem);
             cursor.moveToNext();
         }

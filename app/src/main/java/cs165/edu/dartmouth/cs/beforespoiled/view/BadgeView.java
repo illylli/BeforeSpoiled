@@ -1,9 +1,5 @@
 package cs165.edu.dartmouth.cs.beforespoiled.view;
 
-/**
- * Created by Illyria on 5/25/16.
- */
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -24,12 +20,6 @@ import android.widget.FrameLayout;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
-/**
- * A simple text label view that can be applied as a "badge" to any given {@link android.view.View}.
- * This class is intended to be instantiated at runtime rather than included in XML layouts.
- *
- * @author Jeff Gilfelt
- */
 public class BadgeView extends TextView {
 
     public static final int POSITION_TOP_LEFT = 1;

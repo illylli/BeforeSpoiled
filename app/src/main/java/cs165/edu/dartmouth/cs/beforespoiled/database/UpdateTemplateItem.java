@@ -2,11 +2,7 @@ package cs165.edu.dartmouth.cs.beforespoiled.database;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
-/**
- * Created by Yuzhong on 2016/5/30.
- */
 public class UpdateTemplateItem extends AsyncTask<Void, Integer, Void> {
     private TemplateDataSource mDataSource;
     private TemplateCover templateCover;

@@ -15,7 +15,6 @@ import android.speech.RecognizerIntent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -24,11 +23,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.appengine.api.datastore.Text;
 import com.soundcloud.android.crop.Crop;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import com.vstechlab.easyfonts.EasyFonts;
@@ -249,14 +246,12 @@ public class ManualAddItemActivity extends Activity {
                     f.delete();
                 break;
             case RESULT_SPEECH:
-                Log.d("lly", "in manual access to speech");
                 if (null != data) {
 
                     ArrayList<String> text = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
                     itemName.setText(text.get(0));
-                    Log.d("lly", text.get(0));
                 }
                 break;
 
@@ -277,7 +272,6 @@ public class ManualAddItemActivity extends Activity {
             photoExist = true;
             File file = new File(filePath);
             if(file.exists()) {
-                Log.d("lly", "Delete: " + file.delete() + "again" + file.exists());
                 try {
                     file.createNewFile();
                 } catch (IOException e) {

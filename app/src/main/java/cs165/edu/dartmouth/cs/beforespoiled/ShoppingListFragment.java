@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -73,7 +72,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     private BroadcastReceiver receiverSync = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("template", "shoppingList");
             reloadData();
         }
     };
@@ -112,7 +110,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("Fanzy", "onResume");
     }
 
     @Override
@@ -212,7 +209,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         shoppingList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                Log.d("daniel", "long press");
                 final SweetAlertDialog warningDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
                 warningDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
                 warningDialog.setTitleText("Delete this item?");
@@ -401,7 +397,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         cardList = items;
         cardArrayAdapter.addAll(items);
         cardArrayAdapter.notifyDataSetChanged();
-        Log.d("Fanzy", "onLoadFinished" + items.size());
     }
 
     @Override

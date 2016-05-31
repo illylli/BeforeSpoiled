@@ -11,9 +11,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by oubai on 5/25/16.
- */
 public class TemplateCover implements ParentListItem {
     private long id;
     private String templateName;
@@ -90,12 +87,12 @@ public class TemplateCover implements ParentListItem {
         return items;
     }
 
-    public void setItemsAll(List<String> items) {
-        this.items = items;
-    }
-
     public void setItems(String item) {
         this.items.add(item);
+    }
+
+    public void setItemsAll(List<String> items) {
+        this.items = items;
     }
 
     public String getItemsGson(){

@@ -2,7 +2,6 @@ package cs165.edu.dartmouth.cs.beforespoiled.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +13,12 @@ import java.util.List;
 
 import cs165.edu.dartmouth.cs.beforespoiled.R;
 
-/**
- * Created by Yuzhong on 2016/5/28.
- */
 public class TemplateItemAdapter extends ArrayAdapter<String> {
     private Context context;
     private List<String> list;
 
     public TemplateItemAdapter(Context context, List<String> itemList) {
         super(context, R.layout.activity_template_item, itemList);
-        Log.d("View", "Hello + +");
         this.context = context;
         this.list = itemList;
     }

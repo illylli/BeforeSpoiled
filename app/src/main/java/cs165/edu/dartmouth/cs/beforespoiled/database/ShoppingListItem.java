@@ -1,14 +1,11 @@
 package cs165.edu.dartmouth.cs.beforespoiled.database;
 
-/**
- * Created by Yuzhong on 2016/5/19.
- */
 public class ShoppingListItem {
+    boolean selected = false;
     private long id;
     private long listId;
     private String itemName;
     private int itemNumber;
-    boolean selected = false;
 
     public ShoppingListItem(){
         this.listId = -1;

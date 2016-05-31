@@ -9,7 +9,6 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -35,9 +34,6 @@ import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateCover;
 import cs165.edu.dartmouth.cs.beforespoiled.database.UpdateTemplateItem;
 import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateItemAdapter;
 
-/**
- * Created by Yuzhong on 2016/5/27.
- */
 public class AddTemplateActivity extends Activity {
     public static final int RESULT_OK = -1;
     protected static final int RESULT_SPEECH = 1;
@@ -87,8 +83,6 @@ public class AddTemplateActivity extends Activity {
         Intent i = getIntent();
         String temp = i.getStringExtra("template");
         if(temp != null) {
-            Log.d("EditTemplate", temp + " string template");
-
             Type type = new TypeToken<TemplateCover>() {
             }.getType();
             Gson gson = new Gson();
@@ -101,7 +95,6 @@ public class AddTemplateActivity extends Activity {
         templateItemList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                Log.d("daniel", "long press");
                 final SweetAlertDialog warningDialog = new SweetAlertDialog(AddTemplateActivity.this, SweetAlertDialog.WARNING_TYPE);
                 warningDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
                 warningDialog.setTitleText("Delete this item?");
@@ -157,8 +150,6 @@ public class AddTemplateActivity extends Activity {
                             addItem.clearFocus();
                             addItem.setCursorVisible(false);
                             itemList.add(itemName);
-                            Log.d("EditTemplate", "I am here");
-                            Log.d("EditTemplate", "size" + itemList.size() + itemList);
                             itemListAdpater.notifyDataSetChanged();
                             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(addItem.getWindowToken(), 0);
@@ -230,11 +221,8 @@ public class AddTemplateActivity extends Activity {
 
 
     public void setData(){
-        Log.d("EditTemplate", templateCover + " this is template");
-
         if(templateCover != null){
 
-            Log.d("EditTemplate", templateCover.getTemplateName() + " this is name!!! this is id " + templateCover.getId());
             templateName.setText(templateCover.getTemplateName());
             templateDes.setText(templateCover.getTemplateDes());
 
@@ -243,8 +231,6 @@ public class AddTemplateActivity extends Activity {
                 l = new ArrayList<>();
             }
             for(String str: l) itemList.add(str);
-//            itemListAdpater.clear();
-//            itemListAdpater.notifyDataSetChanged();
             isEdit = true;
         }
     }
@@ -259,19 +245,16 @@ public class AddTemplateActivity extends Activity {
         newTemplateCover.setItemsAll(itemList);
 
         if(!isEdit) {
-            Log.d("EditTemplate", newTemplateCover + " add to database!!");
             SaveTemplateToDataBase task = new SaveTemplateToDataBase(getApplication().getApplicationContext(), newTemplateCover);
             task.execute();
         }else {
             newTemplateCover.setId(templateCover.getId());
-            Log.d("EditTemplate", newTemplateCover + " update from database@@@ " + newTemplateCover.getId() + "****" + newTemplateCover.getItems());
             UpdateTemplateItem task = new UpdateTemplateItem(getApplication().getApplicationContext(), newTemplateCover);
             task.execute();
         }
 
         Intent i = new Intent("AddTemplate");
         sendBroadcast(i);
-        Log.d("template", "Save template");
         finish();
     }
 

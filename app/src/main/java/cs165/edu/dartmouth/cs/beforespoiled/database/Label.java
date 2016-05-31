@@ -1,8 +1,5 @@
 package cs165.edu.dartmouth.cs.beforespoiled.database;
 
-/**
- * Created by Fanzy on 5/22/16.
- */
 public class Label {
     private long id;
     private String name;

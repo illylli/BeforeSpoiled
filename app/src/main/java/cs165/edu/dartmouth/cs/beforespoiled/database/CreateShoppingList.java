@@ -5,9 +5,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-/**
- * Created by Yuzhong on 2016/5/22.
- */
 public class CreateShoppingList extends AsyncTask<Void, Integer, ShoppingLists> {
     private ShoppingListsDataSource mDataSource;
     private ShoppingLists shoppingLists;
@@ -59,7 +56,6 @@ public class CreateShoppingList extends AsyncTask<Void, Integer, ShoppingLists> 
     protected void onPostExecute(ShoppingLists result) {
         // Getting reference to the TextView tv_counter of the layout activity_main
         Toast toast = Toast.makeText(context, "New shopping list have been created", Toast.LENGTH_SHORT);
-//        toast.show();
     }
 }
 

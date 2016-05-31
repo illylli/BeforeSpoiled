@@ -1,14 +1,10 @@
 package cs165.edu.dartmouth.cs.beforespoiled.database;
 
-import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.util.List;
 
-import cs165.edu.dartmouth.cs.beforespoiled.ReminderFragment;
-import cs165.edu.dartmouth.cs.beforespoiled.ShoppingListFragment;
 import cs165.edu.dartmouth.cs.beforespoiled.UIReloader;
 
 /**
@@ -18,8 +14,6 @@ public class ReorderShoppingList extends AsyncTask<Void, Integer, Void> {
 
     private Context context;
     private UIReloader reloader;
-
-    private static final String TAG = "AsyncTask";
 
     public ReorderShoppingList(Context context, UIReloader reloader){
         this.context = context;

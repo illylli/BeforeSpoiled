@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,20 +13,13 @@ import java.util.List;
 
 import cs165.edu.dartmouth.cs.beforespoiled.helper.DateHelper;
 
-/**
- * Created by Yuzhong on 2016/5/22.
- */
 public class ShoppingListsDataSource {
     // Database fields
     public static final String TABLE_SHOPPINGLISTS = "ShoppingLists";
     public static final String COLUMN_ID = "_id";
     public static final String CREATE_DATE = "create_date";
-//    public static final String COLUMN_ITEMNAME = "item_name";
-//    public static final String COLUMN_ITEMNUMBER = "item_number";
-private static final String TAG = "DBDEMO";
     private SQLiteDatabase database;
     private MyDBHelper dbHelper;
-    //    private String[] allColumns = { COLUMN_ID, CREATE_DATE, COLUMN_ITEMNAME, COLUMN_ITEMNUMBER };
     private String[] allColumns = { COLUMN_ID, CREATE_DATE };
 
     public ShoppingListsDataSource(Context context) {
@@ -48,8 +40,6 @@ private static final String TAG = "DBDEMO";
 
         //get one historyEntry values
         values.put(CREATE_DATE, DateHelper.formatDate(shoppingLists.getDate()));
-//        values.put(COLUMN_ITEMNAME, shoppingLists.getItemName());
-//        values.put(COLUMN_ITEMNUMBER, shoppingLists.getItemNumber());
 
         long insertId = database.insert(TABLE_SHOPPINGLISTS, null,
                 values);
@@ -58,10 +48,6 @@ private static final String TAG = "DBDEMO";
                 null, null, null);
         cursor.moveToFirst();
         ShoppingLists newShoppingLists = cursorToShoppingLists(cursor);
-
-        // Log the comment stored
-        Log.d(TAG, "shoppingListItem = " + cursorToShoppingLists(cursor).toString()
-                + " insert ID = " + insertId);
 
         cursor.close();
         return newShoppingLists;
@@ -108,7 +94,6 @@ private static final String TAG = "DBDEMO";
 
     public void deleteAllHistories() {
         System.out.println("HistroyEntries deleted all");
-        Log.d(TAG, "delete all = ");
         database.delete(TABLE_SHOPPINGLISTS, null, null);
     }
 
@@ -121,7 +106,6 @@ private static final String TAG = "DBDEMO";
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ShoppingLists shoppingList = cursorToShoppingLists(cursor);
-            Log.d(TAG, "get comment = " + cursorToShoppingLists(cursor).toString());
             shoppingLists.add(shoppingList);
             cursor.moveToNext();
         }
@@ -141,8 +125,6 @@ private static final String TAG = "DBDEMO";
         shoppingLists.setId(cursor.getLong(0));
         try {
             shoppingLists.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(cursor.getString(1)));
-//            shoppingLists.setItemName(cursor.getString(2));
-//            shoppingLists.setItemNumber(cursor.getInt(3));
         } catch (ParseException e) {
             e.printStackTrace();
         }

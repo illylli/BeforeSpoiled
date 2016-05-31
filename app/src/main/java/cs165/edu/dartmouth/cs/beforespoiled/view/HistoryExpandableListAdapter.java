@@ -14,9 +14,6 @@ import java.util.Map;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingLists;
 
-/**
- * Created by Fanzy on 5/24/16.
- */
 public class HistoryExpandableListAdapter extends BaseExpandableListAdapter {
     private Context mContext;
     private List<ShoppingLists> shoppinglists; // header titles

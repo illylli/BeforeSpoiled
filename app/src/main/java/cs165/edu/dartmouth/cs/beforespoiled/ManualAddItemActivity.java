@@ -169,7 +169,7 @@ public class ManualAddItemActivity extends Activity {
 
         categorySpinner = (SearchableSpinner) findViewById(R.id.spinnerCategory);
         categorySpinner.setPositiveButton("OK");
-        categorySpinner.setTitle("Select Item");
+        categorySpinner.setTitle("Select Category");
         adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, labels.toArray());
         categorySpinner.setAdapter(adapter);
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

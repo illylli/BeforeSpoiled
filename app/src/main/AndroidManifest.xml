@@ -41,11 +41,6 @@
             android:name=".ManualAddItemActivity"
             android:configChanges="orientation|screenSize|keyboardHidden" />
 
-        <service
-            android:name=".MainService"
-            android:enabled="true"
-            android:exported="true" />
-
         <activity
             android:name=".LabelsSettingActivity"
             android:configChanges="orientation|screenSize|keyboardHidden" />
@@ -60,8 +55,8 @@
 
         <activity
             android:name=".AddTemplateActivity"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|screenSize|keyboardHidden" />
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
 
 
         <receiver

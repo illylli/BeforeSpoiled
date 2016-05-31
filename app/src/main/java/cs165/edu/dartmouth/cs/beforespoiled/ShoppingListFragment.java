@@ -1,23 +1,17 @@
 package cs165.edu.dartmouth.cs.beforespoiled;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.speech.RecognizerIntent;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -25,20 +19,15 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -93,13 +82,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d("template", "shoppingList");
-            try {
-                Thread.sleep(500);
-                updateList();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
+            ShoppingListFragment.this.getLoaderManager().restartLoader(0, null, ShoppingListFragment.this).forceLoad();
         }
     };
 
@@ -422,7 +405,7 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
     }
 
     public void addNewItem(ShoppingListItem card) {
-        SaveShoppingItemToDatabase task = new SaveShoppingItemToDatabase(getActivity().getApplicationContext(), card);
+        SaveShoppingItemToDatabase task = new SaveShoppingItemToDatabase(getActivity().getApplicationContext(), card, null);
         task.execute();
         try {
             card.setId(task.get().getId());
@@ -511,6 +494,17 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
 //        return true;
 //    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(receiverSync);
+    }
+
+    public void reloadData() {
+        getLoaderManager().getLoader(0).onContentChanged();
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -523,17 +517,6 @@ public class ShoppingListFragment extends Fragment implements LoaderManager.Load
      */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-    }
-
-    @Override
-    public void onDestroy(){
-        super.onDestroy();
-        getActivity().unregisterReceiver(receiverSync);
-    }
-
-    public void reloadData() {
-        getLoaderManager().getLoader(0).onContentChanged();
-        swipeRefreshLayout.setRefreshing(false);
     }
 
 }

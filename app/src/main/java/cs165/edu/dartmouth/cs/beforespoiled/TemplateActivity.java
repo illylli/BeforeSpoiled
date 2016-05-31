@@ -7,33 +7,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
-import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter;
-import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import cs165.edu.dartmouth.cs.beforespoiled.database.DeleteTemplateFromDatabase;
-import cs165.edu.dartmouth.cs.beforespoiled.database.ReadShoppingListFromDatabase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ReadTemplateFromDataBase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.SaveShoppingItemToDatabase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
 import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateChild;
 import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateCover;
-import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateChildViewHolder;
 import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateExpandableAdapter;
 
 public class TemplateActivity extends Activity implements LoaderManager.LoaderCallbacks<List<TemplateCover>>, UIReloader{
@@ -143,15 +135,8 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
         for(String item: items){
             ShoppingListItem shoppingListItem = new ShoppingListItem();
             shoppingListItem.setItemName(item);
-            SaveShoppingItemToDatabase task = new SaveShoppingItemToDatabase(this, shoppingListItem);
+            SaveShoppingItemToDatabase task = new SaveShoppingItemToDatabase(this, shoppingListItem, this);
             task.execute();
-            try {
-                Thread.sleep(2000);
-                Intent intent = new Intent("Check");
-                sendBroadcast(intent);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -165,7 +150,9 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
     }
 
     public void reloadData() {
-        getLoaderManager().getLoader(0).onContentChanged();
+        Log.d("Fanzy", "reload data");
+        Intent intent = new Intent("Check");
+        sendBroadcast(intent);
     }
 
     @Override

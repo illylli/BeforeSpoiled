@@ -1,13 +1,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    android:minWidth="800dp"
-    android:orientation="horizontal"
-    android:background="#F5F5F5"
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
+    android:background="#F5F5F5"
+    android:minWidth="800dp"
+    android:orientation="horizontal"
     tools:context="cs165.edu.dartmouth.cs.beforespoiled.SingleLabelFragment">
 
     <ImageView
@@ -15,6 +15,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
+        android:layout_margin="10dp"
         android:scaleType="fitXY"
         android:src="@drawable/vege" />
 
@@ -27,10 +28,10 @@
 
         <TextView
             android:id="@+id/add_item_name"
-            android:textSize="17dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/settings_labels_single_name" />
+            android:text="@string/settings_labels_single_name"
+            android:textSize="17dp" />
 
         <EditText
             android:id="@+id/et_settings_labels_single_name"
@@ -39,10 +40,10 @@
 
         <TextView
             android:id="@+id/add_item_storage"
-            android:textSize="17dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/settings_labels_single_period" />
+            android:text="@string/settings_labels_single_period"
+            android:textSize="17dp" />
 
         <EditText
             android:id="@+id/et_settings_labels_single_period"
@@ -52,10 +53,10 @@
 
         <TextView
             android:id="@+id/add_item_day"
-            android:textSize="17dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/settings_labels_single_days" />
+            android:text="@string/settings_labels_single_days"
+            android:textSize="17dp" />
 
         <EditText
             android:id="@+id/et_settings_labels_single_days"
@@ -70,29 +71,29 @@
 
             <mehdi.sakout.fancybuttons.FancyButton
                 android:id="@+id/btn_settings_labels_single_save"
-                android:layout_width="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
                 fancy:fb_defaultColor="#0099CC"
                 fancy:fb_focusColor="#2e5071"
-                fancy:fb_textColor="#ffffff"
                 fancy:fb_fontIconSize="30sp"
                 fancy:fb_radius="8dp"
-                fancy:fb_text="SAVE" />
+                fancy:fb_text="SAVE"
+                fancy:fb_textColor="#ffffff" />
 
             <mehdi.sakout.fancybuttons.FancyButton
                 android:id="@+id/btn_settings_labels_single_cancel"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
                 fancy:fb_defaultColor="#0099CC"
                 fancy:fb_focusColor="#2e5071"
-                fancy:fb_textColor="#ffffff"
                 fancy:fb_fontIconSize="30sp"
                 fancy:fb_radius="8dp"
-                fancy:fb_text="CANCEL" />
+                fancy:fb_text="CANCEL"
+                fancy:fb_textColor="#ffffff" />
         </LinearLayout>
 
     </LinearLayout>

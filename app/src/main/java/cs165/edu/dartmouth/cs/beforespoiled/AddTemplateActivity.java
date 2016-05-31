@@ -1,20 +1,25 @@
 package cs165.edu.dartmouth.cs.beforespoiled;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.appengine.repackaged.com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
@@ -23,21 +28,19 @@ import com.vstechlab.easyfonts.EasyFonts;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import cs165.edu.dartmouth.cs.beforespoiled.database.SaveShoppingItemToDatabase;
 import cs165.edu.dartmouth.cs.beforespoiled.database.SaveTemplateToDataBase;
-import cs165.edu.dartmouth.cs.beforespoiled.database.ShoppingListItem;
 import cs165.edu.dartmouth.cs.beforespoiled.database.TemplateCover;
 import cs165.edu.dartmouth.cs.beforespoiled.database.UpdateTemplateItem;
-import cs165.edu.dartmouth.cs.beforespoiled.view.CardArrayAdapter;
 import cs165.edu.dartmouth.cs.beforespoiled.view.TemplateItemAdapter;
 
 /**
  * Created by Yuzhong on 2016/5/27.
  */
 public class AddTemplateActivity extends Activity {
+    public static final int RESULT_OK = -1;
+    protected static final int RESULT_SPEECH = 1;
     private EditText templateName;
     private EditText templateDes;
     private EditText addItem;
@@ -49,6 +52,22 @@ public class AddTemplateActivity extends Activity {
     private TextView textViewDes;
     private TemplateCover templateCover;
     private boolean isEdit;
+    private ImageButton speechButton;
+    private BroadcastReceiver receiverSync = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+//            mAdapter.notifyDataSetChanged();
+            update(intent);
+        }
+    };
+
+    public void update(Intent i) {
+        int pos = i.getIntExtra("itemPosition", -1);
+        if (pos != -1) {
+            itemList.remove(pos);
+            itemListAdpater.notifyDataSetChanged();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +82,9 @@ public class AddTemplateActivity extends Activity {
         textViewName.setTypeface(EasyFonts.caviarDreamsBold(getApplicationContext()));
         textViewDes.setTypeface(EasyFonts.caviarDreamsBold(getApplicationContext()));
 
+        IntentFilter filter = new IntentFilter("DeleteItem");
+        this.registerReceiver(receiverSync, filter);
+
         Intent i = getIntent();
         String temp = i.getStringExtra("template");
         if(temp != null) {
@@ -75,6 +97,7 @@ public class AddTemplateActivity extends Activity {
         }
 
         itemList = new ArrayList<>();
+
         templateItemList.setLongClickable(true);
         templateItemList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -131,6 +154,7 @@ public class AddTemplateActivity extends Activity {
                     case EditorInfo.IME_ACTION_DONE:
                         String itemName = addItem.getText().toString();
                         if (!itemName.equals("")) {
+                            addItem.setText("");
                             addItem.clearFocus();
                             addItem.setCursorVisible(false);
                             itemList.add(itemName);
@@ -162,7 +186,49 @@ public class AddTemplateActivity extends Activity {
             }
         });
 
+        speechButton = (ImageButton) findViewById(R.id.SpeakButton3);
+        speechButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
+
+                try {
+                    startActivityForResult(intent, RESULT_SPEECH);
+                } catch (ActivityNotFoundException a) {
+                    Toast t = Toast.makeText(getApplicationContext(),
+                            "Opps! Your device doesn't support Speech to Text",
+                            Toast.LENGTH_SHORT);
+                    t.show();
+                }
+            }
+        });
+
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case RESULT_SPEECH: {
+                if (resultCode == RESULT_OK && null != data) {
+
+                    ArrayList<String> text = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    itemList.add(text.get(0).toString());
+                    itemListAdpater.notifyDataSetChanged();
+                }
+                break;
+            }
+            default:
+                break;
+
+        }
+    }
+
 
     public void setData(){
         Log.d("EditTemplate", templateCover + " this is template");

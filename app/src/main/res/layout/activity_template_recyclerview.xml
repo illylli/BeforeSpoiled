@@ -1,50 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#F5F5F5"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:id="@+id/recycler_view"
         />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:foregroundGravity="center"
-        android:layout_weight="1"
-        android:gravity="bottom">
+        android:gravity="bottom"
+        android:orientation="horizontal">
         <com.dd.CircularProgressButton
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
-            app:cpb_cornerRadius="8dp"
-            android:layout_weight="1"
-            app:cpb_textIdle="Add"
-            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
             android:onClick="onAddTemplateClick"
+            android:textColor="@color/white"
+            app:cpb_cornerRadius="8dp"
+            app:cpb_textIdle="Add"
             />
         <com.dd.CircularProgressButton
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1"
-            app:cpb_cornerRadius="8dp"
-            android:textColor="@color/white"
-            app:cpb_textIdle="Cancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
             android:onClick="onAddTemplateCancel"
+            android:textColor="@color/white"
+            app:cpb_cornerRadius="8dp"
+            app:cpb_textIdle="Cancel"
             />
 
     </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>

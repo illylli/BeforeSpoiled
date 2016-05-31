@@ -2,58 +2,58 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#F5F5F5"
     android:orientation="vertical"
     android:screenOrientation="portrait">
 
     <LinearLayout
-        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
 
         <TextView
-            android:textSize="20dp"
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Template Name:"
-            android:id="@+id/textView2" />
+            android:textSize="20dp" />
 
         <EditText
+            android:id="@+id/template_name"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:textColorHint="@color/gray_btn_bg_color"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/shoppinglist_textview"
-            android:textSize="17dp"
-            android:singleLine="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:id="@+id/template_name"
-            android:layout_gravity="center_horizontal" />
+            android:singleLine="true"
+            android:textColorHint="@color/gray_btn_bg_color"
+            android:textSize="17dp" />
 
         <TextView
-            android:textSize="20dp"
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Template Descrpition:"
-            android:id="@+id/textView3" />
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/template_description"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:textColorHint="@color/gray_btn_bg_color"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/shoppinglist_textview"
-            android:textSize="17dp"
-            android:singleLine="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:layout_gravity="center_horizontal" />
+            android:singleLine="true"
+            android:textColorHint="@color/gray_btn_bg_color"
+            android:textSize="17dp" />
 
 
 
@@ -62,35 +62,35 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
 
         <me.james.biuedittext.BiuEditText
-            app:biu_duration="800"
-            app:biu_text_color="@android:color/white"
-            app:biu_text_scale="1.5"
-            app:biu_type="flyup"
-            app:biu_text_start_size="15dp"
             android:id="@+id/add_template"
             android:layout_width="match_parent"
-            android:textSize="15dp"
             android:layout_height="40dp"
-            android:singleLine="true"
-            android:imeOptions="actionDone"
+            android:background="@drawable/shoppinglist_textview"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:hint="I want..."
+            android:imeOptions="actionDone"
+            android:singleLine="true"
             android:textColorHint="@color/gray_btn_bg_color"
-            android:background="@drawable/shoppinglist_textview"/>
+            android:textSize="15dp"
+            app:biu_duration="800"
+            app:biu_text_color="@android:color/white"
+            app:biu_text_scale="1.5"
+            app:biu_text_start_size="15dp"
+            app:biu_type="flyup" />
 
         <ImageButton
-            android:layout_gravity="right"
             android:id="@+id/SpeakButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:layout_marginTop="5dp"
             android:background="#00000000"
             android:src="@android:drawable/ic_btn_speak_now" />
@@ -100,37 +100,37 @@
         android:layout_width="match_parent"
         android:layout_height="300dp">
         <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/template_listView"
-            android:textSize="17dp"
-            android:listSelector="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:cacheColorHint="@android:color/transparent"
             android:divider="@null"
-            android:dividerHeight="10dp">
+            android:dividerHeight="10dp"
+            android:listSelector="@android:color/transparent"
+            android:textSize="17dp">
         </ListView>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="horizontal">
         <com.dd.CircularProgressButton
             android:id="@+id/add_template_save"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginTop="24dp"
+            android:layout_weight="1"
+            android:onClick="onTemplateSave"
             android:textColor="@android:color/white"
             android:textSize="15sp"
-            android:onClick="onTemplateSave"
+            app:cpb_cornerRadius="8dp"
             app:cpb_textComplete="@string/btn_complete"
             app:cpb_textError="Null input"
-            app:cpb_textIdle="Finish"
-            app:cpb_cornerRadius="8dp"/>
+            app:cpb_textIdle="Finish" />
 
         <com.dd.CircularProgressButton
             android:id="@+id/add_template_cancel"
@@ -140,12 +140,12 @@
             android:layout_marginRight="30dp"
             android:layout_marginTop="24dp"
             android:layout_weight="1"
+            android:onClick="onTemplateCancel"
             android:textColor="@android:color/white"
             android:textSize="15sp"
-            android:onClick="onTemplateCancel"
+            app:cpb_cornerRadius="8dp"
             app:cpb_textComplete="@string/btn_complete"
             app:cpb_textError="Null input"
-            app:cpb_textIdle="Cancel"
-            app:cpb_cornerRadius="8dp"/>
+            app:cpb_textIdle="Cancel" />
     </LinearLayout>
 </LinearLayout>

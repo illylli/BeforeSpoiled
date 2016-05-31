@@ -199,6 +199,12 @@ public class AddTemplateActivity extends Activity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        this.unregisterReceiver(receiverSync);
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -218,7 +224,6 @@ public class AddTemplateActivity extends Activity {
 
         }
     }
-
 
     public void setData(){
         if(templateCover != null){
@@ -252,9 +257,6 @@ public class AddTemplateActivity extends Activity {
             UpdateTemplateItem task = new UpdateTemplateItem(getApplication().getApplicationContext(), newTemplateCover);
             task.execute();
         }
-
-        Intent i = new Intent("AddTemplate");
-        sendBroadcast(i);
         finish();
     }
 

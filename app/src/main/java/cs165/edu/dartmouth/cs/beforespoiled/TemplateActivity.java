@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -37,6 +38,7 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
     private BroadcastReceiver receiverSync = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d("Fanzy", "Adding template receives");
             update();
         }
     };
@@ -81,13 +83,14 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
     }
 
     public void update(){
-        getLoaderManager().initLoader(0, null, this).forceLoad();
+        getLoaderManager().getLoader(0).onContentChanged();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_template_recyclerview);
+        Log.d("Fanzy", "onCeate");
 
         IntentFilter filter = new IntentFilter("AddTemplate");
         this.registerReceiver(receiverSync, filter);
@@ -115,7 +118,7 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        update();
+        getLoaderManager().initLoader(0, null, this).forceLoad();
     }
 
     public void saveToShoppingList(int position){
@@ -182,6 +185,7 @@ public class TemplateActivity extends Activity implements LoaderManager.LoaderCa
     @Override
     public void onDestroy(){
         super.onDestroy();
+        Log.d("Fanzy", "onDestory");
         unregisterReceiver(receiverSync);
         unregisterReceiver(receiverAddToList);
         unregisterReceiver(receiverEdit);
